@@ -1,6 +1,5 @@
 body{
-    min-width: 100vH;
-    min-height: 100vH;
+    min-height: 200vH;
     font-family: 'Montserrat';
     margin: 0;
     background-image: url(../img/bleu.jpg);
@@ -23,13 +22,11 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 30px;
-}
-
-header>.bleu{
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .menu{
@@ -49,18 +46,6 @@ header>.bleu{
 }
 
 .bleu{
-    text-decoration: none;
-    color: #12C7EC;
-    font-weight: bold;
-}
-
-.menu>a{
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-}
-
-.menu>a:hover{
     text-decoration: none;
     color: #12C7EC;
     font-weight: bold;
@@ -104,13 +89,13 @@ header>.bleu{
     margin-right: 60px;
 }
 
-.centre>.bleu{
+.blanc{
     text-decoration: none;
     color: rgb(255, 255, 255);
     font-weight: bold;
 }
 
-.centre>.bleu:hover{
+.blanc:hover{
     text-decoration: none;
     color: #12C7EC;
     font-weight: bold;
