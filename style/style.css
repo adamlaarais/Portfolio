@@ -1,6 +1,8 @@
 body{
     min-height: 200vH;
     font-family: 'Montserrat';
+    display: flex;
+    flex-direction: column;
     margin: 0;
     background-image: url(../img/bleu.jpg);
     background-size: cover;
@@ -103,4 +105,117 @@ header{
 
 h1{
     font-size: 16px;
+}
+
+.profile {
+    margin-top: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.photo {
+    width: 500px;
+    height: 500px;
+    background-color: #12C7EC;
+    border-radius: 16px;
+}
+
+.description {
+    margin-bottom: 24px;
+}
+
+.bouton1 {
+    font-family: 'Montserrat';
+    padding: 14px;
+    background-color: transparent;
+    border-radius: 22px;
+    border: solid #12C7EC;
+    width: fit-content;
+    margin: auto;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition-duration: 0.4s;
+} 
+
+.bouton1:hover {
+    background-color: #12C7EC;
+    border-radius: 22px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px 0px inset;
+}
+
+.bouton2 {
+    background-color: #12C7EC;
+    border-radius: 22px;
+    font-family: 'Montserrat';
+    padding: 16px;
+    border-radius: 22px;
+    width: fit-content;
+    margin: auto;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition-duration: 0.4s;
+}
+
+.bouton2:hover {
+    background-color: #1d2a3d;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px 0px inset;
+}
+
+.texte {
+    max-width: 600px;
+}
+
+.rubrique {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    border: 2px solid white;
+    border-radius: 22px;
+    margin: 35px auto;
+    padding: 30px;
+    background-color: #1d2a3d;
+}
+
+.titre {
+    margin-top: 16px;
+    margin-bottom: 12px;
+    font-weight: bolder;
+    font-size: 28px;
+    color: #12C7EC;
+}
+
+.sous-titre {
+    font-size: 18px;
+    font-style: italic;
+    text-align: center;
+}
+
+.competences {
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 26px;
+}
+
+.competences1 {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+svg {
+    transition: transform 0.3s ease;
+}
+
+svg:hover {
+    transform: scale(1.2);
 }
