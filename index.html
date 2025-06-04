@@ -6,8 +6,11 @@
     <title>.Portfolio</title>
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="shortcut icon" href="img/letter-a.png" type="img/png">
 </head>
 <body>
+    <div class="custom-cursor"></div>
+
     <header>
         <div class="gauche">
             <h1>Portfolio.</h1>
@@ -46,13 +49,13 @@
             </div>
         </div>
 
-        <div class="rubrique">
-            <div class="titre">A Propos De Moi</div>
+        <div class="rubrique animate-on-scroll">
+            <div class="titre">BIO</div>
             <div>Je m'appelle Adam, étudiant en BUT Métiers du Multimédia et de l'Internet (MMI) à Mulhouse, passionné par le développement web et le design minimaliste. Soucieux du détail, j'aime concevoir des interfaces épurées et intuitives qui allient esthétique et fonctionnalité. Depuis le début de mon parcours en MMI, j'ai pu explorer plusieurs domaines liés au web, notamment le développement frontend et backend, l'UX/UI design et la gestion de projets digitaux. Ces expériences m'ont permis d'apprendre des langages comme HTML, CSS, JavaScript, PHP mais également des outils essentiels comme Figma, Adobe. Au-delà du code, je suis fasciné par le design minimaliste, une approche qui repose sur la simplicité et la clarté pour mettre en valeur l'essentiel. Actuellement, je cherche à acquérir plus d'expérience et à mettre en pratique mes compétences dans le monde professionnels.</div>
         </div>
 
-        <div class="rubrique">
-            <div class="titre">Compétences</div>
+        <div class="rubrique animate-on-scroll">
+            <div class="titre">COMPÉTENCES</div>
             <div class="sous-titre">Développement Web</div>
             <div class="competences">
                 <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#12C7EC" class="bi bi-filetype-html" viewBox="0 0 16 16">
@@ -85,12 +88,43 @@
             </div>
         </div>
 
-        <div class="rubrique">
-            <div class="titre">Langues</div>
-            <div class="sous-titre"> Anglais (B2)</div>
-            <div></div>
-            <div class="sous-titre">Allemand (A2)</div>
-        </div>
+       <div class="rubrique animate-on-scroll">
+    <div class="titre">LANGUES</div>
+
+    <div class="sous-titre">Anglais - B2</div>
+    <div class="etoiles">
+        <span class="star full">★</span>
+        <span class="star full">★</span>
+        <span class="star full">★</span>
+        <span class="star full">★</span>
+        <span class="star empty">☆</span>
+    </div>
+
+    <div class="sous-titre">Allemand - B1</div>
+    <div class="etoiles">
+        <span class="star full">★</span>
+        <span class="star full">★</span>
+        <span class="star full">★</span>
+        <span class="star empty">☆</span>
+        <span class="star empty">☆</span>
+    </div>
+</div>
+
+<div class="rubrique animate-on-scroll">
+    <div class="titre">MON CV</div>
+    <div class="sous-titre"> Curieux d’en savoir plus ? Téléchargez mon CV</div>
+    <a href="pdf/CV_LAARAIS_Adam.pdf" class="btn-cv" target="_blank">
+    Télécharger mon CV (PDF)
+    </a>
+</div>
     </main>
+
+    <footer class="footer">
+    <div class="footer-content">
+    © 2025 Adam Laarais — Tous droits réservés.
+  </div>
+</footer>
+
+<script src="js/anim.js"></script>
 </body>
 </html>
