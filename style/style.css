@@ -1,24 +1,25 @@
-body{
-    min-height: 100vH;
-    font-family: 'Montserrat';
-    display: flex;
-    flex-direction: column;
+ body {
     margin: 0;
-    background-image: url(../img/bleu.jpg);
-    background-size: cover;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1d2a3d;
     color: white;
-    opacity: 0; 
-    animation: fadeIn 1s ease-out forwards; 
-}
+    position: relative;
+    overflow-x: hidden; /* Pas de scroll horizontal */
+  }
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1; 
-    }
-}
+  /* Cadrillage avec background-image */
+  .background-grid {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; /* Pas d'interaction */
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(40,80,140,0.4) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(40,80,140,0.4) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-repeat: repeat;
+  }
 
 header{
     display: flex;
@@ -121,13 +122,6 @@ h1{
     justify-content: center;
     gap: 40px;
     flex-wrap: wrap;
-}
-
-.photo {
-    width: 500px;
-    height: 500px;
-    background-color: #12C7EC;
-    border-radius: 16px;
 }
 
 .description {
@@ -410,9 +404,9 @@ body {
 /* Style du curseur personnalisé */
 .custom-cursor {
   position: fixed;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #12C7EC;
+  width: 30px;
+  height: 30px;
+  background-color: #12C7EC;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
