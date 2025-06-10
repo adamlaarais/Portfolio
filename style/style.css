@@ -1,4 +1,8 @@
- body {
+html {
+  scroll-behavior: smooth;
+}
+
+body {
     margin: 0;
     min-height: 100vh;
     font-family: 'Montserrat', sans-serif;
@@ -116,7 +120,18 @@ h1{
 }
 
 .profile {
-    margin-top: 140px;
+  min-height: 100vh; /* prend toute la hauteur de la fenêtre */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 40px 20px; /* un peu de padding pour le responsive */
+  box-sizing: border-box;
+}
+
+.oeoe {
+    margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -132,7 +147,9 @@ h1{
     font-family: 'Montserrat';
     padding: 14px;
     background-color: transparent;
-    border-radius: 22px;
+    text-align: center;
+    align-items: center;
+    border-radius: 100%;
     border: solid #12C7EC;
     width: fit-content;
     margin: auto;
@@ -140,20 +157,22 @@ h1{
     color: white;
     font-weight: bold;
     transition-duration: 0.4s;
-} 
+}
 
 .bouton1:hover {
     background-color: #12C7EC;
-    border-radius: 22px;
+    padding: 22px;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px 0px inset;
 }
 
 .bouton2 {
-    background-color: #12C7EC;
-    border-radius: 22px;
     font-family: 'Montserrat';
-    padding: 16px;
+    padding: 20px;
+    background-color: transparent;
+    text-align: center;
+    align-items: center;
     border-radius: 22px;
+    border: solid #12C7EC;
     width: fit-content;
     margin: auto;
     text-decoration: none;
@@ -163,12 +182,13 @@ h1{
 }
 
 .bouton2:hover {
-    background-color: #1d2a3d;
+    background-color: #12C7EC;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px 0px inset;
 }
 
 .texte {
     max-width: 600px;
+    text-align: center;
 }
 
 .rubrique {
@@ -177,7 +197,7 @@ h1{
     height: auto;
     border: 2px solid white;
     border-radius: 22px;
-    margin: 35px auto;
+    margin: 40px auto;
     padding: 30px;
     background-color: #1d2a3d;
     text-align: center;
@@ -190,6 +210,15 @@ h1{
     font-size: 28px;
     color: #12C7EC;
     text-align: left;
+}
+
+.titre2 {
+     margin-top: 16px;
+    margin-bottom: 12px;
+    font-weight: bolder;
+    font-size: 28px;
+    color: #12C7EC;
+    text-align: center; 
 }
 
 .sous-titre {
@@ -299,7 +328,6 @@ img {
       flex-wrap: wrap;
       gap: 40px;
       justify-content: space-between;
-      margin-top: 80px;
 }
 
 .contact-info, .contact-form {
@@ -352,28 +380,6 @@ img {
       min-height: 120px;
 }
 
-.contact-form button {
-      background-color: #12C7EC;
-      color: black;
-      border: none;
-      padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-}
-
-.contact-form button:hover {
-      background-color: white;
-      color: #12C7EC;
-      border: 2px solid #12C7EC;
-}
-
-    @media (max-width: 768px) {
-      .form-group {
-        flex-direction: column;
-      }
-}
-
 .lien1 {
     display: flex;
     gap: 20px;
@@ -412,6 +418,10 @@ body {
   z-index: 9999;
   transform: translate(-50%, -50%);
   transition: transform 0.1s ease;
+}
+
+[id] {
+  scroll-margin-top: 120px; /* adapte selon la hauteur de ton header */
 }
 
 

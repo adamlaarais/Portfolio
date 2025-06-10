@@ -1,17 +1,19 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const elements = document.querySelectorAll('.animate-on-scroll');
 
-  const observer = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible'); // ajoute la classe visible
-        observer.unobserve(entry.target); // arrête d’observer cet élément
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
       }
     });
-  }, { threshold: 0.1 }); // déclenche quand 10% de l’élément est visible
+  }, { threshold: 0.1 });
 
   elements.forEach(el => observer.observe(el));
 });
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const cursor = document.querySelector('.custom-cursor');

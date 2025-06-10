@@ -19,10 +19,10 @@
         <div class="centre">
             <div class="menu">
                 <div></div>
-                <a href="index.html" class="bleu">Accueil</a>
+                <a href="#index" class="bleu">Accueil</a>
             </div>
-            <a href="" class="blanc">Projets Professionnels</a>
-            <a href="" class="blanc">Contact</a>  
+            <a href="#projets" class="blanc">Projets Professionnels</a>
+            <a href="#contact" class="blanc">Contact</a>  
         </div>
         <div class="droite">
             <a href="https://www.linkedin.com/in/adam-laarais-bb572132b/">
@@ -40,16 +40,15 @@
         </div>
     </header>
     <main>
-        <div class="profile">
+        <div class="profile" id="index">
             <div class="texte">
-                <div class="titre">LAARAIS Adam</div>
+                <div class="titre2">LAARAIS Adam</div>
                 <div class="description">Étudiant BUT MMI à Mulhouse | Futur développeur web | En quête d'alternance & projets concrets | Curieux & toujours en apprentissage </div>
-                <a class="bouton1" href="projets.html">Mes Projets</a>
-                <a class="bouton2" href="contact.html">Me Contacter</a>
+                <a class="bouton1 scroll-down" href="#bio"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg></a>
             </div>
         </div>
 
-        <div class="rubrique animate-on-scroll">
+        <div class="rubrique animate-on-scroll" id="bio">
             <div class="titre">BIO</div>
             <div>Je m'appelle Adam, étudiant en BUT Métiers du Multimédia et de l'Internet (MMI) à Mulhouse, passionné par le développement web et le design minimaliste. Soucieux du détail, j'aime concevoir des interfaces épurées et intuitives qui allient esthétique et fonctionnalité. Depuis le début de mon parcours en MMI, j'ai pu explorer plusieurs domaines liés au web, notamment le développement frontend et backend, l'UX/UI design et la gestion de projets digitaux. Ces expériences m'ont permis d'apprendre des langages comme HTML, CSS, JavaScript, PHP mais également des outils essentiels comme Figma, Adobe. Au-delà du code, je suis fasciné par le design minimaliste, une approche qui repose sur la simplicité et la clarté pour mettre en valeur l'essentiel. Actuellement, je cherche à acquérir plus d'expérience et à mettre en pratique mes compétences dans le monde professionnels.</div>
         </div>
@@ -110,9 +109,9 @@
     </div>
 </div>
 
- <div class="profile">
+        <div class="oeoe animate-on-scroll" id="projets">
             <div class="texte">
-                <div class="titre">Mes Projets Professionnels</div>
+                <div class="titre2">Mes Projets Professionnels</div>
                 <div>Explorez mes réalisations : des projets minimaliste et créatif, démontrant mes compétences et mon engagement à apporter des solutions durables. Chaque projet reflète ma passion pour l'innovation et la résolution de problèmes.</div>
             </div>
         </div>
@@ -185,16 +184,18 @@
     </a>
 </div>
 
- <section class="contact-section">
+ <section class="contact-section" id="contact">
     <div class="contact-info">
-      <h2>Contacts</h2>
+      <h2>Contact</h2>
       <p>
         Une question, une envie d’échanger ou une opportunité d’alternance à partager ? 
         Utilisez le formulaire ci-dessous ou contactez-moi directement via mes réseaux sociaux. 
         Je serai ravi de vous répondre !
       </p>
-      <a href="mailto:laaraisadam22@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg> laaraisadam22@gmail.com</a>
-      <a href="tel:+33610352125"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> +33 6 10 35 21 25 </a>
+      <a href="mailto:laaraisadam22@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg> 
+        laaraisadam22@gmail.com</a>
+      <a href="tel:+33610352125"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> 
+        +33 6 10 35 21 25 </a>
       <div class="lien" style="margin-top: 20px;">
         <a href="https://www.linkedin.com/in/adam-laarais-bb572132b/">
                 <svg width="35" height="35" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +223,7 @@
         <br><br>
         <textarea name="message" placeholder="Message" required></textarea>
         <br><br>
-        <button type="submit">Envoyer</button>
+        <button class="bouton2" type="submit">Envoyer</button>
       </form>
     </div>
   </section>
