@@ -213,14 +213,17 @@ h1{
 }
 
 .titre2 {
-     margin-top: 16px;
+    margin-top: 16px;
     margin-bottom: 12px;
     font-weight: bolder;
-    font-size: 28px;
+    font-size: 30px;
     color: #12C7EC;
     text-align: center; 
 }
 
+.des {
+    font-size: 26px;
+}
 .sous-titre {
     font-size: 18px;
     font-style: italic;
