@@ -3,240 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>.Portfolio</title>
+    <title>Adam Laarais | Portfolio</title>
     <link rel="stylesheet" href="style/style.css">
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-    <link rel="shortcut icon" href="img/letter-a.png" type="img/png">
+    <link rel="shortcut icon" href="img/letter-a.png" type="image/png">
 </head>
 <body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <div class="background-grid"></div>
-    <div class="custom-cursor"></div>
 
     <header>
-        <div class="gauche">
+        <div class="header-logo">
             <h1>Portfolio.</h1>
         </div>
-        <div class="centre">
-            <div class="menu">
-                <div></div>
-                <a href="#index" class="bleu">Accueil</a>
-            </div>
-            <a href="#projets" class="blanc">Projets Professionnels</a>
-            <a href="#contact" class="blanc">Contact</a>  
-        </div>
-        <div class="droite">
-            <a href="https://www.linkedin.com/in/adam-laarais-bb572132b/" target="_blank">
-                <svg width="35" height="35" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M26.6666 13.3333C29.3188 13.3333 31.8624 14.3869 33.7377 16.2623C35.6131 18.1376 36.6666 20.6812 36.6666 23.3333V35H30V23.3333C30 22.4493 29.6488 21.6014 29.0237 20.9763C28.3985 20.3512 27.5507 20 26.6666 20C25.7826 20 24.9347 20.3512 24.3096 20.9763C23.6845 21.6014 23.3333 22.4493 23.3333 23.3333V35H16.6666V23.3333C16.6666 20.6812 17.7202 18.1376 19.5956 16.2623C21.4709 14.3869 24.0145 13.3333 26.6666 13.3333Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M9.99998 15H3.33331V35H9.99998V15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M6.66665 10C8.5076 10 9.99998 8.50763 9.99998 6.66668C9.99998 4.82573 8.5076 3.33334 6.66665 3.33334C4.8257 3.33334 3.33331 4.82573 3.33331 6.66668C3.33331 8.50763 4.8257 10 6.66665 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+        <nav class="header-nav">
+            <a href="#accueil" class="nav-link bleu">Accueil</a>
+            <a href="#projets" class="nav-link blanc">Projets</a>
+            <a href="#contact" class="nav-link blanc">Contact</a>
+        </nav>
+        <div class="header-socials">
+            <a href="https://www.linkedin.com/in/adam-laarais-bb572132b/" target="_blank" aria-label="LinkedIn">
+                <svg width="30" height="30" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.6666 13.3333C29.3188 13.3333 31.8624 14.3869 33.7377 16.2623C35.6131 18.1376 36.6666 20.6812 36.6666 23.3333V35H30V23.3333C30 22.4493 29.6488 21.6014 29.0237 20.9763C28.3985 20.3512 27.5507 20 26.6666 20C25.7826 20 24.9347 20.3512 24.3096 20.9763C23.6845 21.6014 23.3333 22.4493 23.3333 23.3333V35H16.6666V23.3333C16.6666 20.6812 17.7202 18.1376 19.5956 16.2623C21.4709 14.3869 24.0145 13.3333 26.6666 13.3333Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.99998 15H3.33331V35H9.99998V15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.66665 10C8.5076 10 9.99998 8.50763 9.99998 6.66668C9.99998 4.82573 8.5076 3.33334 6.66665 3.33334C4.8257 3.33334 3.33331 4.82573 3.33331 6.66668C3.33331 8.50763 4.8257 10 6.66665 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="https://github.com/adamlaarais" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#ffffff" class="bi bi-github" viewBox="0 0 16 16">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
-                </svg>
+            <a href="https://github.com/adamlaarais" target="_blank" aria-label="GitHub">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffffff" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>
             </a>
         </div>
     </header>
+
     <main>
-        <div class="profile" id="index">
-            <div class="texte">
-                <div class="titre2">LAARAIS Adam</div>
-                <div class="des">Étudiant BUT MMI à Mulhouse | Futur développeur web | En quête d'alternance & projets concrets | Curieux & toujours en apprentissage </div>
-                <a class="bouton1 scroll-down" href="#bio"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg></a>
+        <section class="hero" id="accueil">
+            <div class="hero-content">
+                <h2 class="hero-title">LAARAIS Adam</h2>
+                <p class="hero-subtitle">Étudiant BUT MMI | Futur développeur web | En quête d'alternance & projets concrets.</p>
+                <a class="bouton-scroll" href="#bio" aria-label="Voir la suite">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M5 12l7 7 7-7"/></svg>
+                </a>
             </div>
-        </div>
+        </section>
 
-        <div class="rubrique animate-on-scroll" id="bio">
-            <div class="titre">BIO</div>
-            <div>Je m'appelle Adam, étudiant en BUT Métiers du Multimédia et de l'Internet (MMI) à Mulhouse, passionné par le développement web et le design minimaliste. Soucieux du détail, j'aime concevoir des interfaces épurées et intuitives qui allient esthétique et fonctionnalité. Depuis le début de mon parcours en MMI, j'ai pu explorer plusieurs domaines liés au web, notamment le développement frontend et backend, l'UX/UI design et la gestion de projets digitaux. Ces expériences m'ont permis d'apprendre des langages comme HTML, CSS, JavaScript, PHP mais également des outils essentiels comme Figma, Adobe. Au-delà du code, je suis fasciné par le design minimaliste, une approche qui repose sur la simplicité et la clarté pour mettre en valeur l'essentiel. Actuellement, je cherche à acquérir plus d'expérience et à mettre en pratique mes compétences dans le monde professionnels.</div>
-        </div>
-
-        <div class="rubrique animate-on-scroll">
-            <div class="titre">COMPÉTENCES</div>
-            <div class="sous-titre">Développement Web</div>
-            <div class="competences">
-                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#12C7EC" class="bi bi-filetype-html" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M14 4.5V11h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zm-9.736 7.35v3.999h-.791v-1.714H1.79v1.714H1V11.85h.791v1.626h1.682V11.85h.79Zm2.251.662v3.337h-.794v-3.337H4.588v-.662h3.064v.662zm2.176 3.337v-2.66h.038l.952 2.159h.516l.946-2.16h.038v2.661h.715V11.85h-.8l-1.14 2.596H9.93L8.79 11.85h-.805v3.999zm4.71-.674h1.696v.674H12.61V11.85h.79v3.325Z"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#12C7EC" class="bi bi-filetype-js" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2H8v-1h4a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM3.186 15.29a1.2 1.2 0 0 1-.111-.449h.765a.58.58 0 0 0 .255.384q.105.073.249.114.143.041.319.041.246 0 .413-.07a.56.56 0 0 0 .255-.193.5.5 0 0 0 .085-.29.39.39 0 0 0-.153-.326q-.151-.12-.462-.193l-.619-.143a1.7 1.7 0 0 1-.539-.214 1 1 0 0 1-.351-.367 1.1 1.1 0 0 1-.123-.524q0-.366.19-.639.19-.272.528-.422.336-.15.776-.149.457 0 .78.152.324.153.5.41.18.255.2.566h-.75a.56.56 0 0 0-.12-.258.6.6 0 0 0-.247-.181.9.9 0 0 0-.369-.068q-.325 0-.513.152a.47.47 0 0 0-.184.384q0 .18.143.3a1 1 0 0 0 .405.175l.62.143q.327.075.566.211.24.136.375.358t.135.56q0 .37-.188.656a1.2 1.2 0 0 1-.539.439q-.351.158-.858.158-.381 0-.665-.09a1.4 1.4 0 0 1-.478-.252 1.1 1.1 0 0 1-.29-.375m-3.104-.033A1.3 1.3 0 0 1 0 14.791h.765a.6.6 0 0 0 .073.27.5.5 0 0 0 .454.246q.285 0 .422-.164.138-.165.138-.466v-2.745h.79v2.725q0 .66-.357 1.005-.354.345-.984.345a1.6 1.6 0 0 1-.569-.094 1.15 1.15 0 0 1-.407-.266 1.1 1.1 0 0 1-.243-.39"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#12C7EC" class="bi bi-filetype-css" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM3.397 14.841a1.13 1.13 0 0 0 .401.823q.195.162.478.252.284.091.665.091.507 0 .859-.158.354-.158.539-.44.187-.284.187-.656 0-.336-.134-.56a1 1 0 0 0-.375-.357 2 2 0 0 0-.566-.21l-.621-.144a1 1 0 0 1-.404-.176.37.37 0 0 1-.144-.299q0-.234.185-.384.188-.152.512-.152.214 0 .37.068a.6.6 0 0 1 .246.181.56.56 0 0 1 .12.258h.75a1.1 1.1 0 0 0-.2-.566 1.2 1.2 0 0 0-.5-.41 1.8 1.8 0 0 0-.78-.152q-.439 0-.776.15-.337.149-.527.421-.19.273-.19.639 0 .302.122.524.124.223.352.367.228.143.539.213l.618.144q.31.073.463.193a.39.39 0 0 1 .152.326.5.5 0 0 1-.085.29.56.56 0 0 1-.255.193q-.167.07-.413.07-.175 0-.32-.04a.8.8 0 0 1-.248-.115.58.58 0 0 1-.255-.384zM.806 13.693q0-.373.102-.633a.87.87 0 0 1 .302-.399.8.8 0 0 1 .475-.137q.225 0 .398.097a.7.7 0 0 1 .272.26.85.85 0 0 1 .12.381h.765v-.072a1.33 1.33 0 0 0-.466-.964 1.4 1.4 0 0 0-.489-.272 1.8 1.8 0 0 0-.606-.097q-.534 0-.911.223-.375.222-.572.632-.195.41-.196.979v.498q0 .568.193.976.197.407.572.626.375.217.914.217.439 0 .785-.164t.55-.454a1.27 1.27 0 0 0 .226-.674v-.076h-.764a.8.8 0 0 1-.118.363.7.7 0 0 1-.272.25.9.9 0 0 1-.401.087.85.85 0 0 1-.478-.132.83.83 0 0 1-.299-.392 1.7 1.7 0 0 1-.102-.627zM6.78 15.29a1.2 1.2 0 0 1-.111-.449h.764a.58.58 0 0 0 .255.384q.106.073.25.114.142.041.319.041.245 0 .413-.07a.56.56 0 0 0 .255-.193.5.5 0 0 0 .085-.29.39.39 0 0 0-.153-.326q-.152-.12-.463-.193l-.618-.143a1.7 1.7 0 0 1-.539-.214 1 1 0 0 1-.351-.367 1.1 1.1 0 0 1-.123-.524q0-.366.19-.639.19-.272.527-.422t.777-.149q.456 0 .779.152.326.153.5.41.18.255.2.566h-.75a.56.56 0 0 0-.12-.258.6.6 0 0 0-.246-.181.9.9 0 0 0-.37-.068q-.324 0-.512.152a.47.47 0 0 0-.184.384q0 .18.143.3a1 1 0 0 0 .404.175l.621.143q.326.075.566.211t.375.358.135.56q0 .37-.188.656a1.2 1.2 0 0 1-.539.439q-.351.158-.858.158-.381 0-.665-.09a1.4 1.4 0 0 1-.478-.252 1.1 1.1 0 0 1-.29-.375"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#12C7EC" class="bi bi-filetype-php" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM1.6 11.85H0v3.999h.791v-1.342h.803q.43 0 .732-.173.305-.175.463-.474a1.4 1.4 0 0 0 .161-.677q0-.375-.158-.677a1.2 1.2 0 0 0-.46-.477q-.3-.18-.732-.179m.545 1.333a.8.8 0 0 1-.085.38.57.57 0 0 1-.238.241.8.8 0 0 1-.375.082H.788V12.48h.66q.327 0 .512.181.185.182.185.522m4.48 2.666V11.85h-.79v1.626H4.153V11.85h-.79v3.999h.79v-1.714h1.682v1.714zm.703-3.999h1.6q.433 0 .732.179.3.175.46.477.158.302.158.677t-.161.677q-.159.299-.463.474a1.45 1.45 0 0 1-.733.173H8.12v1.342h-.791zm2.06 1.714a.8.8 0 0 0 .084-.381q0-.34-.184-.521-.184-.182-.513-.182h-.66v1.406h.66a.8.8 0 0 0 .375-.082.57.57 0 0 0 .237-.24Z"/>
-                </svg>
+        <section class="section animate-on-scroll" id="bio">
+            <div class="bio-container">
+                <h3 class="section-title">BIO</h3>
+                <p class="section-text">Je suis Adam, étudiant en BUT MMI à Mulhouse, passionné par la création d'interfaces web épurées et fonctionnelles. Mon parcours m'a permis d'acquérir de solides compétences en développement (HTML, CSS, JS, PHP) et en design (Figma, Suite Adobe). Autonome et rigoureux, je suis prêt à transformer ma passion en expertise professionnelle.</p>
             </div>
-            <div class="sous-titre">Design</div>
-            <div class="competences1">
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="80" height="80" viewBox="0,0,256,256">
-                    <g fill="#12c7ec" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(10.66667,10.66667)"><path d="M8.0332,2.99609c-2.76844,0 -5.03125,2.26468 -5.03125,5.03125v7.94727c0,2.76657 2.26281,5.0293 5.03125,5.0293h7.9375c2.76926,0 5.03125,-2.26294 5.03125,-5.0293v-7.94727c0,-2.76657 -2.26281,-5.03125 -5.03125,-5.03125zM8.0332,4.49609h7.9375c1.95557,0 3.53125,1.57782 3.53125,3.53125v7.94727c0,1.95364 -1.57451,3.5293 -3.53125,3.5293h-7.9375c-1.95556,0 -3.53125,-1.57586 -3.53125,-3.5293v-7.94727c0,-1.95343 1.57569,-3.53125 3.53125,-3.53125zM10.00586,6.99805c-0.34335,-0.00442 -0.64585,0.22487 -0.73437,0.55664l-2.25586,8.49219c-0.07437,0.26064 -0.00233,0.54113 0.18842,0.73369c0.19076,0.19256 0.47056,0.26722 0.73189,0.1953c0.26133,-0.07192 0.46353,-0.27923 0.52891,-0.54227l0.51563,-1.9375h2.0332l0.51563,1.9375c0.06538,0.26304 0.26758,0.47035 0.52891,0.54227c0.26133,0.07192 0.54113,-0.00275 0.73188,-0.1953c0.19076,-0.19255 0.26279,-0.47304 0.18843,-0.73369l-2.25586,-8.49219c-0.08685,-0.32544 -0.37998,-0.55308 -0.7168,-0.55664zM16.00195,7.25391c-0.413,0 -0.74805,0.33309 -0.74805,0.74609c0,0.414 0.33505,0.74609 0.74805,0.74609c0.413,0 0.75,-0.33309 0.75,-0.74609c0,-0.414 -0.337,-0.74609 -0.75,-0.74609zM15.98828,10c-0.41344,0.00647 -0.74367,0.34631 -0.73828,0.75977v5.48047c-0.00383,0.27048 0.13828,0.52206 0.3719,0.65842c0.23362,0.13635 0.52257,0.13635 0.75619,0c0.23362,-0.13635 0.37573,-0.38794 0.3719,-0.65842v-5.48047c0.00264,-0.20264 -0.07682,-0.39773 -0.22031,-0.54085c-0.14349,-0.14312 -0.33878,-0.22208 -0.54141,-0.21892zM9.99609,10.66992l0.61914,2.32617h-1.23633z"></path></g></g>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="80" height="80" viewBox="0,0,256,256">
-                    <g fill="#12c7ec" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(10.66667,10.66667)"><path d="M8,3c-2.75,0 -5,2.25 -5,5v8c0,2.75 2.25,5 5,5h8c2.75,0 5,-2.25 5,-5v-8c0,-2.75 -2.25,-5 -5,-5zM8,4.5h8c1.93,0 3.5,1.57 3.5,3.5v8c0,1.93 -1.57,3.5 -3.5,3.5h-8c-1.93,0 -3.5,-1.57 -3.5,-3.5v-8c0,-1.93 1.57,-3.5 3.5,-3.5zM6.75586,7.01367c-0.4142,0.00004 -0.74996,0.3358 -0.75,0.75v4.36328c-0.01355,0.08147 -0.01355,0.16462 0,0.24609v3.87891c-0.00383,0.27048 0.13828,0.52206 0.3719,0.65842c0.23362,0.13635 0.52257,0.13635 0.75619,0c0.23362,-0.13635 0.37573,-0.38794 0.3719,-0.65842v-3.25195h1.51758c1.61521,0 2.97266,-1.27723 2.97266,-2.875v-0.23633c0,-1.59776 -1.35744,-2.875 -2.97266,-2.875zM7.50586,8.51367h1.51758c0.84079,0 1.47266,0.62476 1.47266,1.375v0.23633c0,0.75024 -0.63187,1.375 -1.47266,1.375h-1.51758zM15.20117,9.00781c-0.76186,0 -1.3982,0.30065 -1.81055,0.71484c-0.41235,0.41419 -0.63281,0.90412 -0.63281,1.42578c0,0.8077 0.38021,1.48885 0.88281,1.86914c0.50261,0.38029 1.05496,0.53065 1.5332,0.66992c0.47824,0.13927 0.89053,0.2703 1.09375,0.40234c0.20322,0.13204 0.24414,0.14646 0.24414,0.47266c0,0.36199 -0.10013,0.51457 -0.30664,0.66797c-0.20651,0.1534 -0.57196,0.26953 -1.02734,0.26953c-0.99513,0 -1.17187,-0.6875 -1.17187,-0.6875c-0.09491,-0.25525 -0.3207,-0.43901 -0.5899,-0.48009c-0.2692,-0.04108 -0.53952,0.06697 -0.70624,0.2823c-0.16671,0.21532 -0.20363,0.50409 -0.09644,0.75443c0,0 0.74558,1.63086 2.56445,1.63086c0.69561,0 1.37414,-0.15955 1.92188,-0.56641c0.54774,-0.40685 0.91211,-1.09809 0.91211,-1.87109c0,-0.7588 -0.42689,-1.40504 -0.92773,-1.73047c-0.50084,-0.32543 -1.02973,-0.44988 -1.49023,-0.58398c-0.46051,-0.1341 -0.84542,-0.27531 -1.04687,-0.42774c-0.20145,-0.15243 -0.28906,-0.24408 -0.28906,-0.67187c0,-0.01134 0.04986,-0.21913 0.19727,-0.36719c0.1474,-0.14806 0.35695,-0.27344 0.74609,-0.27344c0.58033,0 1.12305,0.4707 1.12305,0.4707c0.19093,0.19202 0.47054,0.26621 0.73155,0.19413c0.26102,-0.07208 0.46292,-0.27926 0.52825,-0.54204c0.06533,-0.26279 -0.01605,-0.54039 -0.21292,-0.72631c0,0 -0.86425,-0.89648 -2.16992,-0.89648z"></path></g></g>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="80" height="80" viewBox="0,0,256,256">
-                    <g fill="#12c7ec" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M18.5,2c-4.68248,0 -8.5,3.81752 -8.5,8.5c0,3.30029 1.94993,6.09286 4.70898,7.5c-2.75906,1.40715 -4.70898,4.19971 -4.70898,7.5c0,3.30029 1.94993,6.09286 4.70898,7.5c-2.75906,1.40715 -4.70898,4.19971 -4.70898,7.5c0,4.68248 3.81752,8.5 8.5,8.5c4.68248,0 8.5,-3.81752 8.5,-8.5v-7.5v-3.34375c1.34137,2.54547 3.93207,4.34375 7,4.34375c4.40644,0 8,-3.59357 8,-8c0,-3.62175 -2.47383,-6.57131 -5.78516,-7.55078c3.33871,-1.14751 5.78516,-4.22899 5.78516,-7.94922c0,-4.68248 -3.81752,-8.5 -8.5,-8.5h-7.5zM18.5,4h6.5v13h-6.5c-3.60152,0 -6.5,-2.89848 -6.5,-6.5c0,-3.60152 2.89848,-6.5 6.5,-6.5zM27,4h6.5c3.60152,0 6.5,2.89848 6.5,6.5c0,3.60152 -2.89848,6.5 -6.5,6.5h-6.5zM18.5,19h6.5v13h-6.5c-3.60152,0 -6.5,-2.89848 -6.5,-6.5c0,-3.60152 2.89848,-6.5 6.5,-6.5zM27,19h3.34375c-1.43491,0.75615 -2.5876,1.90884 -3.34375,3.34375zM34,20c3.32556,0 6,2.67445 6,6c0,3.32555 -2.67444,6 -6,6c-3.32556,0 -6,-2.67445 -6,-6c0,-3.32555 2.67444,-6 6,-6zM18.5,34h6.5v6.5c0,3.60152 -2.89848,6.5 -6.5,6.5c-3.60152,0 -6.5,-2.89848 -6.5,-6.5c0,-3.60152 2.89848,-6.5 6.5,-6.5z"></path></g></g>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="80" height="80" viewBox="0,0,256,256">
-                    <g fill="#12c7ec" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M25,2c-12.68957,0 -23,10.31043 -23,23c0,12.68957 10.31043,23 23,23c12.68957,0 23,-10.31043 23,-23c0,-12.68957 -10.31043,-23 -23,-23zM25,4c11.60843,0 21,9.39157 21,21c0,11.60843 -9.39157,21 -21,21c-11.60843,0 -21,-9.39157 -21,-21c0,-11.60843 9.39157,-21 21,-21zM15.11719,17.08203c-0.717,0 -1.50499,0.21358 -2.20899,0.64258c-3.068,1.869 -5.04839,6.13277 -4.65039,9.38477c0.126,1.033 0.55523,2.16287 1.36523,2.92188c0.546,0.506 1.53427,1.12891 2.69727,1.12891c1.26,0 2.32525,-0.48484 3.28125,-1.08984c0.648,-0.414 1.18753,-0.91669 1.64453,-1.42969c0.321,0.679 0.98864,1.13672 1.68164,1.13672c0.543,0 1.0525,-0.2723 1.4375,-0.7793c0.116,0.468 0.44239,0.7793 1.02539,0.7793c0.426,0 1.33664,-0.42464 2.18164,-1.05664l-0.08594,0.45117c-0.023,0.096 -0.03144,0.19302 -0.02344,0.29102c0.026,0.215 0.17319,0.3125 0.36719,0.3125c0.407,0 1.00009,-0.39014 1.12109,-0.99414l0.18555,-0.85547c0.238,-1.071 1.804,-2.68945 2.25,-2.68945c0.057,0 0.10133,0.03919 0.11133,0.11719c0.033,0.273 -0.49752,1.16838 -0.72852,2.60938c-0.044,0.245 -0.05139,0.49423 -0.02539,0.74023c0.078,0.643 0.4592,1.07031 1.1582,1.07031c0.604,0 1.8935,-0.50862 2.8125,-1.51563c0.069,0.563 0.18819,1.04356 0.36719,1.35156c0.077,0.136 0.2522,0.17383 0.4082,0.17383c0.195,0 0.46586,-0.07642 0.75586,-0.23242c0.698,-0.39 1.61042,-1.2682 2.48242,-2.5332c0.116,0.019 0.21113,0.01953 0.32813,0.01953c0.349,0 0.73956,-0.12366 1.10156,-0.34766c-0.137,0.439 -0.18772,0.88478 -0.13672,1.30078c0.123,1.012 0.99472,1.79297 1.88672,1.79297c0.523,0 1.03492,-0.27277 1.41992,-0.75977c0.117,0.644 0.5303,1.32538 1.5293,1.73437c0.063,0.039 0.14122,0.03906 0.19922,0.03906c0.194,0 0.31292,-0.13502 0.29492,-0.29102c-0.007,-0.06 -0.05948,-0.15738 -0.14648,-0.23437c-0.24,-0.214 -0.49641,-0.58539 -0.56641,-1.15039c-0.033,-0.273 -0.01673,-0.60319 0.07227,-0.99219c0.217,-0.915 0.264,-1.16816 0.25,-1.28516c-0.028,-0.234 -0.19467,-0.33203 -0.38867,-0.33203c-0.408,0 -0.95952,0.40766 -1.10352,0.97266c-0.224,0.856 -0.83323,1.44141 -1.24023,1.44141c-0.504,0 -0.76303,-0.54633 -0.83203,-1.11133c-0.172,-1.401 0.72149,-3.13477 2.02148,-3.13477c0.388,0 0.7938,0.15687 0.8418,0.54687c0.074,0.603 -0.5642,0.46575 -0.5332,0.71875c0.031,0.253 0.46781,0.33203 0.75781,0.33203c0.291,0 1.14053,-0.1945 1.01953,-1.1875c-0.095,-0.779 -0.91719,-1.15039 -1.86719,-1.15039c-1.116,0 -2.0678,0.56756 -2.7168,1.35156c-0.086,0.05 -0.17644,0.13609 -0.27344,0.24609c-0.214,0.254 -0.60147,0.48828 -1.10547,0.48828c-0.058,0 -0.19336,-0.01953 -0.19336,-0.01953c0.328,-0.642 0.56055,-1.30367 0.56055,-1.88867c0,-0.935 -0.5807,-1.40234 -1.2207,-1.40234c-0.814,0 -1.64844,0.72105 -1.64844,2.12305c0,0.837 0.32911,1.51867 0.91211,1.88867c-0.659,1.091 -1.57103,1.98828 -1.70703,1.98828c-0.077,0 -0.09428,-0.07825 -0.11328,-0.15625c-0.097,-0.369 -0.19531,-1.09106 -0.19531,-1.53906c0,-0.798 0.15531,-1.59613 0.44531,-2.45312c0.039,-0.097 0.05859,-0.19544 0.05859,-0.27344c0,-0.233 -0.15514,-0.34961 -0.36914,-0.34961c-0.425,0 -1.0657,0.48519 -1.2207,0.99219c-0.155,0.486 -0.21289,1.1488 -0.21289,1.9668c0,0.152 0.00281,0.30122 0.00781,0.44922c-0.79,1.044 -1.77022,1.41602 -2.07422,1.41602c-0.381,0 -0.45416,-0.31444 -0.41016,-0.52344c0.206,-0.982 0.51697,-2.12381 0.79297,-2.88281c0.129,-0.37 0.18611,-0.69953 0.16211,-0.89453c-0.043,-0.351 -0.29695,-0.52539 -0.62695,-0.52539c-0.776,0 -2.07325,0.81478 -2.90625,1.92578l0.26563,-1.20117c0.025,-0.116 0.03244,-0.21597 0.02344,-0.29297c-0.028,-0.234 -0.17514,-0.33008 -0.36914,-0.33008c-0.951,0 -1.12003,0.48217 -1.20703,0.95117c-0.022,0.113 -0.29748,1.54322 -0.52148,2.69922c-0.712,0.639 -1.48241,1.05273 -1.69141,1.05273c-0.264,0 -0.35042,-0.20737 -0.35742,-0.35937c-0.01,-0.174 0.18347,-1.01848 0.23047,-1.27148c0.025,-0.116 0.03244,-0.21302 0.02344,-0.29102c-0.026,-0.215 -0.17372,-0.3125 -0.38672,-0.3125c-0.409,0 -0.96247,0.38866 -1.10547,0.97266c-0.226,0.857 -0.81175,1.44141 -1.21875,1.44141c-0.504,0 -0.78456,-0.54384 -0.85156,-1.08984c-0.148,-1.209 0.62353,-3.15625 2.01953,-3.15625c0.388,0 0.79184,0.13639 0.83984,0.52539c0.077,0.623 -0.54277,0.46723 -0.50977,0.74023c0.03,0.253 0.46628,0.33008 0.73828,0.33008c0.311,0 1.13853,-0.19497 1.01953,-1.16797c-0.095,-0.78 -0.89719,-1.16992 -1.86719,-1.16992c-2.242,0 -3.74847,2.20494 -3.60547,3.96094c-0.58,0.675 -1.15869,1.08738 -2.17969,1.60937c-0.585,0.292 -1.24133,0.4668 -1.86133,0.4668c-1.861,0 -2.77017,-1.71336 -2.95117,-3.19336c-0.464,-3.797 2.87417,-9.01562 5.20117,-9.01562c0.543,0 1.02719,0.47103 1.11719,1.20703c0.139,1.144 0.11759,1.95436 -1.06641,2.94336c-0.129,0.107 -0.16661,0.28272 -0.09961,0.38672c0.1,0.155 0.41855,0.16975 1.06055,-0.15625c1.259,-0.635 1.71322,-1.615 1.57422,-2.75c-0.154,-1.26 -1.25452,-2.31445 -2.72851,-2.31445zM34.22266,23.4668c0.213,0 0.48438,0.31072 0.48438,1.01172c0,0.371 -0.07689,0.74133 -0.21289,1.11133c-0.349,-0.369 -0.62109,-0.93447 -0.62109,-1.48047c0,-0.292 0.09761,-0.64158 0.34961,-0.64258z"></path></g></g>
-                </svg>
+        </section>
+
+        <section class="section animate-on-scroll" id="competences">
+            <h3 class="section-title">COMPÉTENCES</h3>
+            <div class="skills-container">
+                <div class="skills-column">
+                    <h4 class="skills-subtitle">Développement & Design</h4>
+                    <div class="competences-icons">
+                        <svg title="HTML5" xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#12C7EC" class="bi bi-filetype-html" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14 4.5V11h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM1.264 11.85H1v3.999h.791v-1.714H1.95c.25 0 .473.06.638.18s.278.293.34.512h.791v-3.999h-.75a1.5 1.5 0 0 0-.36.6A1 1 0 0 0 2.5 13a.5.5 0 0 1-.5.5h-.086a.5.5 0 0 1-.414-.24L1.264 11.85zM4.515 12.512v3.337H3.72v-3.337H2.72v-.662h3.064v.662H4.515zm2.176 3.337v-2.66h.038l.952 2.159h.516l.946-2.16h.038v2.661h.715V11.85h-.8l-1.14 2.596H9.93L8.79 11.85h-.805v3.999h.715zm4.71-.674h1.696v.674H12.61V11.85h.79v3.325z"/></svg>
+                        <svg title="CSS3" xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#12C7EC" class="bi bi-filetype-css" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM3.397 14.841a1.13 1.13 0 0 0 .401.823c.195.162.478.252.665.252.507 0 .859-.158.859-.539 0-.284-.187-.44-.439-.539l-.621-.144a1 1 0 0 1-.404-.176.37.37 0 0 1-.144-.299c0-.234.185-.384.512-.384.214 0 .37.068.489.181.12.113.195.258.195.439h.75c0-.44-.2-.786-.5-.964-.3-.181-.733-.272-1.29-.272-.534 0-.911.149-1.125.421-.214.273-.214.639 0 .911.214.273.539.404.946.404l.618.144c.31.073.463.193.463.326 0 .195-.144.299-.439.299-.175 0-.32-.04-.413-.115a.58.58 0 0 1-.255-.384H3.397zM.806 13.693c0-.373.102-.633.302-.823s.475-.284.806-.284c.225 0 .398.097.527.284.13.187.196.439.196.75v.498c0 .31-.065.56-.196.74a.79.79 0 0 1-.527.272c-.33 0-.58-.09-.78-.272s-.302-.45-.302-.823v-.498zm.765-.498c0-.214.04-.384.12-.512s.195-.196.34-.196.26.068.34.196.12.298.12.512v.996c0 .214-.04.384-.12.512s-.195.196-.34-.196-.26-.068-.34-.196-.12-.298-.12-.512v-.996zM6.78 15.29c-.11-.273-.11-.56 0-.838.11-.273.33-.404.665-.404.225 0 .398.06.527.181.13.12.196.284.196.489h.75c0-.44-.2-.786-.5-.964-.3-.181-.733-.272-1.29-.272-.534 0-.911.149-1.125.421-.214.273-.214.639 0 .911.214.273.539.404.946.404l.618.144c.31.073.463.193.463.326 0 .195-.144.299-.439.299-.175 0-.32-.04-.413-.115a.58.58 0 0 1-.255-.384H6.78z"/></svg>
+                        <svg title="JavaScript" xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#12C7EC" class="bi bi-filetype-js" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2H8v-1h4a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM3.186 15.29a1.2 1.2 0 0 1-.111-.449h.765a.58.58 0 0 0 .255.384q.105.073.249.114.143.041.319.041.246 0 .413-.07a.56.56 0 0 0 .255-.193.5.5 0 0 0 .085-.29.39.39 0 0 0-.153-.326q-.151-.12-.462-.193l-.619-.143a1.7 1.7 0 0 1-.539-.214 1 1 0 0 1-.351-.367 1.1 1.1 0 0 1-.123-.524q0-.366.19-.639.19-.272.528-.422.336-.15.776-.149.457 0 .78.152.324.153.5.41.18.255.2.566h-.75a.56.56 0 0 0-.12-.258.6.6 0 0 0-.247-.181.9.9 0 0 0-.369-.068q-.325 0-.513.152a.47.47 0 0 0-.184.384q0 .18.143.3a1 1 0 0 0 .405.175l.62.143q.327.075.566.211.24.136.375.358t.135.56q0 .37-.188.656a1.2 1.2 0 0 1-.539.439q-.351.158-.858.158-.381 0-.665-.09a1.4 1.4 0 0 1-.478-.252 1.1 1.1 0 0 1-.29-.375m-3.104-.033A1.3 1.3 0 0 1 0 14.791h.765a.6.6 0 0 0 .073.27.5.5 0 0 0 .454.246q.285 0 .422-.164.138-.165.138-.466v-2.745h.79v2.725q0 .66-.357 1.005-.354.345-.984.345a1.6 1.6 0 0 1-.569-.094 1.15 1.15 0 0 1-.407-.266 1.1 1.1 0 0 1-.243-.39"/></svg>
+                        <svg title="PHP" xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#12C7EC" class="bi bi-filetype-php" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM1.6 11.85H0v3.999h.791v-1.342h.803q.43 0 .732-.173.305-.175.463-.474a1.4 1.4 0 0 0 .161-.677q0-.375-.158-.677a1.2 1.2 0 0 0-.46-.477q-.3-.18-.732-.179m.545 1.333a.8.8 0 0 1-.085.38.57.57 0 0 1-.238.241.8.8 0 0 1-.375.082H.788V12.48h.66q.327 0 .512.181.185.182.185.522m4.48 2.666V11.85h-.79v1.626H4.153V11.85h-.79v3.999h.79v-1.714h1.682v1.714zm.703-3.999h1.6q.433 0 .732.179.3.175.46.477.158.302.158.677t-.161.677q-.159.299-.463.474a1.45 1.45 0 0 1-.733.173H8.12v1.342h-.791zm2.06 1.714a.8.8 0 0 0 .084-.381q0-.34-.184-.521-.184-.182-.513-.182h-.66v1.406h.66a.8.8 0 0 0 .375-.082.57.57 0 0 0 .237-.24Z"/></svg>
+                        <svg title="Figma" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="80" height="80" viewBox="0,0,256,256"><g fill="#12c7ec" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M18.5,2c-4.68248,0 -8.5,3.81752 -8.5,8.5c0,3.30029 1.94993,6.09286 4.70898,7.5c-2.75906,1.40715 -4.70898,4.19971 -4.70898,7.5c0,3.30029 1.94993,6.09286 4.70898,7.5c-2.75906,1.40715 -4.70898,4.19971 -4.70898,7.5c0,4.68248 3.81752,8.5 8.5,8.5c4.68248,0 8.5,-3.81752 8.5,-8.5v-7.5v-3.34375c1.34137,2.54547 3.93207,4.34375 7,4.34375c4.40644,0 8,-3.59357 8,-8c0,-3.62175 -2.47383,-6.57131 -5.78516,-7.55078c3.33871,-1.14751 5.78516,-4.22899 5.78516,-7.94922c0,-4.68248 -3.81752,-8.5 -8.5,-8.5h-7.5zM18.5,4h6.5v13h-6.5c-3.60152,0 -6.5,-2.89848 -6.5,-6.5c0,-3.60152 2.89848,-6.5 6.5,-6.5zM27,4h6.5c3.60152,0 6.5,2.89848 6.5,6.5c0,3.60152 -2.89848,6.5 -6.5,6.5h-6.5zM18.5,19h6.5v13h-6.5c-3.60152,0 -6.5,-2.89848 -6.5,-6.5c0,-3.60152 2.89848,-6.5 6.5,-6.5zM27,19h3.34375c-1.43491,0.75615 -2.5876,1.90884 -3.34375,3.34375zM34,20c3.32556,0 6,2.67445 6,6c0,3.32555 -2.67444,6 -6,6c-3.32556,0 -6,-2.67445 -6,-6c0,-3.32555 2.67444,-6 6,-6zM18.5,34h6.5v6.5c0,3.60152 -2.89848,6.5 -6.5,6.5c-3.60152,0 -6.5,-2.89848 -6.5,-6.5c0,-3.60152 2.89848,-6.5 6.5,-6.5z"></path></g></g></svg>
+                    </div>
+                </div>
+                <div class="skills-column">
+                    <h4 class="skills-subtitle">Langues</h4>
+                    <div class="language-skill">
+                        <p>Anglais - B2</p>
+                        <div class="stars">
+                            <span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star empty">☆</span>
+                        </div>
+                    </div>
+                    <div class="language-skill">
+                        <p>Allemand - A2</p>
+                        <div class="stars">
+                            <span class="star full">★</span><span class="star full">★</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-       <div class="rubrique animate-on-scroll">
-    <div class="titre">LANGUES</div>
-
-    <div class="sous-titre">Anglais - B2</div>
-    <div class="etoiles">
-        <span class="star full">★</span>
-        <span class="star full">★</span>
-        <span class="star full">★</span>
-        <span class="star full">★</span>
-        <span class="star empty">☆</span>
-    </div>
-
-    <div class="sous-titre">Allemand - B1</div>
-    <div class="etoiles">
-        <span class="star full">★</span>
-        <span class="star full">★</span>
-        <span class="star full">★</span>
-        <span class="star empty">☆</span>
-        <span class="star empty">☆</span>
-    </div>
-</div>
-
-        <div class="oeoe animate-on-scroll" id="projets">
-            <div class="texte">
-                <div class="titre2">Mes Projets Professionnels</div>
-                <div>Explorez mes réalisations : des projets minimaliste et créatif, démontrant mes compétences et mon engagement à apporter des solutions durables. Chaque projet reflète ma passion pour l'innovation et la résolution de problèmes.</div>
+        <section class="section animate-on-scroll" id="projets">
+            <h3 class="section-title">Mes Projets Professionnels</h3>
+            <p class="section-text">Explorez mes réalisations : des projets variés, démontrant mes compétences et mon engagement à apporter des solutions durables.</p>
+            
+            <div class="project-card">
+                <h4 class="project-title">Projet Développement WEB - VoltAuto</h4>
+                <p>Site de location de voiture développé en HTML, CSS, JavaScript et PHP/MySQL.</p>
+                <div class="project-gallery">
+                    <img src="img/Accueil.png" alt="Page d'accueil VoltAuto">
+                    <img src="img/Véhicules.png" alt="Page des véhicules VoltAuto">
+                </div>
+                <a href="https://github.com/adamlaarais/SAE-203" class="btn-cv" target="_blank">Voir sur GitHub</a>
             </div>
-        </div>
 
-    <!-- SAE 203 : Projet Développement Web -->
-    <div class="rubrique animate-on-scroll">
-        <div class="titre">Projet Développement WEB</div>
-        <div>
-            Ce projet a été réalisé dans le cadre de la SAE 203 en développement web du BUT MMI à l'IUT de Mulhouse.
-            Il s'agit d'un site de location de voiture nommé <strong>VoltAuto</strong>, développé en HTML, CSS, JavaScript pour le front, et PHP avec une base de données MySQL pour le back-end.
-        </div>
-        <div class="lien1" style="text-align: center; margin-top: 15px;">
-            <img src="img/Accueil.png" alt="Page d'accueil VoltAuto" style="text-align: center;">
-            <img src="img/En savoir plus.png" alt="Page En savoir plus" style="text-align: center;">
-            <img src="img/Véhicules.png" alt="Page des véhicules" style="text-align: center;">
-            <img src="img/Réserver.png" alt="Page de réservation" style="text-align: center;">
-        </div>
-        <div style="text-align: center; margin-top: 10px;">
-            <a href="https://github.com/adamlaarais/SAE-203" class="btn-cv" target="_blank">Voir Mon GITHUB</a>
-        </div>
-    </div>
+            <div class="project-card">
+                <h4 class="project-title">Projet Design WEB - Agence Cursive.io</h4>
+                <p>Maquette d'une page d'accueil pour une agence digitale, réalisée sur Figma.</p>
+                <div class="project-gallery">
+                    <img src="img/HOME.png" alt="Page d'accueil Cursive.io">
+                </div>
+                <a href="https://www.figma.com/design/RoXTdWpAObvQM99BxynFgI/-----?node-id=0-1&t=IOJfw9aKcybK3TUw-1" class="btn-cv" target="_blank">Voir sur Figma</a>
+            </div>
 
-    <!-- Projet Figma : Page d'accueil -->
-    <div class="rubrique animate-on-scroll">
-        <div class="titre">Projet design WEB</div>
-        <div>
-            Ce projet a été réalisé dans le cadre d'un TP en design du BUT MMI à l'IUT de Mulhouse.
-            Il s'agit d'une page d'accueil d'un site web, conçue avec Figma.
-        </div>
-        <div style="text-align: center;">
-            <img src="img/HOME.png" alt="Page d'accueil site web">
-            <br>
-            <a href="https://www.figma.com/design/RoXTdWpAObvQM99BxynFgI/-----?node-id=0-1&t=IOJfw9aKcybK3TUw-1" class="btn-cv" target="_blank">Voir Mon Figma</a>
-        </div>
-    </div>
+            <div class="project-card">
+                <h4 class="project-title">Projet Design WEB - Volkswagen Golf 8R</h4>
+                <p>Création d'une page produit pour la Golf 8R, conçue sur Figma.</p>
+                <div class="project-gallery">
+                    <img src="img/GOLF 8R.png" alt="Page produit Golf 8R">
+                </div>
+                <a href="https://www.figma.com/design/vMEg2RePy7yZ7tq44AV77A/Golf-8R?node-id=21-63&t=mQ5c1d2r5x2vF036-1" class="btn-cv" target="_blank">Voir sur Figma</a>
+            </div>
 
-    <!-- Projet Figma : Page produit Golf 8R -->
-    <div class="rubrique animate-on-scroll">
-        <div class="titre">Projet design WEB</div>
-        <div>
-            Ce projet a été réalisé dans le cadre d'un TP en design du BUT MMI à l'IUT de Mulhouse.
-            Il s'agit d'une page produit de la voiture Golf 8R, également conçue sur Figma.
-        </div>
-        <div style="text-align: center;">
-            <img src="img/GOLF 8R.png" alt="Page produit Golf 8R">
-            <br>
-            <a href="https://www.figma.com/design/vMEg2RePy7yZ7tq44AV77A/Golf-8R?node-id=21-63&t=mQ5c1d2r5x2vF036-1" class="btn-cv" target="_blank">Voir Mon Figma</a>
-        </div>
-    </div>
+        </section>
 
-    <!-- Projet Figma : Restaurant Bacio -->
-    <div class="rubrique animate-on-scroll">
-        <div class="titre">Projet design WEB</div>
-        <div>
-            Ce projet a été réalisé dans le cadre d'un TP en design du BUT MMI à l'IUT de Mulhouse.
-            Il s'agit d'une page d'accueil pour le restaurant <strong>Bacio</strong>, imaginée sur Figma avec un design épuré et moderne.
-        </div>
-        <div style="text-align: center;">
-            <img src="img/BACCIO.png" alt="Page d'accueil restaurant Bacio">
-            <br>
-            <a href="https://www.figma.com/design/XImPuuoStQXa1CJBpFuCz8/Bacio?t=mQ5c1d2r5x2vF036-1" class="btn-cv" target="_blank">Voir Mon Figma</a>
-        </div>
-    </div>
+        <section class="section section-center animate-on-scroll">
+             <h3 class="section-title">MON CV</h3>
+             <p class="section-text">Curieux d’en savoir plus ? Téléchargez mon CV.</p>
+             <a href="pdf/CV_LAARAIS_Adam.pdf" class="btn-cv" target="_blank">Télécharger mon CV (PDF)</a>
+        </section>
 
-<div class="rubrique animate-on-scroll">
-    <div class="titre">MON CV</div>
-    <div class="sous-titre"> Curieux d’en savoir plus ? Téléchargez mon CV</div>
-    <a href="pdf/CV_LAARAIS_Adam.pdf" class="btn-cv" target="_blank">
-    Télécharger mon CV (PDF)
-    </a>
-</div>
-
- <section class="contact-section" id="contact">
-    <div class="contact-info">
-      <h2>Contact</h2>
-      <p>
-        Une question, une envie d’échanger ou une opportunité d’alternance à partager ? 
-        Utilisez le formulaire ci-dessous ou contactez-moi directement via mes réseaux sociaux. 
-        Je serai ravi de vous répondre !
-      </p>
-      <a href="mailto:laaraisadam22@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg> 
-        laaraisadam22@gmail.com</a>
-      <a href="tel:+33610352125"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg> 
-        +33 6 10 35 21 25 </a>
-      <div class="lien" style="margin-top: 20px;">
-        <a href="https://www.linkedin.com/in/adam-laarais-bb572132b/" target="_blank">
-                <svg width="35" height="35" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M26.6666 13.3333C29.3188 13.3333 31.8624 14.3869 33.7377 16.2623C35.6131 18.1376 36.6666 20.6812 36.6666 23.3333V35H30V23.3333C30 22.4493 29.6488 21.6014 29.0237 20.9763C28.3985 20.3512 27.5507 20 26.6666 20C25.7826 20 24.9347 20.3512 24.3096 20.9763C23.6845 21.6014 23.3333 22.4493 23.3333 23.3333V35H16.6666V23.3333C16.6666 20.6812 17.7202 18.1376 19.5956 16.2623C21.4709 14.3869 24.0145 13.3333 26.6666 13.3333Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M9.99998 15H3.33331V35H9.99998V15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M6.66665 10C8.5076 10 9.99998 8.50763 9.99998 6.66668C9.99998 4.82573 8.5076 3.33334 6.66665 3.33334C4.8257 3.33334 3.33331 4.82573 3.33331 6.66668C3.33331 8.50763 4.8257 10 6.66665 10Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-        </a>
-       <a href="https://github.com/adamlaarais" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#ffffff" class="bi bi-github" viewBox="0 0 16 16">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
-                </svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="contact-form">
-      <h2>Contactez-moi !</h2>
-      <form>
-        <div class="form-group">
-          <input type="text" name="nom" placeholder="Nom" required>
-          <input type="text" name="prenom" placeholder="Prénom" required>
-        </div>
-        <input type="email" name="email" placeholder="Email" required>
-        <br><br>
-        <textarea name="message" placeholder="Message" required></textarea>
-        <br><br>
-        <button class="bouton2" type="submit">Envoyer</button>
-      </form>
-    </div>
-  </section>
-
-
+        <section class="section animate-on-scroll" id="contact">
+            <h3 class="section-title">CONTACT</h3>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p>Une question, une envie d’échanger ou une opportunité d’alternance ? Je serai ravi de vous répondre !</p>
+                    <a href="mailto:laaraisadam22@gmail.com">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        laaraisadam22@gmail.com
+                    </a>
+                    <a href="tel:+33610352125">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        +33 6 10 35 21 25
+                    </a>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" name="nom" placeholder="Nom" required>
+                            <input type="text" name="prenom" placeholder="Prénom" required>
+                        </div>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea name="message" placeholder="Votre message" required></textarea>
+                        <button class="bouton-envoyer" type="submit">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
-    <div class="footer-content">
-    © 2025 Adam Laarais — Tous droits réservés.
-  </div>
-</footer>
+        <p>© 2025 Adam Laarais — Tous droits réservés.</p>
+    </footer>
 
-<script src="js/anim.js"></script>
+    <script src="js/anim.js"></script>
 </body>
 </html>
