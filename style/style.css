@@ -1,6 +1,12 @@
-/* --- GÉNÉRAL --- */
+/* --- GÉNÉRAL & SCROLL SNAPPING --- */
 html {
   scroll-behavior: smooth;
+}
+
+.main-container {
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
 }
 
 body {
@@ -8,50 +14,22 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: #1d2a3d;
     color: white;
-    overflow-x: hidden;
+    overflow: hidden; /* Empêche le double scroll */
     cursor: none;
 }
 body.menu-open {
     overflow: hidden;
 }
 
-.background-grid {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    z-index: -1;
-    background-image:
-      linear-gradient(rgba(40,80,140,0.2) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(40,80,140,0.2) 1px, transparent 1px);
-    background-size: 50px 50px;
-}
+.background-grid { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; background-image: linear-gradient(rgba(40,80,140,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(40,80,140,0.2) 1px, transparent 1px); background-size: 50px 50px; }
 
 /* --- CURSEUR --- */
-.cursor-dot, .cursor-outline {
-    position: fixed;
-    pointer-events: none;
-    z-index: 10001;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    transition: all 0.2s ease-out;
-}
+.cursor-dot, .cursor-outline { position: fixed; pointer-events: none; z-index: 10001; transform: translate(-50%, -50%); border-radius: 50%; transition: all 0.2s ease-out; }
 .cursor-dot { width: 8px; height: 8px; background-color: #12C7EC; }
 .cursor-outline { width: 30px; height: 30px; border: 2px solid #12C7EC; }
 
 /* --- HEADER --- */
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
-    background-color: #111a28;
-    height: 70px;
-    border-bottom: 1px solid #12C7EC;
-}
-
+header { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: #111a28; height: 70px; border-bottom: 1px solid #12C7EC; }
 .header-logo h1 { font-size: 1.2rem; margin: 0; }
 .header-nav { display: flex; gap: 25px; }
 .nav-link { text-decoration: none; font-weight: bold; position: relative; padding: 5px 0; color: white; transition: color 0.3s; }
@@ -74,38 +52,38 @@ header {
 .mobile-nav-link { color: white; text-decoration: none; font-size: 2rem; padding: 20px; transition: color 0.3s; }
 .mobile-nav-link:hover { color: #12C7EC; }
 
+/* --- NAVIGATION LATÉRALE --- */
+.side-nav { position: fixed; top: 50%; right: 30px; transform: translateY(-50%); z-index: 999; display: flex; flex-direction: column; gap: 15px; }
+.dot { position: relative; width: 12px; height: 12px; background-color: rgba(255, 255, 255, 0.5); border-radius: 50%; transition: all 0.3s ease; }
+.dot:hover { background-color: white; }
+.dot.active { background-color: #12C7EC; transform: scale(1.4); }
+.dot span { visibility: hidden; opacity: 0; position: absolute; right: 150%; top: 50%; transform: translateY(-50%); background-color: #111a28; color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.9rem; white-space: nowrap; transition: visibility 0.2s, opacity 0.2s; }
+.dot:hover span { visibility: visible; opacity: 1; }
+
 /* --- SECTIONS --- */
-main { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-.section { padding: 80px 0; }
+.full-page-section { height: 100vh; scroll-snap-align: start; display: flex; justify-content: center; align-items: center; padding: 80px 40px; box-sizing: border-box; position: relative; }
 .section-center { text-align: center; }
 .section-title { font-size: clamp(2rem, 5vw, 2.5rem); color: #12C7EC; margin-bottom: 40px; text-align: center; }
 .section-text { text-align: center; max-width: 800px; margin: 0 auto 20px auto; line-height: 1.7; }
 
-.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 20px; }
+/* --- HERO SECTION --- */
+.hero-content { max-width: 1000px; text-align: center; }
 .hero-title { font-size: clamp(2.5rem, 6vw, 3.5rem); color: #12C7EC; margin: 0 0 10px 0; }
-.hero-subtitle { font-size: clamp(1.1rem, 3vw, 1.3rem); max-width: 600px; margin-bottom: 40px; }
+.hero-subtitle { font-size: clamp(1.1rem, 3vw, 1.3rem); max-width: 600px; margin: 0 auto 40px auto; }
 .bouton-scroll { display: inline-flex; justify-content: center; align-items: center; width: 50px; height: 50px; border: 2px solid #12C7EC; border-radius: 50%; transition: background-color 0.4s ease, transform 0.4s ease; }
 .bouton-scroll svg { transition: transform 0.4s ease-in-out; }
 .bouton-scroll:hover { background-color: #12C7EC; }
 .bouton-scroll:hover svg { transform: rotate(360deg) scale(1.1); }
 
-/* --- SECTION BIO STYLISÉE --- */
-#bio .bio-container {
-    background-color: #111a28;
-    border: 1px solid #12C7EC;
-    border-radius: 15px;
-    padding: 40px;
-}
+/* --- BIO SECTION --- */
+.bio-container { max-width: 1000px; background-color: #111a28; border: 1px solid #12C7EC; border-radius: 15px; padding: 40px; }
 .bio-container .section-title { text-align: left; margin-bottom: 10px; margin-top: 0; }
 .bio-container .section-text { text-align: left; margin-left: 0; color: #ccc; }
 
-/* --- SECTION COMPÉTENCES STYLISÉE --- */
+/* --- COMPÉTENCES SECTION --- */
+#competences > div { max-width: 1000px; width: 100%; }
 .skills-container { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
-.skills-column {
-    background-color: #111a28; /* FOND UNIFIÉ */
-    border: 1px solid #12C7EC; /* BORDURE UNIFIÉE */
-    border-radius: 15px; padding: 30px; flex: 1 1 300px; max-width: 400px;
-}
+.skills-column { background-color: #111a28; border: 1px solid #12C7EC; border-radius: 15px; padding: 30px; flex: 1 1 300px; max-width: 400px; }
 .skills-subtitle { text-align: center; font-size: 1.5rem; margin-top: 0; margin-bottom: 30px; }
 .competences-icons { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; align-items: center; }
 .competences-icons svg { transition: transform 0.3s; }
@@ -116,31 +94,23 @@ main { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 .star.full { color: #12C7EC; }
 .star.empty { color: rgba(255, 255, 255, 0.3); }
 
-/* --- PROJETS STYLISÉS --- */
-.project-card {
-    background-color: #111a28; /* FOND UNIFIÉ */
-    border: 1px solid #12C7EC; /* BORDURE UNIFIÉE */
-    border-radius: 15px; padding: 30px; margin-top: 40px; text-align: center;
-}
-.project-title { color: #12C7EC; font-size: 1.5rem; }
-.project-gallery { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
-.project-gallery img { max-width: 100%; height: auto; border-radius: 8px; width: 350px; transition: transform 0.4s ease; }
-.project-gallery img:hover { transform: scale(1.5); }
+/* --- PROJETS SECTION --- */
+#projets > div { max-width: 1200px; width: 100%; } /* Plus large pour les projets */
+.project-container { display: flex; gap: 20px; justify-content: center; }
+.project-card { background-color: #111a28; border: 1px solid #12C7EC; border-radius: 15px; padding: 20px; text-align: center; flex: 1; max-width: 350px;}
+.project-title { color: #12C7EC; font-size: 1.2rem; margin-bottom: 15px; }
+.project-card img { max-width: 100%; height: auto; border-radius: 8px; transition: transform 0.4s ease; }
+.project-card img:hover { transform: scale(1.05); }
 
-/* --- SECTION CV STYLISÉE --- */
-#cv-section {
-    background-color: #111a28;
-    border: 1px solid #12C7EC;
-    border-radius: 15px;
-    padding: 40px;
-    margin-top: 40px;
-}
+/* --- CV SECTION --- */
+#cv-section { background-color: #111a28; border: 1px solid #12C7EC; border-radius: 15px; padding: 40px; }
 #cv-section .section-title { margin-bottom: 20px; }
 #cv-section .section-text { margin-bottom: 30px; color: #ccc; }
 .btn-cv { display: inline-block; margin-top: 20px; padding: 12px 28px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; color: white; background: linear-gradient(135deg, #12C7EC, #0a7eaa); border-radius: 30px; border: none; text-decoration: none; box-shadow: 0 4px 12px rgba(18, 199, 236, 0.4); transition: all 0.3s ease; }
 .btn-cv:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 18px rgba(9, 95, 122, 0.7); }
 
-/* --- SECTION CONTACT --- */
+/* --- CONTACT SECTION --- */
+#contact > div { max-width: 1000px; width: 100%; }
 .contact-container { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; background-color: #111a28; border-radius: 15px; padding: clamp(20px, 5vw, 40px); border: 1px solid #12C7EC; }
 .contact-info, .contact-form { flex: 1 1 300px; display: flex; flex-direction: column; }
 .contact-info-title { font-size: 1.5rem; color: #12C7EC; margin-top: 0; margin-bottom: 20px; }
@@ -155,21 +125,26 @@ main { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 .bouton-envoyer:hover { background-color: #fff; color: #111a28; transform: scale(1.05); box-shadow: 0 0 20px rgba(18, 199, 236, 0.5); }
 
 /* --- FOOTER --- */
-.footer { text-align: center; padding: 25px 20px; margin-top: 50px; background-color: #111a28; border-top: 1px solid #12C7EC; }
-.footer p { margin: 0; }
+footer { text-align: center; padding: 25px 20px; background-color: #111a28; border-top: 1px solid #12C7EC; scroll-snap-align: end; }
+footer p { margin: 0; }
 
 /* --- ANIMATIONS & RESPONSIVE --- */
 .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
 .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
-[id] { scroll-margin-top: 90px; }
 
+@media (max-width: 900px) {
+    .side-nav { display: none; }
+    .project-container { flex-direction: column; align-items: center; }
+}
 @media (max-width: 768px) {
-    body { cursor: auto; }
+    .main-container { height: auto; overflow-y: visible; scroll-snap-type: none; }
+    body { cursor: auto; overflow-y: auto; }
+    .full-page-section { height: auto; min-height: 100vh; padding: 100px 20px; }
     .cursor-dot, .cursor-outline { display: none; }
     header { padding: 0 20px; }
     .header-nav, .header-socials { display: none; }
     .hamburger-menu { display: block; }
-    #bio .bio-container { border-left: none; padding-left: 0; }
+    .bio-container { border-left: none; padding-left: 0; }
     .bio-container .section-title, .bio-container .section-text { text-align: center; }
     .contact-info { text-align: center; }
     .contact-info a { justify-content: center; }
