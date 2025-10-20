@@ -19,30 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // --- GESTION DE LA NAVIGATION LATÉRALE (SIDE NAV) ---
-  const sections = document.querySelectorAll('.full-page-section');
-  const dots = document.querySelectorAll('.dot');
-  
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        dots.forEach(dot => dot.classList.remove('active'));
-        const sectionId = entry.target.id;
-        const activeDot = document.querySelector(`.dot[data-section="${sectionId}"]`);
-        if (activeDot) {
-          activeDot.classList.add('active');
-        }
-      }
-    });
-  }, {
-    root: document.querySelector('.main-container'),
-    threshold: 0.5
-  });
-
-  sections.forEach(section => {
-    sectionObserver.observe(section);
-  });
-
   // --- GESTION DU CURSEUR PERSONNALISÉ ---
   const dot = document.querySelector('.cursor-dot');
   const outline = document.querySelector('.cursor-outline');
@@ -80,8 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }, {
-    root: document.querySelector('.main-container'),
-    threshold: 0.2
+    threshold: 0.1
   });
 
   elementsToAnimate.forEach(el => {
