@@ -1,23 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  const mainContainer = document.querySelector('.main-container');
-
-  // --- CORRECTION DU SCROLL SMOOTH POUR LA FLÈCHE ---
-  const scrollDownButton = document.querySelector('.bouton-scroll');
-  if (scrollDownButton) {
-      scrollDownButton.addEventListener('click', function(e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('href');
-          const targetSection = document.querySelector(targetId);
-          if (targetSection) {
-              mainContainer.scrollTo({
-                  top: targetSection.offsetTop,
-                  behavior: 'smooth'
-              });
-          }
-      });
-  }
-
   // --- GESTION DU MENU MOBILE ---
   const hamburger = document.querySelector('.hamburger-menu');
   const mobileNav = document.querySelector('.mobile-nav');
@@ -35,30 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
         mobileNav.classList.remove('is-active');
         document.body.classList.remove('menu-open');
     });
-  });
-
-  // --- GESTION DE LA NAVIGATION LATÉRALE (SIDE NAV) ---
-  const sections = document.querySelectorAll('.full-page-section');
-  const dots = document.querySelectorAll('.dot');
-  
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        dots.forEach(dot => dot.classList.remove('active'));
-        const sectionId = entry.target.id;
-        const activeDot = document.querySelector(`.dot[data-section="${sectionId}"]`);
-        if (activeDot) {
-          activeDot.classList.add('active');
-        }
-      }
-    });
-  }, {
-    root: mainContainer,
-    threshold: 0.5
-  });
-
-  sections.forEach(section => {
-    sectionObserver.observe(section);
   });
 
   // --- GESTION DU CURSEUR PERSONNALISÉ ---
@@ -98,8 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }, {
-    root: mainContainer,
-    threshold: 0.2
+    threshold: 0.1
   });
 
   elementsToAnimate.forEach(el => {
