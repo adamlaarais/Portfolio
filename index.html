@@ -20,7 +20,10 @@
         </div>
         <nav class="header-nav">
             <a href="#accueil" class="nav-link bleu">Accueil</a>
+            <a href="#bio" class="nav-link blanc">Bio</a>
+            <a href="#competences" class="nav-link blanc">Compétences</a>
             <a href="#projets" class="nav-link blanc">Projets</a>
+            <a href="#cv" class="nav-link blanc">CV</a>
             <a href="#contact" class="nav-link blanc">Contact</a>
         </nav>
         <div class="header-socials">
@@ -38,13 +41,25 @@
 
     <div class="mobile-nav">
         <a href="#accueil" class="mobile-nav-link">Accueil</a>
+        <a href="#bio" class="mobile-nav-link">Bio</a>
+        <a href="#competences" class="mobile-nav-link">Compétences</a>
         <a href="#projets" class="mobile-nav-link">Projets</a>
+        <a href="#cv" class="mobile-nav-link">CV</a>
         <a href="#contact" class="mobile-nav-link">Contact</a>
     </div>
+
+    <nav class="side-nav">
+        <a href="#accueil" class="dot" data-section="accueil"><span>Accueil</span></a>
+        <a href="#bio" class="dot" data-section="bio"><span>Bio</span></a>
+        <a href="#competences" class="dot" data-section="competences"><span>Compétences</span></a>
+        <a href="#projets" class="dot" data-section="projets"><span>Projets</span></a>
+        <a href="#cv" class="dot" data-section="cv"><span>CV</span></a>
+        <a href="#contact" class="dot" data-section="contact"><span>Contact</span></a>
+    </nav>
     
-    <main>
-        <section class="section hero" id="accueil">
-            <div class="hero-content animate-on-scroll">
+    <div class="main-container">
+        <section class="full-page-section" id="accueil">
+            <div class="section-content hero-content animate-on-scroll">
                 <h2 class="hero-title">LAARAIS Adam</h2>
                 <p class="hero-subtitle">Étudiant BUT MMI | Futur développeur web | En quête d'alternance & projets concrets.</p>
                 <a class="bouton-scroll" href="#bio" aria-label="Voir la suite">
@@ -53,104 +68,108 @@
             </div>
         </section>
 
-        <section class="section animate-on-scroll" id="bio">
-            <div class="bio-container">
+        <section class="full-page-section" id="bio">
+            <div class="section-content bio-container animate-on-scroll">
                 <h3 class="section-title">BIO</h3>
                 <p class="section-text">Je suis Adam, étudiant en BUT MMI à Mulhouse, passionné par la création d'interfaces web épurées et fonctionnelles. Mon parcours m'a permis d'acquérir de solides compétences en développement (HTML, CSS, JS, PHP) et en design (Figma, Suite Adobe). Autonome et rigoureux, je suis prêt à transformer ma passion en expertise professionnelle.</p>
             </div>
         </section>
 
-        <section class="section animate-on-scroll" id="competences">
-            <h3 class="section-title">COMPÉTENCES</h3>
-            <div class="skills-container">
-                <div class="skills-column">
-                    <h4 class="skills-subtitle">Développement & Design</h4>
-                    <div class="competences-icons">
-                         </div>
-                </div>
-                <div class="skills-column">
-                    <h4 class="skills-subtitle">Langues</h4>
-                    <div class="language-skill">
-                        <p>Anglais - B2</p>
-                        <div class="stars">
-                            <span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star empty">☆</span>
-                        </div>
+        <section class="full-page-section" id="competences">
+            <div class="section-content animate-on-scroll">
+                <h3 class="section-title">COMPÉTENCES</h3>
+                <div class="skills-container">
+                    <div class="skills-column">
+                        <h4 class="skills-subtitle">Développement & Design</h4>
+                        <div class="competences-icons">
+                             </div>
                     </div>
-                    <div class="language-skill">
-                        <p>Allemand - A2</p>
-                        <div class="stars">
-                            <span class="star full">★</span><span class="star full">★</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span>
+                    <div class="skills-column">
+                        <h4 class="skills-subtitle">Langues</h4>
+                        <div class="language-skill">
+                            <p>Anglais - B2</p>
+                            <div class="stars">
+                                <span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star empty">☆</span>
+                            </div>
+                        </div>
+                        <div class="language-skill">
+                            <p>Allemand - A2</p>
+                            <div class="stars">
+                                <span class="star full">★</span><span class="star full">★</span><span class="star empty">☆</span><span class="star empty">☆</span><span class="star empty">☆</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section animate-on-scroll" id="projets">
-            <h3 class="section-title">Mes Projets</h3>
-            <div class="project-container">
-                <div class="project-card">
-                    <h5 class="project-title">VoltAuto - Site de location</h5>
-                    <p>Développement d'un site de location de voitures électriques en HTML, CSS, JavaScript et PHP/MySQL.</p>
-                    <div class="project-gallery">
-                        <img src="img/GOLF 8R.png" alt="Page d'accueil VoltAuto">
+        <section class="full-page-section" id="projets">
+            <div class="section-content animate-on-scroll">
+                <h3 class="section-title">Mes Projets</h3>
+                <div class="project-container">
+                    <div class="project-card">
+                        <h5 class="project-title">VoltAuto - Site de location</h5>
+                        <p>Développement d'un site de location de voitures électriques en HTML, CSS, JavaScript et PHP/MySQL.</p>
+                        <div class="project-gallery">
+                            <img src="img/Accueil.png" alt="Page d'accueil VoltAuto">
+                        </div>
+                        <a href="https://github.com/adamlaarais/SAE-203" class="btn-cv" target="_blank">Voir sur GitHub</a>
                     </div>
-                    <a href="https://github.com/adamlaarais/SAE-203" class="btn-cv" target="_blank">Voir sur GitHub</a>
-                </div>
-                <div class="project-card">
-                    <h5 class="project-title">Agence Cursive.io</h5>
-                    <p>Maquette d'une page d'accueil pour une agence digitale, réalisée sur Figma.</p>
-                    <div class="project-gallery">
-                        <img src="img/HOME.png" alt="Maquette Cursive.io">
+                    <div class="project-card">
+                        <h5 class="project-title">Agence Cursive.io</h5>
+                        <p>Maquette d'une page d'accueil pour une agence digitale, réalisée sur Figma.</p>
+                        <div class="project-gallery">
+                            <img src="img/HOME.png" alt="Maquette Cursive.io">
+                        </div>
+                        <a href="https://www.figma.com/design/RoXTdWpAObvQM99BxynFgI/-----?node-id=0-1&t=IOJfw9aKcybK3TUw-1" class="btn-cv" target="_blank">Voir sur Figma</a>
                     </div>
-                    <a href="https://www.figma.com/design/RoXTdWpAObvQM99BxynFgI/-----?node-id=0-1&t=IOJfw9aKcybK3TUw-1" class="btn-cv" target="_blank">Voir sur Figma</a>
-                </div>
-                <div class="project-card">
-                    <h5 class="project-title">Volkswagen Golf 8R</h5>
-                    <p>Création d'une page produit pour la Golf 8R, conçue sur Figma.</p>
-                    <div class="project-gallery">
-                        <img src="img/GOLF 8R.png" alt="Maquette page produit Golf 8R">
+                    <div class="project-card">
+                        <h5 class="project-title">Volkswagen Golf 8R</h5>
+                        <p>Création d'une page produit pour la Golf 8R, conçue sur Figma.</p>
+                        <div class="project-gallery">
+                            <img src="img/GOLF 8R.png" alt="Maquette page produit Golf 8R">
+                        </div>
+                        <a href="https://www.figma.com/design/vMEg2RePy7yZ7tq44AV77A/Golf-8R?node-id=21-63&t=mQ5c1d2r5x2vF036-1" class="btn-cv" target="_blank">Voir sur Figma</a>
                     </div>
-                    <a href="https://www.figma.com/design/vMEg2RePy7yZ7tq44AV77A/Golf-8R?node-id=21-63&t=mQ5c1d2r5x2vF036-1" class="btn-cv" target="_blank">Voir sur Figma</a>
-                </div>
-                <div class="project-card">
-                    <h5 class="project-title">Restaurant Bacio</h5>
-                    <p>Imagination d'une page d'accueil pour un restaurant italien, designée sur Figma.</p>
-                    <div class="project-gallery">
-                        <img src="img/BACCIO.png" alt="Maquette du restaurant Bacio">
-                    </div>
-                    <a href="https://www.figma.com/design/XImPuuoStQXa1CJBpFuCz8/Bacio?t=mQ5c1d2r5x2vF036-1" class="btn-cv" target="_blank">Voir sur Figma</a>
                 </div>
             </div>
         </section>
         
-        <section class="section section-center animate-on-scroll" id="cv-section">
-             <h3 class="section-title">MON CV</h3>
-             <p class="section-text">Curieux d’en savoir plus ? Téléchargez mon CV.</p>
-             <a href="pdf/CV_LAARAIS_Adam.pdf" class="btn-cv" target="_blank">Télécharger mon CV (PDF)</a>
+        <section class="full-page-section" id="cv">
+             <div class="section-content section-center animate-on-scroll" id="cv-section">
+                <h3 class="section-title">MON CV</h3>
+                <p class="section-text">Curieux d’en savoir plus ? Téléchargez mon CV.</p>
+                <a href="pdf/CV_LAARAIS_Adam.pdf" class="btn-cv" target="_blank">Télécharger mon CV (PDF)</a>
+            </div>
         </section>
 
-        <section class="section animate-on-scroll" id="contact">
-            <h3 class="section-title">CONTACT</h3>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h4 class="contact-info-title">Contactez-moi !</h4>
-                    <p>Une question, une envie d’échanger ou une opportunité d’alternance ? Je serai ravi de vous répondre !</p>
-                    <a href="mailto:laaraisadam22@gmail.com">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                        laaraisadam22@gmail.com
-                    </a>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" name="nom" placeholder="Nom" required>
-                            <input type="text" name="prenom" placeholder="Prénom" required>
-                        </div>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <textarea name="message" placeholder="Votre message" required></textarea>
-                        <button class="bouton-envoyer" type="submit">Envoyer</button>
-                    </form>
+        <section class="full-page-section" id="contact">
+            <div class="section-content animate-on-scroll">
+                <h3 class="section-title">CONTACT</h3>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h4 class="contact-info-title">Contactez-moi !</h4>
+                        <p>Une question, une envie d’échanger ou une opportunité d’alternance ? Je serai ravi de vous répondre !</p>
+                        <a href="mailto:laaraisadam22@gmail.com">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            laaraisadam22@gmail.com
+                        </a>
+                        <a href="tel:+33610352125">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            +33 6 10 35 21 25
+                        </a>
+                    </div>
+                    <div class="contact-form">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" name="nom" placeholder="Nom" required>
+                                <input type="text" name="prenom" placeholder="Prénom" required>
+                            </div>
+                            <input type="email" name="email" placeholder="Email" required>
+                            <textarea name="message" placeholder="Votre message" required></textarea>
+                            <button class="bouton-envoyer" type="submit">Envoyer</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -158,7 +177,7 @@
         <footer class="footer">
             <p>© 2025 Adam Laarais — Tous droits réservés.</p>
         </footer>
-    </main>
+    </div>
     
     <script src="js/anim.js"></script>
 </body>
