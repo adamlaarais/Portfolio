@@ -137,15 +137,9 @@ main {
 .project-gallery img { max-width: 100%; height: auto; border-radius: 8px; transition: transform 0.4s ease; }
 .project-gallery img:hover { transform: scale(1.1); }
 
-/* CV (Section supprimée) */
-/*
-#cv-section { background-color: #111a28; border: 1px solid #12C7EC; border-radius: 15px; padding: 40px; }
-#cv-section .section-title { margin-bottom: 20px; }
-#cv-section .section-text { margin-bottom: 30px; color: #ccc; }
-*/
-.btn-cv { display: inline-block; padding: 12px 28px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; color: white; background: linear-gradient(135deg, #12C7EC, #0a7eaa); border-radius: 30px; border: none; text-decoration: none; box-shadow: 0 4px 12px rgba(18, 199, 236, 0.4); transition: all 0.3s ease; }
-.btn-cv:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 18px rgba(9, 95, 122, 0.7); }
-
+/* CV */
+.btn-cv { display: inline-block; padding: 12px 28px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1rem; color: white; border-radius: 30px; border: 2px solid #12C7EC; text-decoration: none; transition: all 0.3s ease; }
+.btn-cv:hover {background-color: #12C7EC;}
 /* CONTACT */
 .contact-container { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; background-color: #111a28; border-radius: 15px; padding: clamp(20px, 5vw, 40px); border: 1px solid #12C7EC; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; /* Ajoute box-shadow et border-color à la transition */ }
 .contact-container:hover{
