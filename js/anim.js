@@ -19,6 +19,25 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
+  // --- GESTION DE LA BARRE DE PROGRESSION DU SCROLL ---
+  const scrollbarThumb = document.getElementById('scrollbar-thumb');
+  
+  function updateScrollbar() {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = window.scrollY;
+    const scrollPercent = (scrolled / scrollHeight) * 100;
+    
+    // Assure que la valeur reste entre 0 et 100
+    const thumbHeight = Math.min(100, Math.max(0, scrollPercent)); 
+    
+    scrollbarThumb.style.height = `${thumbHeight}%`;
+  }
+
+  // Met à jour la barre au chargement et au scroll
+  window.addEventListener('scroll', updateScrollbar);
+  updateScrollbar(); // Appel initial
+
+
   // --- GESTION DU CURSEUR PERSONNALISÉ ---
   const dot = document.querySelector('.cursor-dot');
   const outline = document.querySelector('.cursor-outline');
