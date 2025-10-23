@@ -112,7 +112,7 @@ main {
 .skills-container { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
 .skills-column { background-color: #111a28; border: 1px solid #12C7EC; border-radius: 15px; padding: 30px; flex: 1 1 300px; max-width: 400px; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; /* Ajoute box-shadow et border-color à la transition */}
 .skills-column:hover {
-    transform: scale(1.05); /* Garde l'effet d'agrandissement */
+    transform: scale(1.1); /* Garde l'effet d'agrandissement */
     border-color: #12C7EC; /* Renforce la bordure */
     box-shadow: 0 0 20px rgba(18, 199, 236, 0.7); /* Effet néon bleu */
 }
