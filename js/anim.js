@@ -38,21 +38,51 @@ document.addEventListener("DOMContentLoaded", function () {
   updateScrollbar(); // Appel initial
 
 
-  // --- GESTION DU CURSEUR PERSONNALISÉ ---
+  // --- GESTION DU CURSEUR PERSONNALISÉ (OPTIMISÉ) ---
   const dot = document.querySelector('.cursor-dot');
   const outline = document.querySelector('.cursor-outline');
 
+  // On vérifie si l'utilisateur a une souris
   if (window.matchMedia("(pointer: fine)").matches) {
+    
+    // 1. Variables pour stocker les positions
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    // Position "lissée" du contour
+    let outlineX = 0;
+    let outlineY = 0;
+
+    // Vitesse du lissage (plus le chiffre est petit, plus la traînée est longue)
+    const lerpSpeed = 0.15; 
+
+    // 2. Mettre à jour les coordonnées de la souris (sans toucher au DOM)
     window.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        dot.style.left = `${clientX}px`;
-        dot.style.top = `${clientY}px`;
-        setTimeout(() => {
-            outline.style.left = `${clientX}px`;
-            outline.style.top = `${clientY}px`;
-        }, 80);
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     });
 
+    // 3. Créer une boucle d'animation fluide
+    function animateCursor() {
+        // Le point central suit la souris instantanément
+        dot.style.left = `${mouseX}px`;
+        dot.style.top = `${mouseY}px`;
+
+        // Le contour "chasse" la position de la souris (interpolation linéaire ou "lerp")
+        outlineX += (mouseX - outlineX) * lerpSpeed;
+        outlineY += (mouseY - outlineY) * lerpSpeed;
+
+        outline.style.left = `${outlineX}px`;
+        outline.style.top = `${outlineY}px`;
+
+        // 4. Demander à répéter à la prochaine frame
+        requestAnimationFrame(animateCursor);
+    }
+
+    // 5. Lancer la boucle d'animation
+    requestAnimationFrame(animateCursor);
+
+    // 6. La gestion du "hover" (agrandissement) ne change pas
     const interactiveElements = document.querySelectorAll('a, button, input, textarea, .hamburger-menu');
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -65,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
   }
+  // --- FIN GESTION CURSEUR ---
 
   // --- ANIMATION DES ÉLÉMENTS AU SCROLL ---
   const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');

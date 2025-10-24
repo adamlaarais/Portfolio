@@ -33,7 +33,7 @@ body::-webkit-scrollbar {
 .background-grid { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; background-image: linear-gradient(rgba(40,80,140,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(40,80,140,0.2) 1px, transparent 1px); background-size: 50px 50px; }
 
 /* --- CURSEUR --- */
-.cursor-dot, .cursor-outline { position: fixed; pointer-events: none; z-index: 10001; transform: translate(-50%, -50%); border-radius: 50%; transition: all 0.2s ease-out; }
+.cursor-dot, .cursor-outline { position: fixed; pointer-events: none; z-index: 10001; transform: translate(-50%, -50%); border-radius: 50%; transition: transform 0.2s ease-out, border-color 0.2s ease-out; }
 .cursor-dot { width: 8px; height: 8px; background-color: #12C7EC; }
 .cursor-outline { width: 30px; height: 30px; border: 2px solid #12C7EC; }
 
