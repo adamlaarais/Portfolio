@@ -104,9 +104,78 @@ main {
 .bouton-scroll:hover svg { transform: rotate(360deg) scale(1.1); }
 
 /* BIO */
-.bio-container { background-color: #111a28; border: 1px solid #12C7EC; border-radius: 15px; padding: 40px; }
-.bio-container .section-title { text-align: left; margin-bottom: 10px; margin-top: 0; }
-.bio-container .section-text { text-align: left; margin-left: 0; color: #ccc; }
+.bio-container {
+    background-color: #111a28;
+    border: 1px solid #12C7EC;
+    border-radius: 15px;
+    padding: 40px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.bio-container:hover {
+    border-color: #12C7EC;
+    box-shadow: 0 0 25px rgba(18, 199, 236, 0.7);
+}
+
+.bio-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.bio-text {
+    flex: 2;
+    text-align: left;
+}
+
+.bio-text h4 {
+    font-size: 1.5rem;
+    color: #12C7EC;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.bio-text p {
+    line-height: 1.8;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.bio-text p strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+.bio-image {
+    flex: 1;
+    padding-left: 30px;
+    border-left: 2px solid #12C7EC;
+}
+
+.bio-image h4 {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.bio-image ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bio-image li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.bio-image li svg {
+    flex-shrink: 0;
+}
 
 /* COMPÉTENCES */
 .skills-container { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; }
@@ -182,8 +251,42 @@ main {
     .hamburger-menu { display: block; }
     main { padding: 0 20px; }
     #scrollbar { display: none; } /* Cache la barre de scroll sur mobile */
-    #bio .bio-container { border: none; padding: 0; background: none; }
-    .bio-container .section-title, .bio-container .section-text { text-align: center; }
+    #apropos .bio-container {
+        border: none;
+        padding: 0;
+        background: none;
+    }
+    .bio-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .bio-text {
+        text-align: center;
+    }
+
+    .bio-image {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid #12C7EC;
+        padding-top: 30px;
+        width: 100%;
+    }
+
+    .bio-image h4 {
+        text-align: center;
+    }
+
+    .bio-image ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bio-image li {
+        justify-content: flex-start;
+        width: auto;
+    }
     .project-container { flex-direction: column; align-items: center; }
     .contact-info { text-align: center; }
     .contact-info a { justify-content: center; }
