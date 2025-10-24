@@ -20,6 +20,16 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+#star-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Derrière la grille */
+    pointer-events: none; /* Pour que la souris clique à travers */
+}
+
 .background-grid { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; background-image: linear-gradient(rgba(40,80,140,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(40,80,140,0.2) 1px, transparent 1px); background-size: 50px 50px; }
 
 /* --- CURSEUR --- */
@@ -186,8 +196,25 @@ main {
     box-shadow: 0 0 20px rgba(18, 199, 236, 0.7); /* Effet néon bleu */
 }
 .skills-subtitle { text-align: center; font-size: 1.5rem; margin-top: 0; margin-bottom: 30px; }
-.competences-icons { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; align-items: center; }
+.competences-icons { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; align-items: flex-start; }
 .competences-icons svg { transition: transform 0.3s; }
+
+.skill-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px; /* Donne une largeur fixe pour un meilleur alignement */
+    text-align: center;
+}
+
+.skill-icon p {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: #ccc;
+    font-weight: 500;
+}
+
 .language-skill { margin-bottom: 20px; text-align: center; }
 .language-skill p { margin: 0 0 10px 0; font-size: 1.1rem; }
 .stars { font-size: 1.5rem; }

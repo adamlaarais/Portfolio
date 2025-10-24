@@ -82,4 +82,79 @@ document.addEventListener("DOMContentLoaded", function () {
     animationObserver.observe(el);
   });
   
+  // --- GESTION DU FOND ÉTOILÉ ---
+  const canvas = document.getElementById('star-background');
+  // Vérifie si le canvas existe avant de continuer
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+
+    let stars = [];
+    let numStars = 100; // Nombre d'étoiles
+
+    function setCanvasSize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+        stars = [];
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1, // Rayon entre 1 et 3
+                vx: (Math.random() - 0.5) * 0.5, // Vitesse x
+                vy: (Math.random() - 0.5) * 0.5, // Vitesse y
+                color: '#12C7EC' // Couleur bleue du portfolio
+            });
+        }
+    }
+
+    function drawStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = 'rgba(3, 83, 99, 1)'
+        ctx.beginPath();
+        for (let i = 0; i < stars.length; i++) {
+            let star = stars[i];
+            ctx.moveTo(star.x, star.y);
+            ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        }
+        ctx.fill();
+    }
+
+    function updateStars() {
+        for (let i = 0; i < stars.length; i++) {
+            let star = stars[i];
+
+            star.x += star.vx;
+            star.y += star.vy;
+
+            // Fait réapparaître les étoiles de l'autre côté
+            if (star.x < 0) star.x = canvas.width;
+            if (star.x > canvas.width) star.x = 0;
+            if (star.y < 0) star.y = canvas.height;
+            if (star.y > canvas.height) star.y = 0;
+        }
+    }
+
+    function animate() {
+        drawStars();
+        updateStars();
+        requestAnimationFrame(animate);
+    }
+
+    // Initialisation
+    setCanvasSize();
+    initStars();
+    animate();
+
+    // Gérer le redimensionnement de la fenêtre
+    window.addEventListener('resize', () => {
+        setCanvasSize();
+        initStars(); // Réinitialiser les étoiles pour la nouvelle taille
+    });
+  }
+  // --- FIN GESTION FOND ÉTOILÉ ---
+
 });
