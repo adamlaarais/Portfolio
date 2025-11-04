@@ -307,7 +307,6 @@ main {
     .bio-image ul {
         display: flex;
         flex-direction: column;
-        align-items: center;
     }
 
     .bio-image li {
