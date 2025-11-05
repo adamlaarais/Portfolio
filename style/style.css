@@ -58,7 +58,7 @@ body::-webkit-scrollbar {
 
 /* --- HEADER --- */
 header { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: #111a28; height: 70px; border-bottom: 1px solid #12C7EC; }
-.header-logo h1 { font-size: 1.2rem; margin: 0; }
+.header-logo img { height: 50px; width: auto; margin: 0; }
 .header-nav { display: flex; gap: 25px; }
 .nav-link { text-decoration: none; font-weight: bold; position: relative; padding: 5px 0; color: white; transition: color 0.3s; }
 .nav-link.bleu { color: #12C7EC; }
