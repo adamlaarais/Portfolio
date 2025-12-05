@@ -27,62 +27,63 @@ document.addEventListener("DOMContentLoaded", function () {
     const scrolled = window.scrollY;
     const scrollPercent = (scrolled / scrollHeight) * 100;
     
-    // Assure que la valeur reste entre 0 et 100
     const thumbHeight = Math.min(100, Math.max(0, scrollPercent)); 
     
     scrollbarThumb.style.height = `${thumbHeight}%`;
   }
 
-  // Met à jour la barre au chargement et au scroll
   window.addEventListener('scroll', updateScrollbar);
-  updateScrollbar(); // Appel initial
+  updateScrollbar(); 
 
+
+  // --- GESTION SMART SCROLL DU HEADER ---
+  const header = document.querySelector('header');
+  let lastScrollY = window.scrollY;
+  const headerHeight = header.offsetHeight;
+
+  window.addEventListener('scroll', () => {
+      if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
+          header.classList.add('hidden');
+      } 
+      else if (window.scrollY < lastScrollY) {
+          header.classList.remove('hidden');
+      }
+      lastScrollY = window.scrollY;
+  });
+  // --- FIN GESTION SMART SCROLL ---
 
   // --- GESTION DU CURSEUR PERSONNALISÉ (OPTIMISÉ) ---
   const dot = document.querySelector('.cursor-dot');
   const outline = document.querySelector('.cursor-outline');
 
-  // On vérifie si l'utilisateur a une souris
   if (window.matchMedia("(pointer: fine)").matches) {
     
-    // 1. Variables pour stocker les positions
     let mouseX = 0;
     let mouseY = 0;
-    
-    // Position "lissée" du contour
     let outlineX = 0;
     let outlineY = 0;
-
-    // Vitesse du lissage (plus le chiffre est petit, plus la traînée est longue)
     const lerpSpeed = 0.15; 
 
-    // 2. Mettre à jour les coordonnées de la souris (sans toucher au DOM)
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
 
-    // 3. Créer une boucle d'animation fluide
     function animateCursor() {
-        // Le point central suit la souris instantanément
         dot.style.left = `${mouseX}px`;
         dot.style.top = `${mouseY}px`;
 
-        // Le contour "chasse" la position de la souris (interpolation linéaire ou "lerp")
         outlineX += (mouseX - outlineX) * lerpSpeed;
         outlineY += (mouseY - outlineY) * lerpSpeed;
 
         outline.style.left = `${outlineX}px`;
         outline.style.top = `${outlineY}px`;
 
-        // 4. Demander à répéter à la prochaine frame
         requestAnimationFrame(animateCursor);
     }
 
-    // 5. Lancer la boucle d'animation
     requestAnimationFrame(animateCursor);
 
-    // 6. La gestion du "hover" (agrandissement) ne change pas
     const interactiveElements = document.querySelectorAll('a, button, input, textarea, .hamburger-menu');
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -97,30 +98,59 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   // --- FIN GESTION CURSEUR ---
 
-  // --- ANIMATION DES ÉLÉMENTS AU SCROLL ---
+  // --- ANIMATION DES ÉLÉMENTS AU SCROLL (STAGGERED & TITRES ANIMÉS) ---
   const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+  const animatedTitles = document.querySelectorAll('.animated-title');
+  
+  // Observer principal pour l'apparition des éléments (avec effet staggered)
   const animationObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
+        // Applique un délai de transition basé sur l'index (0.15s de décalage)
+        entry.target.style.transitionDelay = `${index * 0.15}s`; 
+        
         entry.target.classList.add('visible');
+        
+        // Arrête l'observation après la première apparition
+        animationObserver.unobserve(entry.target); 
       }
     });
   }, {
     threshold: 0.1
   });
 
+  // Observer pour les titres de section (Effet de remplissage néon)
+  const titleObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            titleObserver.unobserve(entry.target);
+        }
+    });
+  }, {
+    threshold: 0.8 
+  });
+
+
   elementsToAnimate.forEach(el => {
+    el.style.transitionDelay = '0s'; 
     animationObserver.observe(el);
   });
   
+  animatedTitles.forEach(el => {
+      titleObserver.observe(el);
+  });
+  // --- FIN ANIMATION SCROLL --- 
+
+
   // --- GESTION DU FOND ÉTOILÉ ---
   const canvas = document.getElementById('star-background');
-  // Vérifie si le canvas existe avant de continuer
+  
   if (canvas) {
     const ctx = canvas.getContext('2d');
 
     let stars = [];
-    let numStars = 100; // Nombre d'étoiles
+    let numStars = 100; 
 
     function setCanvasSize() {
         canvas.width = window.innerWidth;
@@ -133,10 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
             stars.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
-                radius: Math.random() * 2 + 1, // Rayon entre 1 et 3
-                vx: (Math.random() - 0.5) * 0.5, // Vitesse x
-                vy: (Math.random() - 0.5) * 0.5, // Vitesse y
-                color: '#12C7EC' // Couleur bleue du portfolio
+                radius: Math.random() * 2 + 1, 
+                vx: (Math.random() - 0.5) * 0.5, 
+                vy: (Math.random() - 0.5) * 0.5, 
+                color: '#12C7EC'
             });
         }
     }
@@ -161,7 +191,6 @@ document.addEventListener("DOMContentLoaded", function () {
             star.x += star.vx;
             star.y += star.vy;
 
-            // Fait réapparaître les étoiles de l'autre côté
             if (star.x < 0) star.x = canvas.width;
             if (star.x > canvas.width) star.x = 0;
             if (star.y < 0) star.y = canvas.height;
@@ -175,15 +204,13 @@ document.addEventListener("DOMContentLoaded", function () {
         requestAnimationFrame(animate);
     }
 
-    // Initialisation
     setCanvasSize();
     initStars();
     animate();
 
-    // Gérer le redimensionnement de la fenêtre
     window.addEventListener('resize', () => {
         setCanvasSize();
-        initStars(); // Réinitialiser les étoiles pour la nouvelle taille
+        initStars(); 
     });
   }
   // --- FIN GESTION FOND ÉTOILÉ ---
