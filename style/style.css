@@ -116,7 +116,6 @@ main {
     font-weight: 700; 
     position: relative;
     -webkit-text-stroke: 1px #12C7EC; 
-    text-stroke: 1px #12C7EC;
     height: 1.2em;
     line-height: 1.2;
 }
