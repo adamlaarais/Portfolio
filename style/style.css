@@ -30,7 +30,6 @@ body::-webkit-scrollbar {
     pointer-events: none; 
 }
 
-/* Parallaxe subtile sur la grille */
 .background-grid { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: -1; background-image: linear-gradient(rgba(40,80,140,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(40,80,140,0.2) 1px, transparent 1px); background-size: 50px 50px; background-attachment: fixed; }
 
 /* --- CURSEUR --- */
@@ -71,7 +70,6 @@ header.hidden {
 .nav-link.blanc::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%; transform: translateX(-50%); background-color: #12C7EC; transition: width 0.3s ease-in-out; }
 .nav-link.blanc:hover::after { width: 100%; }
 
-/* Boutons Sociaux */
 .header-socials { display: flex; align-items: center; gap: 15px; }
 .header-socials svg { 
     transition: transform 0.3s; 
@@ -107,12 +105,6 @@ main {
     box-shadow: 0 0 20px rgba(18, 199, 236, 0.7); 
 }
 
-/* Keyframes pour l'animation Clip Reveal du Héro */
-@keyframes clip-reveal {
-    0% { clip-path: inset(0 100% 0 0); }
-    100% { clip-path: inset(0 0 0 0); }
-}
-
 /* Titre de section animé (Stylé) */
 .animated-title {
     font-size: clamp(2rem, 5vw, 2.5rem); 
@@ -145,27 +137,23 @@ main {
 
 
 /* --- Boutons Unifiés (CV, Projets, Envoyer) --- */
-.btn-cv, .bouton-envoyer {
+.btn-cv, .bouton-envoyer, .btn-cta {
     font-family: 'Montserrat', sans-serif; 
     padding: 12px 28px; 
     font-weight: 700; 
     font-size: 1rem; 
     border-radius: 30px; 
     text-decoration: none; 
-    
-    /* Base styles: Outline/Text White */
     color: white; 
     border: 2px solid #12C7EC; 
     background-color: transparent; 
-    
-    /* Animation base */
     transition: all 0.3s ease; 
     position: relative;
     overflow: hidden;
     z-index: 1;
+    display: inline-block;
 }
 
-/* Styles spécifiques au bouton Envoyer */
 .bouton-envoyer {
     letter-spacing: 1px;
     margin-top: 30px; 
@@ -175,34 +163,36 @@ main {
     margin-right: auto;
 }
 
-/* Pseudo-element pour l'effet de remplissage (le fond bleu) */
-.btn-cv::before, .bouton-envoyer::before {
+.btn-cta {
+    margin-top: 20px;
+}
+
+/* Remplissage du bouton (Effet néon/wave) */
+.btn-cv::before, .bouton-envoyer::before, .btn-cta::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #12C7EC; /* Couleur de remplissage */
+    background-color: #12C7EC; 
     z-index: -1;
-    transform: scaleX(0); /* Commence caché (scale 0 horizontalement) */
-    transform-origin: left; /* Remplissage de gauche à droite */
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transition stylée */
+    transform: scale(0); 
+    transform-origin: center; 
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
 }
 
-/* Hover des boutons: Remplissage, Scale et Lueur */
-.btn-cv:hover, .bouton-envoyer:hover {
-    color: white; /* Conserve le texte blanc */
+.btn-cv:hover, .bouton-envoyer:hover, .btn-cta:hover {
+    color: white; 
     transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(18, 199, 236, 0.8); /* Lueur néon sur le contour */
+    box-shadow: 0 0 15px rgba(18, 199, 236, 0.8); 
     border-color: #12C7EC; 
-    background-color: transparent; /* Maintenir transparent pour que le ::before agisse */
+    background-color: transparent; 
 }
 
-.btn-cv:hover::before, .bouton-envoyer:hover::before {
-    transform: scaleX(1); /* Remplissage complet */
+.btn-cv:hover::before, .bouton-envoyer:hover::before, .btn-cta:hover::before {
+    transform: scale(1); 
 }
-
 
 /* Bouton Scroll (style unique) */
 .bouton-scroll { 
@@ -234,9 +224,9 @@ main {
     margin-top: 40px;
 }
 
-/* --- Rework "À PROPOS" --- */
-.bio-content-rework {
-    max-width: 900px;
+/* --- Rework "À PROPOS" (Fusion Style) --- */
+.bio-content-fusion {
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     gap: 60px;
@@ -247,45 +237,115 @@ main {
     padding: 40px;
     transition: box-shadow 0.4s ease, border-color 0.4s ease;
 }
-.bio-content-rework:hover {
+.bio-content-fusion:hover {
     box-shadow: 0 0 25px rgba(18, 199, 236, 0.7);
 }
 
-.bio-main-text {
+.bio-text-column {
     flex: 3;
     text-align: left;
 }
 
-.bio-main-text p {
+.bio-text-column p {
     line-height: 1.8;
     color: #ccc;
     margin-bottom: 15px;
+    opacity: 0; 
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.bio-key-info {
+.bio-text-column p.intro-text {
+    opacity: 1; /* Le premier paragraphe sera animé par JS (typewriter) */
+    transform: none;
+}
+
+.bio-skills-fusion {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 200px;
     padding-left: 30px;
     border-left: 2px solid #12C7EC;
-    min-width: 200px;
 }
 
-.bio-key-info .key-points-title {
-    font-size: 1.3rem;
-    color: #fff;
-    margin-top: 0;
-    margin-bottom: 25px;
+.skill-circle-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 30px;
 }
-
-.info-item p {
-    margin: 0 0 15px 0;
-    line-height: 1.6;
-}
-.info-item strong {
+.skill-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #12C7EC;
+    opacity: 0.2;
+    transform: scale(0);
+    animation: skill-pulse 4s infinite ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
     color: #12C7EC;
-    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-/* --- Rework Compétences --- */
+.skill-circle::after {
+    content: attr(data-skill);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.bio-content-fusion:hover .skill-circle::after {
+    opacity: 1;
+}
+
+
+.skill-circle.dev { animation-delay: 0s; }
+.skill-circle.design { animation-delay: 0.5s; }
+.skill-circle.multimedia { animation-delay: 1s; }
+
+
+@keyframes skill-pulse {
+    0% { transform: scale(0.7); opacity: 0.1; }
+    50% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(0.7); opacity: 0.1; }
+}
+
+.fusion-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.keyword-item {
+    background-color: rgba(18, 199, 236, 0.1);
+    border: 1px solid #12C7EC;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    color: #12C7EC;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.bio-content-fusion.visible .keyword-item {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: var(--animation-delay, 0s);
+}
+
+
+/* --- Rework Compétences (Original) --- */
 .skills-container-rework { 
     max-width: 900px;
     margin: 0 auto;
@@ -293,7 +353,6 @@ main {
     border: none;
     padding: 0; 
 }
-
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -309,8 +368,6 @@ main {
 .skills-grid:hover {
     box-shadow: 0 0 25px rgba(18, 199, 236, 0.7); 
 }
-
-/* Icônes de compétences: effet de révélation du nom (nettoyé) */
 .skill-icon {
     display: flex;
     flex-direction: column;
@@ -322,11 +379,9 @@ main {
     cursor: default;
     transition: transform 0.3s ease;
 }
-
 .skill-icon:hover {
     transform: translateY(-5px);
 }
-
 .skill-icon p {
     margin: 0;
     margin-top: 10px;
@@ -337,12 +392,10 @@ main {
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform: translateY(10px); 
 }
-
 .skill-icon:hover p {
     opacity: 1; 
     transform: translateY(0); 
 }
-
 .skill-icon svg { 
     transition: transform 0.3s ease, color 0.3s ease; 
     color: #12C7EC; 
@@ -352,31 +405,100 @@ main {
     color: #fff; 
 }
 
-/* PROJETS */
-.project-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-.project-card { 
-    background-color: #111a28; 
-    border: 1px solid #12C7EC; 
-    border-radius: 15px; 
-    padding: 20px; 
-    text-align: center; 
-    flex-basis: 320px; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between; 
-    margin-bottom: 20px; 
-    transition: transform 0.3s ease, box-shadow 0.4s ease, border-color 0.4s ease; 
+/* --- Nouveaux Projets (Pleine page) --- */
+#projets {
+    padding-top: 80px;
+    padding-bottom: 0; 
 }
-.project-card:hover {
-    border-color: #12C7EC; 
-    box-shadow: 0 0 20px rgba(18, 199, 236, 0.7); 
-    transform: scale(1.03); 
-}
-.project-card .project-title { color: #12C7EC; font-size: 1.5rem; margin-top: 0; }
-.project-gallery { margin: 15px 0; }
-.project-gallery img { max-width: 100%; height: auto; border-radius: 8px; transition: transform 0.4s ease; }
-.project-gallery img:hover { transform: scale(1.1); }
 
+.project-slides-wrapper {
+    display: flex;
+    flex-direction: column; 
+    gap: 0;
+}
+
+.project-slide {
+    min-height: 85vh; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 50px 0;
+    margin-bottom: 80px; 
+    border-bottom: 1px solid rgba(18, 199, 236, 0.2);
+}
+.project-slide:last-child {
+    border-bottom: none;
+    margin-bottom: 80px;
+}
+
+.project-slide.inverse {
+    flex-direction: row-reverse;
+}
+
+.project-details {
+    flex: 1;
+    max-width: 45%;
+}
+
+.project-title-slide {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.project-tagline {
+    font-size: 1.1rem;
+    color: #12C7EC;
+    margin-bottom: 30px;
+}
+.project-specs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.project-specs li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+    color: #ccc;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.project-specs li strong {
+    color: #fff;
+}
+.project-slide.visible .project-specs li {
+    opacity: 1;
+    transform: translateX(0);
+}
+.project-slide.visible .project-specs li:nth-child(1) { transition-delay: 0.2s; }
+.project-slide.visible .project-specs li:nth-child(2) { transition-delay: 0.4s; }
+.project-slide.visible .project-specs li:nth-child(3) { transition-delay: 0.6s; }
+
+
+.project-gallery-slide {
+    flex: 1;
+    max-width: 55%;
+}
+.project-gallery-slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain;
+    border: 1px solid rgba(18, 199, 236, 0.4);
+    box-shadow: 0 0 30px rgba(18, 199, 236, 0.2);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    transform: rotateY(15deg) scale(0.9);
+    opacity: 0;
+}
+
+.project-slide.visible .project-gallery-slide img {
+    opacity: 1;
+    transform: rotateY(0deg) scale(1); 
+}
+.project-slide.inverse.visible .project-gallery-slide img {
+    transform: rotateY(0deg) scale(1); 
+}
 
 /* --- Rework Formulaire de Contact --- */
 .contact-container-rework {
@@ -414,7 +536,12 @@ main {
 .contact-info-new a { display: flex; align-items: center; gap: 15px; color: white; text-decoration: none; margin-bottom: 20px; transition: color 0.3s; font-weight: bold; }
 .contact-info-new a:hover { color: #12C7EC; }
 
-/* Styles pour le formulaire (Minimaliste et Clair) */
+/* Floating Label Structure */
+.form-group {
+    position: relative;
+    margin-bottom: 40px; 
+}
+
 .contact-form-new input, .contact-form-new textarea { 
     width: 100%; 
     background-color: transparent; 
@@ -427,7 +554,7 @@ main {
     border-bottom: 1px solid #5a6b80; 
     transition: border-bottom-color 0.3s ease, box-shadow 0.3s ease; 
     box-sizing: border-box; 
-    margin-bottom: 30px; /* Ajout d'une marge pour l'input email */
+    margin-bottom: 0; 
 }
 
 .contact-form-new textarea { 
@@ -435,12 +562,49 @@ main {
     border: 1px solid #5a6b80; 
     border-radius: 5px; 
     resize: vertical; 
-    margin-top: 10px; /* Ajusté */
+    margin-top: 10px; 
     padding: 15px; 
-    margin-bottom: 0; /* Pas de marge en bas */
 }
 
-/* Animation sur le focus */
+.contact-form-new label {
+    position: absolute;
+    top: 15px; 
+    left: 0;
+    color: #999;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
+    font-size: 1rem;
+    padding: 0 5px; 
+    background: transparent;
+}
+
+.contact-form-new input:focus + label,
+.contact-form-new input:not(:placeholder-shown) + label,
+.contact-form-new textarea:focus + label,
+.contact-form-new textarea:not(:placeholder-shown) + label {
+    top: -10px; 
+    font-size: 0.75rem;
+    color: #12C7EC;
+    background-color: #111a28; 
+    padding: 0 5px;
+}
+
+.textarea-group {
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+.textarea-group label {
+    top: 0;
+    left: 10px;
+}
+.contact-form-new textarea:focus + label,
+.contact-form-new textarea:not(:placeholder-shown) + label {
+    top: -10px;
+}
+
+.contact-form-new input::placeholder, .contact-form-new textarea::placeholder {
+    opacity: 0;
+}
 .contact-form-new input:focus { 
     outline: none; 
     border-bottom-color: #12C7EC; 
@@ -451,6 +615,7 @@ main {
     border-color: #12C7EC; 
     box-shadow: 0 0 10px rgba(18, 199, 236, 0.2);
 }
+
 
 /* --- FOOTER --- */
 .footer {
@@ -465,17 +630,15 @@ main {
 
 /* --- ANIMATIONS & RESPONSIVE --- */
 
-/* Keyframes pour l'animation Clip Reveal du Héro */
 @keyframes clip-reveal {
     0% { clip-path: inset(0 100% 0 0); }
     100% { clip-path: inset(0 0 0 0); }
 }
 
-/* MODIFICATION: Inclut transition-delay pour le JS stagger */
 .animate-on-scroll { 
     opacity: 0; 
     transform: translateY(40px); 
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out, transition-delay 0s; 
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
 }
 
 .animate-on-scroll.visible { 
@@ -483,7 +646,6 @@ main {
     transform: translateY(0); 
 }
 
-/* Animation spécifique pour le titre Hero */
 .hero-title.animate-on-scroll.visible {
     opacity: 1; 
     transform: none; 
@@ -492,6 +654,17 @@ main {
 }
 
 [id] { scroll-margin-top: 90px; }
+
+@media (max-width: 900px) {
+    .project-slide {
+        flex-direction: column !important;
+        text-align: center;
+        min-height: auto;
+    }
+    .project-details, .project-gallery-slide {
+        max-width: 100%;
+    }
+}
 
 @media (max-width: 768px) {
     body { cursor: auto; }
@@ -502,15 +675,14 @@ main {
     main { padding: 0 20px; }
     #scrollbar { display: none; } 
     
-    /* Responsive À PROPOS */
-    .bio-content-rework {
+    .bio-content-fusion {
         flex-direction: column;
         gap: 30px;
         padding: 20px;
         background: none;
         border: none;
     }
-    .bio-key-info {
+    .bio-skills-fusion {
         padding-left: 0;
         border-left: none;
         border-top: 1px solid #12C7EC;
@@ -518,7 +690,6 @@ main {
         width: 100%;
     }
 
-    /* Responsive COMPÉTENCES */
     .skills-grid {
         padding: 20px;
     }
@@ -526,7 +697,6 @@ main {
         width: 80px;
     }
 
-    /* Responsive CONTACT */
     .contact-container-rework {
         flex-direction: column;
         gap: 30px;
@@ -543,8 +713,5 @@ main {
     }
     .contact-info-new a {
         justify-content: center;
-    }
-    .contact-form-new input {
-        margin-bottom: 20px;
     }
 }

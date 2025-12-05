@@ -66,22 +66,24 @@
 
         <section class="section" id="apropos">
             <div class="animated-title" data-text="QUI SUIS-JE."></div>
-            <div class="bio-content-rework animate-on-scroll">
-                <div class="bio-main-text">
-                    <p class="intro-text animate-on-scroll">Actuellement étudiant en <strong>BUT Métiers du Multimédia et de l'Internet (MMI)</strong> à Mulhouse, je me passionne pour la création d'expériences web où le développement précis rencontre un design minimaliste et intuitif.</p>
-                    <p class="animate-on-scroll">Mon parcours m'a permis d'acquérir de solides compétences en développement front-end (HTML, CSS, JavaScript) et back-end (PHP, MySQL), ainsi qu'une maîtrise des outils de design incontournables comme Figma et la Suite Adobe.</p>
-                    <p class="animate-on-scroll">Autonome, rigoureux et toujours curieux d'apprendre, je suis activement à la recherche d'une <strong>alternance</strong> pour transformer ma passion en expertise professionnelle et contribuer à des projets concrets et stimulants.</p>
+            <div class="bio-content-fusion animate-on-scroll">
+                <div class="bio-text-column">
+                    <p class="intro-text">Actuellement étudiant en <strong>BUT Métiers du Multimédia et de l'Internet (MMI)</strong> à Mulhouse, je me passionne pour la création d'expériences web où le développement précis rencontre un design minimaliste et intuitif.</p>
+                    <p>Mon parcours m'a permis d'acquérir de solides compétences en développement front-end (HTML, CSS, JavaScript) et back-end (PHP, MySQL), ainsi qu'une maîtrise des outils de design incontournables comme Figma et la Suite Adobe.</p>
+                    <p>Autonome, rigoureux et toujours curieux d'apprendre, je suis activement à la recherche d'une <strong>alternance</strong> pour transformer ma passion en expertise professionnelle et contribuer à des projets concrets et stimulants.</p>
                 </div>
-                <div class="bio-key-info">
-                    <h4 class="key-points-title animate-on-scroll">Mon Profil :</h4>
-                    <div class="info-item animate-on-scroll">
-                        <p><strong>Formation :</strong> BUT MMI (IUT Mulhouse)</p>
+                <div class="bio-skills-fusion animate-on-scroll">
+                    <div class="skill-circle-container">
+                        <div class="skill-circle dev" data-skill="Développement"></div>
+                        <div class="skill-circle design" data-skill="Design UX/UI"></div>
+                        <div class="skill-circle multimedia" data-skill="Multimédia"></div>
                     </div>
-                    <div class="info-item animate-on-scroll">
-                        <p><strong>Statut :</strong> Recherche Alternance / Projets</p>
-                    </div>
-                    <div class="info-item animate-on-scroll">
-                        <p><strong>Soft Skills :</strong> Travail d'équipe, Curiosité, Rigueur</p>
+                    <div class="fusion-keywords">
+                        <span class="keyword-item">Front-End</span>
+                        <span class="keyword-item">Back-End</span>
+                        <span class="keyword-item">Figma</span>
+                        <span class="keyword-item">PHP/SQL</span>
+                        <span class="keyword-item">UX/UI</span>
                     </div>
                 </div>
             </div>
@@ -121,39 +123,83 @@
 
         <section class="section" id="projets">
             <div class="animated-title" data-text="PROJETS RÉCENTS."></div>
-            <div class="project-container">
-                <div class="project-card animate-on-scroll">
-                    <h5 class="project-title">VoltAuto - Site de location</h5>
-                    <p>Site de location de voitures en HTML, CSS, JavaScript et PHP/MySQL.</p>
-                    <div class="project-gallery">
+            <div class="project-slides-wrapper">
+                <div class="project-slide animate-slide">
+                    <div class="project-details animate-on-scroll">
+                        <h5 class="project-title-slide">VoltAuto - Site de location</h5>
+                        <p class="project-tagline">HTML, CSS, JS, PHP/MySQL.</p>
+                        <ul class="project-specs">
+                            <li><strong>Objectif:</strong> Créer une plateforme de location de VE avec BDD.</li>
+                            <li><strong>Stack:</strong> HTML, CSS (Sass), JavaScript, PHP, MySQL.</li>
+                            <li><strong>Résultat:</strong> Système complet de création de compte et de réservation.</li>
+                        </ul>
+                        <a href="#" class="btn-cta">Voir le Projet</a>
+                    </div>
+                    <div class="project-gallery-slide animate-on-scroll">
                         <img src="img/Accueil.png" alt="Page d'accueil VoltAuto">
                     </div>
                 </div>
-                <div class="project-card animate-on-scroll">
-                    <h5 class="project-title">Agence Cursive.io</h5>
-                    <p>Maquette d'une page d'accueil pour une agence digitale, réalisée sur Figma.</p>
-                    <div class="project-gallery">
+
+                <div class="project-slide animate-slide inverse">
+                    <div class="project-details animate-on-scroll">
+                        <h5 class="project-title-slide">Agence Cursive.io</h5>
+                        <p class="project-tagline">Maquette d'une page d'accueil pour une agence digitale.</p>
+                        <ul class="project-specs">
+                            <li><strong>Objectif:</strong> Créer un design moderne et professionnel.</li>
+                            <li><strong>Stack:</strong> Figma.</li>
+                            <li><strong>Impact:</strong> Maîtrise des principes de l'UX et des outils de prototypage.</li>
+                        </ul>
+                        <a href="#" class="btn-cta">Voir la Maquette</a>
+                    </div>
+                    <div class="project-gallery-slide animate-on-scroll">
                         <img src="img/HOME.png" alt="Maquette Cursive.io">
                     </div>
                 </div>
-                <div class="project-card animate-on-scroll">
-                    <h5 class="project-title">Volkswagen Golf 8R</h5>
-                    <p>Création d'une page produit pour la Golf 8R, conçue sur Figma.</p>
-                    <div class="project-gallery">
+
+                <div class="project-slide animate-slide">
+                    <div class="project-details animate-on-scroll">
+                        <h5 class="project-title-slide">Volkswagen Golf 8R</h5>
+                        <p class="project-tagline">Création d'une page produit, conçue sur Figma.</p>
+                        <ul class="project-specs">
+                            <li><strong>Objectif:</strong> Designer une page produit premium et interactive.</li>
+                            <li><strong>Stack:</strong> Figma.</li>
+                            <li><strong>Résultat:</strong> Maquette complète avec déclinaisons de couleurs et jantes.</li>
+                        </ul>
+                        <a href="#" class="btn-cta">Voir la Maquette</a>
+                    </div>
+                    <div class="project-gallery-slide animate-on-scroll">
                         <img src="img/GOLF 8R.png" alt="Maquette page produit Golf 8R">
                     </div>
                 </div>
-                <div class="project-card animate-on-scroll">
-                    <h5 class="project-title">SoLune</h5>
-                    <p>Imagination d'une page d'accueil avec sa version mobile du produit SoLune, designée sur Figma.</p>
-                    <div class="project-gallery">
+
+                <div class="project-slide animate-slide inverse">
+                    <div class="project-details animate-on-scroll">
+                        <h5 class="project-title-slide">SoLune</h5>
+                        <p class="project-tagline">Imagination d'une page d'accueil produit, designée sur Figma.</p>
+                        <ul class="project-specs">
+                            <li><strong>Objectif:</strong> Mettre en avant un produit écologique (chargeur solaire).</li>
+                            <li><strong>Stack:</strong> Figma.</li>
+                            <li><strong>Impact:</strong> Conception d'une expérience utilisateur pour un produit innovant.</li>
+                        </ul>
+                        <a href="#" class="btn-cta">Voir la Maquette</a>
+                    </div>
+                    <div class="project-gallery-slide animate-on-scroll">
                         <img src="img/SOLUNE.png" alt="Maquette du produit SoLune">
                     </div>
                 </div>
-                <div class="project-card animate-on-scroll">
-                    <h5 class="project-title">Atelier Patine</h5>
-                    <p>Refonte du site Atelier Patine, désigné sur Figma</p>
-                    <div class="project-gallery">
+
+                <div class="project-slide animate-slide">
+                    <div class="project-details animate-on-scroll">
+                        <h5 class="project-title-slide">Atelier Patine</h5>
+                        <p class="project-tagline">Refonte du site Atelier Patine, désigné sur Figma</p>
+                        <ul class="project-specs">
+                            <li><strong>Objectif:</strong> Améliorer l'esthétique et l'UX d'un site d'ameublement.</li>
+                            <li><strong>Stack:</strong> Figma.</li>
+                            <li><strong>Résultat:</strong> Design épuré axé sur la mise en valeur des produits.</li>
+                        </ul>
+                        <a href="#" class="btn-cta">Voir la Maquette</a>
+                    </div>
+                    <div class="project-gallery-slide animate-on-scroll">
                         <img src="img/Patine.png" alt="Maquette du site Atelier Patine">
                     </div>
                 </div>
@@ -173,9 +219,19 @@
                 </div>
                 <div class="contact-form-new">
                     <form>
-                        <input type="email" name="email" placeholder="Votre email" required>
-                        <textarea name="message" placeholder="Votre message ou opportunité" required></textarea>
-                        <button class="bouton-envoyer" type="submit">Envoyer le message</button>
+                        <div class="form-group animate-on-scroll">
+                            <input type="text" name="name" id="name" placeholder=" " required>
+                            <label for="name">Votre Nom</label>
+                        </div>
+                        <div class="form-group animate-on-scroll" style="transition-delay: 0.1s;">
+                            <input type="email" name="email" id="email" placeholder=" " required>
+                            <label for="email">Votre Email</label>
+                        </div>
+                        <div class="form-group textarea-group animate-on-scroll" style="transition-delay: 0.2s;">
+                            <textarea name="message" id="message" placeholder=" " required></textarea>
+                            <label for="message">Votre message ou opportunité</label>
+                        </div>
+                        <button class="bouton-envoyer animate-on-scroll" style="transition-delay: 0.3s;" type="submit">Envoyer le message</button>
                     </form>
                 </div>
             </div>

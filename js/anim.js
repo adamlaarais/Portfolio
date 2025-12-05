@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+  const BLUE_NEON = '#12C7EC';
+
   // --- GESTION DU MENU MOBILE ---
   const hamburger = document.querySelector('.hamburger-menu');
   const mobileNav = document.querySelector('.mobile-nav');
@@ -92,24 +94,76 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         el.addEventListener('mouseleave', () => {
             outline.style.transform = 'translate(-50%, -50%) scale(1)';
-            outline.style.borderColor = '#12C7EC';
+            outline.style.borderColor = BLUE_NEON;
         });
     });
   }
   // --- FIN GESTION CURSEUR ---
 
+  // --- LOGIQUE TYPEWRITER POUR SECTION A PROPOS ---
+  function typewriter(element, speed = 30) {
+      const text = element.getAttribute('data-text-full');
+      element.textContent = ''; 
+      element.style.opacity = 1;
+
+      let i = 0;
+      function typing() {
+          if (i < text.length) {
+              element.textContent = text.substring(0, i + 1) + '▍'; 
+              i++;
+              setTimeout(typing, speed); 
+          } else {
+              element.textContent = text; 
+          }
+      }
+      typing();
+  }
+  
+  // Prépare le texte pour le typewriter et le cascade
+  const bioTextParagraphs = document.querySelectorAll('.bio-text-column p');
+  bioTextParagraphs.forEach(p => {
+      p.setAttribute('data-text-full', p.innerHTML); // Stocke le contenu HTML original
+      p.innerHTML = ''; // Vide le contenu
+  });
+  
   // --- ANIMATION DES ÉLÉMENTS AU SCROLL (STAGGERED & TITRES ANIMÉS) ---
   const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
   const animatedTitles = document.querySelectorAll('.animated-title');
-  
-  // Observer principal pour l'apparition des éléments (avec effet staggered)
+  const projectSlides = document.querySelectorAll('.project-slide');
+
+  // Observer principal pour l'apparition des éléments (avec effet staggered/cascade)
   const animationObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
-        // Applique un délai de transition basé sur l'index (0.15s de décalage)
-        entry.target.style.transitionDelay = `${index * 0.15}s`; 
         
         entry.target.classList.add('visible');
+        
+        // Logique spécifique pour la section À Propos (Typewriter)
+        if (entry.target.classList.contains('bio-content-fusion')) {
+            bioTextParagraphs.forEach((p, pIndex) => {
+               // Typewriter sur la première phrase, cascade simple pour les autres (pour éviter la lenteur)
+               if (pIndex === 0) {
+                    setTimeout(() => {
+                        typewriter(p, 25);
+                    }, pIndex * 600); 
+               } else {
+                   setTimeout(() => {
+                       p.innerHTML = p.getAttribute('data-text-full');
+                       p.classList.add('visible');
+                   }, 600 + (pIndex * 300));
+               }
+           });
+           
+           // Anime les mots-clés
+           const keywords = entry.target.querySelectorAll('.keyword-item');
+           keywords.forEach((keyword, kIndex) => {
+                keyword.style.setProperty('--animation-delay', `${0.8 + kIndex * 0.1}s`);
+           });
+           
+        } else {
+          // Staggered général pour les autres blocs animate-on-scroll
+          entry.target.style.transitionDelay = `${index * 0.1}s`; 
+        }
         
         // Arrête l'observation après la première apparition
         animationObserver.unobserve(entry.target); 
@@ -130,6 +184,19 @@ document.addEventListener("DOMContentLoaded", function () {
   }, {
     threshold: 0.8 
   });
+  
+  // Observer pour les slides de projets
+  const projectObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        } else {
+             entry.target.classList.remove('visible');
+        }
+    });
+  }, {
+    threshold: 0.4 
+  });
 
 
   elementsToAnimate.forEach(el => {
@@ -139,6 +206,10 @@ document.addEventListener("DOMContentLoaded", function () {
   
   animatedTitles.forEach(el => {
       titleObserver.observe(el);
+  });
+
+  projectSlides.forEach(el => {
+      projectObserver.observe(el);
   });
   // --- FIN ANIMATION SCROLL --- 
 
@@ -166,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 radius: Math.random() * 2 + 1, 
                 vx: (Math.random() - 0.5) * 0.5, 
                 vy: (Math.random() - 0.5) * 0.5, 
-                color: '#12C7EC'
+                color: BLUE_NEON
             });
         }
     }
