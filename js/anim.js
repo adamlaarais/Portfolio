@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
     threshold: 0.8 
   });
   
-  // Observer pour les slides de projets
+  // Observer pour les slides de projets (Déclenche l'animation de l'image et du texte descriptif via CSS)
   const projectObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
