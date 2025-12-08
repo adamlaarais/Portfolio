@@ -618,7 +618,7 @@ main {
 }
 
 .slider-controls button {
-    background: rgba(17, 26, 40, 0.8); 
+    background: var(--bg-dark); 
     border: 2px solid var(--neon-blue);
     border-radius: 50%;
     color: var(--neon-blue);
