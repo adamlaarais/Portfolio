@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const BLUE_NEON = '#12C7EC';
 
-    // --- GESTION DU MENU MOBILE ---
     const hamburger = document.querySelector('.hamburger-menu');
     const mobileNav = document.querySelector('.mobile-nav');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
@@ -21,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // --- GESTION DE LA BARRE DE PROGRESSION DU SCROLL ---
     const scrollbarThumb = document.getElementById('scrollbar-thumb');
     
     function updateScrollbar() {
@@ -39,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('scroll', updateScrollbar);
     updateScrollbar(); 
 
-    // --- GESTION SMART SCROLL DU HEADER ---
     const header = document.querySelector('header');
     let lastScrollY = window.scrollY;
     const headerHeight = header ? header.offsetHeight : 70;
@@ -56,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
         lastScrollY = window.scrollY;
     });
 
-    // --- GESTION DU CURSEUR PERSONNALISÉ ---
     const dot = document.querySelector('.cursor-dot');
     const outline = document.querySelector('.cursor-outline');
 
@@ -101,108 +97,104 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // --- LOGIQUE SLIDER DE PROJET (SANS POINTS) ---
-    const slider = document.querySelector('.project-slider');
-    const prevButton = document.querySelector('.slider-prev');
-    const nextButton = document.querySelector('.slider-next');
-    
-    // Le nombre de slides est déterminé par le nombre d'enfants dans le slider
-    let totalSlides = slider ? slider.children.length : 0;
-    let currentIndex = 0;
+    function initializeProjectSlider(containerElement) {
+        const sliderWrapper = containerElement.querySelector('.project-slider-wrapper');
+        const slider = containerElement.querySelector('.project-slider');
+        const prevButton = containerElement.querySelector('.slider-prev');
+        const nextButton = containerElement.querySelector('.slider-next');
+        const dotsContainer = containerElement.querySelector('.slider-dots-container');
+        
+        if (!slider || !slider.firstElementChild || !prevButton || !nextButton) return;
 
-    function updateSlider() {
-        if (!slider || totalSlides === 0 || !slider.firstElementChild) return;
+        const totalSlides = slider.children.length;
+        let currentIndex = 0;
 
-        const slideWidth = slider.firstElementChild.clientWidth;
-        slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    }
+        function updateSlider() {
+            const slideWidth = slider.firstElementChild.clientWidth;
+            slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            updateDots();
+        }
+        
+        function createDots() {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                dot.setAttribute('data-index', i);
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        }
+        
+        function updateDots() {
+            if (!dotsContainer) return;
+            dotsContainer.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+        
+        function goToNextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
 
-    function goToNextSlide() {
-        currentIndex = (currentIndex + 1) % totalSlides;
+        function goToPrevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        createDots();
         updateSlider();
-    }
 
-    function goToPrevSlide() {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlider();
-    }
-
-    if (slider && totalSlides > 0) {
-        window.addEventListener('load', updateSlider); 
+        nextButton.addEventListener('click', goToNextSlide);
+        prevButton.addEventListener('click', goToPrevSlide);
+        
         window.addEventListener('resize', updateSlider);
-
-        // Ajout des écouteurs pour les flèches
-        if (nextButton) nextButton.addEventListener('click', goToNextSlide);
-        if (prevButton) prevButton.addEventListener('click', goToPrevSlide);
+        window.addEventListener('load', updateSlider);
     }
 
+    const allProjectContainers = document.querySelectorAll('.project-card');
+    allProjectContainers.forEach(container => {
+        initializeProjectSlider(container);
+    });
 
-    // --- ANIMATION DES ÉLÉMENTS AU SCROLL ---
     const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
     const animatedTitles = document.querySelectorAll('.animated-title');
     const roleTags = document.querySelectorAll('.role-tag');
 
-    const animationObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                
-                // Logique pour les Rôles/Tags (staggered)
-                if (entry.target.classList.contains('bio-content-fusion')) {
-                    roleTags.forEach((item, itemIndex) => {
-                         setTimeout(() => {
-                            item.classList.add('visible');
-                        }, itemIndex * 150);
-                    });
-                }
-
-                if (!entry.target.classList.contains('bio-content-fusion') && !entry.target.classList.contains('contact-container-twocol')) {
-                     // Appliquer le staggered général
-                     entry.target.style.transitionDelay = `${index * 0.1}s`;
-                }
-
-                // Pour les conteneurs qui ont des enfants staggerés, on n'unobserve pas immédiatement
-                if (!entry.target.classList.contains('bio-content-fusion') && !entry.target.classList.contains('contact-container-twocol')) {
-                    animationObserver.unobserve(entry.target);
-                }
-            }
+    // Retrait de l'IntersectionObserver pour les éléments .animate-on-scroll
+    // Les animations se déclencheront immédiatement au chargement de la page.
+    window.addEventListener('load', () => {
+        elementsToAnimate.forEach(el => {
+            el.classList.add('visible');
         });
-    }, {
-        threshold: 0.1
-    });
 
-    const titleObserver = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                titleObserver.unobserve(entry.target);
-            }
+        // Déclenchement spécifique pour les rôles (staggered)
+        document.querySelectorAll('.bio-content-fusion').forEach(container => {
+            container.querySelectorAll('.role-tag').forEach((item, itemIndex) => {
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, itemIndex * 150);
+            });
         });
-    }, {
-        threshold: 0.8
+
+        // Déclenchement pour les titres
+        animatedTitles.forEach(el => {
+            el.classList.add('visible');
+        });
     });
 
-    elementsToAnimate.forEach(el => {
-        if (!el.style.transitionDelay) {
-            el.style.transitionDelay = '0s';
-        }
-        animationObserver.observe(el);
-    });
-
-    animatedTitles.forEach(el => {
-        titleObserver.observe(el);
-    });
-    // --- FIN ANIMATION SCROLL ---
-
-
-    // --- GESTION DU FOND ÉTOILÉ ---
     const canvas = document.getElementById('star-background');
 
     if (canvas) {
         const ctx = canvas.getContext('2d');
 
         let stars = [];
-        let numStars = 100;
+        let numStars = 250;
 
         function setCanvasSize() {
             canvas.width = window.innerWidth;

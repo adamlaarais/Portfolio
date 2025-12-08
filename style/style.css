@@ -1,4 +1,3 @@
-/* --- VARIABLES & GÉNÉRAL --- */
 :root {
     --bg-dark: #111a28;
     --bg-medium: #1d2a3d;
@@ -31,7 +30,6 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-/* --- EFFETS DE FOND & CURSEUR --- */
 #star-background {
     position: fixed;
     top: 0;
@@ -77,7 +75,6 @@ body::-webkit-scrollbar {
     border: 2px solid var(--neon-blue);
 }
 
-/* --- BARRE DE PROGRESSION DU SCROLL --- */
 #scrollbar {
     position: fixed;
     top: 0;
@@ -96,7 +93,6 @@ body::-webkit-scrollbar {
     transition: height 0.1s linear;
 }
 
-/* --- HEADER / NAVIGATION --- */
 header {
     display: flex;
     align-items: center;
@@ -109,7 +105,6 @@ header {
     z-index: 1000;
     background-color: var(--bg-dark);
     height: 70px;
-    border-bottom: 1px solid var(--neon-blue);
     transition: top 0.4s ease-in-out;
 }
 
@@ -145,21 +140,22 @@ header.hidden {
     color: var(--neon-blue); 
 }
 
-/* Suppression de l'effet néon en basse barre */
 .nav-link.blanc::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 0; 
-    bottom: 0;
+    height: 3px;
+    bottom: -5px;
     left: 50%;
-    transform: translateX(-50%);
-    background-color: transparent; 
-    transition: width 0.3s ease-in-out;
+    transform: translateX(-50%) scaleX(0);
+    background-color: var(--neon-blue); 
+    transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+    transform-origin: center;
 }
 
 .nav-link.blanc:hover::after {
-    width: 0; 
+    width: 100%;
+    transform: translateX(-50%) scaleX(1);
 }
 
 .header-socials {
@@ -176,7 +172,6 @@ header.hidden {
     transform: scale(1.2);
 }
 
-/* --- MENU HAMBURGER & MOBILE --- */
 .hamburger-menu {
     display: none;
     background: none;
@@ -238,7 +233,6 @@ header.hidden {
     color: var(--neon-blue);
 }
 
-/* --- SECTIONS GÉNÉRALES --- */
 main {
     max-width: 1200px;
     margin: 0 auto;
@@ -288,7 +282,6 @@ main {
     clip-path: inset(0 0% 0 0);
 }
 
-/* Décoration du titre de section (barre bleue) */
 .animated-title::after {
     content: '';
     position: absolute;
@@ -306,19 +299,6 @@ main {
     transform: scaleX(1);
 }
 
-/* --- BOUTONS UNIFIÉS (NEON FLASH) --- */
-@keyframes lightning-pulse {
-    0% {
-        box-shadow: 0 0 5px rgba(18, 199, 236, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 15px rgba(18, 199, 236, 1), 0 0 30px rgba(18, 199, 236, 0.6);
-    }
-    100% {
-        box-shadow: 0 0 5px rgba(18, 199, 236, 0.4);
-    }
-}
-
 .btn-primary, .btn-contact-submit {
     font-family: 'Montserrat', sans-serif;
     padding: 12px 28px;
@@ -326,12 +306,11 @@ main {
     font-size: 1rem;
     border-radius: 30px;
     text-decoration: none;
-    color: white;
+    color: var(--text-light);
     border: 2px solid var(--neon-blue);
     background-color: transparent;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease-in-out;
     position: relative;
-    overflow: hidden;
     z-index: 1;
     display: inline-block;
 }
@@ -344,49 +323,14 @@ main {
     border-radius: 5px;
 }
 
-.btn-primary::before, .btn-contact-submit::before {
-    content: '';
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    width: 100%;
-    height: 100%;
-    background-color: var(--neon-blue);
-    z-index: -1;
-    /* Transformation initiale pour le flash */
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.4s;
-    border-radius: 30px;
-}
-
-.btn-contact-submit::before {
-    border-radius: 5px;
-}
-
 .btn-primary:hover, .btn-contact-submit:hover {
-    color: white;
+    color: var(--text-light);
+    background-color: var(--neon-blue);
     transform: none;
     box-shadow: none;
     border-color: var(--neon-blue);
-    background-color: transparent;
-    animation: lightning-pulse 1.5s infinite ease-in-out;
+    animation: none;
 }
-
-.btn-primary:hover::before, .btn-contact-submit:hover::before {
-    /* Flash rapide (s'étend et disparaît) */
-    transform: translate(-50%, -50%) scale(1.5); 
-    opacity: 0;
-    transition: transform 0.1s ease-out, opacity 0.3s ease-out 0.1s;
-}
-
-/* Assurer que l'état de repos est bien défini */
-.btn-primary:not(:hover)::before, .btn-contact-submit:not(:hover)::before {
-    transform: translate(-50%, -50%) scale(0); 
-    opacity: 0;
-    transition: transform 0.01s, opacity 0.01s;
-}
-
 
 .bouton-scroll {
     display: inline-flex;
@@ -396,27 +340,26 @@ main {
     height: 50px;
     border: 2px solid var(--neon-blue);
     border-radius: 50%;
-    transition: all 0.4s ease;
     text-decoration: none;
     background-color: transparent;
-}
-
-.bouton-scroll svg {
-    transition: transform 0.4s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .bouton-scroll:hover {
     background-color: var(--neon-blue);
     transform: none;
     box-shadow: none;
-    animation: lightning-pulse 1.5s infinite ease-in-out;
+    animation: none;
+}
+
+.bouton-scroll svg {
+    transition: stroke 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 
 .bouton-scroll:hover svg {
     transform: rotate(360deg);
 }
 
-/* --- HERO SECTION --- */
 .hero-content {
     text-align: center;
 }
@@ -441,7 +384,6 @@ main {
     margin-top: 40px;
 }
 
-/* --- SECTION À PROPOS + COMPÉTENCES (fusionnées) --- */
 .bio-content-fusion {
     max-width: 900px;
     margin: 0 auto;
@@ -466,7 +408,7 @@ main {
 
 .bio-text-column p {
     line-height: 1.8;
-    color: var(--text-muted);
+    color: var(--text-light);
     margin-bottom: 15px;
 }
 
@@ -482,15 +424,16 @@ main {
 .role-tag {
     display: inline-block;
     padding: 10px 20px;
-    border: 1px solid var(--neon-blue);
+    border: 2px solid var(--neon-blue);
     border-radius: 5px;
-    color: var(--neon-blue);
+    color: var(--text-light);
     font-weight: 600;
     text-transform: uppercase;
     transition: background-color 0.3s, transform 0.3s;
     cursor: pointer;
     opacity: 0;
     transform: translateX(20px);
+    text-align: center;
 }
 
 .role-tag.visible {
@@ -498,12 +441,6 @@ main {
     transform: translateX(0);
 }
 
-.role-tag:hover {
-    background-color: rgba(18, 199, 236, 0.1);
-    transform: scale(1.05);
-}
-
-/* --- GRILLE COMPÉTENCES (Horizontal/Hover) --- */
 .skills-container-rework {
     max-width: 900px;
     margin: 0 auto;
@@ -511,13 +448,12 @@ main {
 }
 
 .skills-grid {
-    display: flex; /* Aligné horizontalement (Flexbox) */
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px 20px;
     align-items: center;
-    background-color: var(--bg-dark);
-    border: 1px solid var(--neon-blue);
+    border: 2px solid var(--neon-blue);
     border-radius: 15px;
     padding: 30px;
     margin-top: 30px;
@@ -528,7 +464,7 @@ main {
     flex-direction: column;
     align-items: center;
     width: 110px;
-    height: 90px; 
+    height: 80px; 
     text-align: center;
     position: relative;
     cursor: pointer;
@@ -543,13 +479,13 @@ main {
 .skill-icon svg {
     transition: transform 0.3s ease, color 0.3s ease;
     color: var(--neon-blue);
-    margin-top: 5px;
+    margin-top: 10px;
     transform: translateY(0); 
 }
 
 .skill-icon .skill-name-text {
     position: absolute;
-    bottom: -20px; /* Caché sous l'icône au repos */
+    bottom: -20px;
     margin: 0;
     font-size: 0.9rem;
     color: var(--text-light);
@@ -560,21 +496,18 @@ main {
 }
 
 .skill-icon:hover svg {
-    transform: translateY(-15px); /* Déplace l'icône vers le haut */
+    transform: translateY(-15px);
 }
 
 .skill-icon:hover .skill-name-text {
-    bottom: 5px; /* Déplace le texte en position visible */
+    bottom: 5px;
     opacity: 1;
 }
 
-
-/* --- SECTION PROJETS (SLIDER) --- */
 .project-card {
     max-width: 1200px; 
     margin: 0 auto;
     display: flex;
-    background-color: var(--bg-medium); 
     border: none;
     border-radius: 0;
     box-shadow: none;
@@ -584,23 +517,19 @@ main {
     justify-content: space-between;
 }
 
-/* Espacement entre les projets */
 .project-card:not(:last-child) {
     margin-bottom: 80px; 
 }
 
-/* Structure inversée pour le second projet */
 .project-card.inverse {
     flex-direction: row-reverse;
 }
 .project-card.inverse .project-details {
     text-align: right;
 }
-/* Aligner le bouton à droite dans la structure inversée */
 .project-card.inverse .project-cta {
     margin-left: auto;
 }
-
 
 .project-slider-container {
     flex: 1;
@@ -612,7 +541,7 @@ main {
 .project-slider-wrapper {
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--neon-blue); 
+    border: 2px solid var(--neon-blue); 
     border-radius: 5px;
 }
 
@@ -629,11 +558,9 @@ main {
     display: block;
 }
 
-/* POSITIONNEMENT FINAL DES FLÈCHES (CORRECTION ULTIME) */
 .slider-controls {
     position: absolute;
     top: 50%;
-    /* Les contrôles couvrent le wrapper de l'image */
     left: 0; 
     right: 0;
     transform: translateY(-50%); 
@@ -642,12 +569,17 @@ main {
     width: 100%; 
     padding: 0; 
     pointer-events: none;
-    z-index: 50; 
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.project-slider-container:hover .slider-controls {
+    opacity: 1;
 }
 
 .slider-controls button {
     background: rgba(17, 26, 40, 0.8); 
-    border: 1px solid var(--neon-blue);
+    border: 2px solid var(--neon-blue);
     border-radius: 50%;
     color: var(--neon-blue);
     cursor: pointer;
@@ -660,30 +592,26 @@ main {
     pointer-events: all;
     transition: background-color 0.3s, transform 0.3s;
     opacity: 0.9;
-    margin: 0; 
+    margin: 6px; 
+    z-index: 70;
 }
 
-/* Flèche gauche décalée à l'extérieur du bord */
 .slider-controls button.slider-prev {
-    left: 0;
-    /* Pousser la moitié de la flèche (20px) à l'extérieur */
-    transform: translateX(-50%); 
+    left: 2px;
+    transform: none; 
 }
-/* Flèche droite décalée à l'extérieur du bord */
 .slider-controls button.slider-next {
-    right: 0;
-    /* Pousser la moitié de la flèche (20px) à l'extérieur */
-    transform: translateX(50%); 
+    right: 2px;
+    transform: none; 
 }
 
 .slider-controls button:hover {
     background: var(--neon-blue);
-    color: var(--bg-dark);
+    color: var(--text-light);
     opacity: 1;
     transform: scale(1.1);
 }
 
-/* Séparateur horizontal */
 .project-separator {
     border: 0;
     height: 2px;
@@ -693,11 +621,38 @@ main {
     opacity: 0.3;
 }
 
-
-/* Suppression des points et de leur conteneur */
 .slider-dots-container {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    position: absolute; 
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 60; 
 }
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.dot.active {
+    background-color: var(--neon-blue);
+    transform: scale(1.2);
+}
+
+.dot:hover {
+    background-color: var(--neon-blue);
+    transform: scale(1.1);
+}
+
 
 .project-details {
     flex: 1;
@@ -734,12 +689,10 @@ main {
     border-radius: 5px; 
 }
 
-/* --- SECTION CONTACT (TWO-COLUMN) --- */
 .contact-container-twocol {
     max-width: 1000px;
     margin: 0 auto;
     display: flex;
-    background-color: var(--bg-medium);
     border-radius: 0;
     padding: 50px 0;
     border: none;
@@ -766,7 +719,7 @@ main {
 }
 
 .info-text {
-    color: var(--text-muted);
+    color: var(--text-light);
     line-height: 1.6;
     margin-bottom: 30px;
 }
@@ -782,7 +735,6 @@ main {
     font-size: 1rem;
 }
 
-/* Style de l'icône email au repos (blanc) et au survol (bleu) */
 .email-icon {
     stroke: var(--text-light);
     transition: stroke 0.3s, transform 0.3s;
@@ -807,7 +759,6 @@ main {
     width: 100%;
 }
 
-/* Floating Label Structure */
 .form-group-floating {
     position: relative;
     margin-bottom: 30px;
@@ -842,10 +793,9 @@ main {
     resize: vertical;
 }
 
-/* Positionnement du label pour l'effet flottant */
 .form-group-floating label {
     position: absolute;
-    top: 15px; /* Position initiale : à l'intérieur */
+    top: 15px;
     left: 0;
     color: var(--text-muted);
     pointer-events: none;
@@ -855,7 +805,6 @@ main {
     background: transparent;
 }
 
-/* Ajustement pour le textarea (le label est plus haut initialement) */
 .form-group-floating.textarea-group-floating {
     padding-top: 0;
 }
@@ -865,17 +814,15 @@ main {
     padding: 0;
 }
 
-/* Le label monte quand l'input a le focus OU est rempli (not(:placeholder-shown)) */
 .form-group-floating input:focus + label,
 .form-group-floating input:not(:placeholder-shown):valid + label {
-    top: -15px; /* Position finale : au-dessus */
+    top: -6px;
     font-size: 0.75rem;
     color: var(--neon-blue);
     background-color: var(--bg-medium); 
     padding: 0 5px;
 }
 
-/* Le label monte pour le textarea */
 .form-group-floating textarea:focus + label,
 .form-group-floating textarea:not(:placeholder-shown):valid + label {
     top: -10px;
@@ -886,27 +833,11 @@ main {
     padding: 0 5px;
 }
 
-/* Masquer le placeholder (le label sert de placeholder) */
 .form-group-floating input::placeholder,
 .form-group-floating textarea::placeholder {
     opacity: 0;
 }
 
-
-/* Style de bouton de soumission contact spécifique */
-.btn-contact-submit {
-    width: 100%; 
-    background-color: var(--bg-dark);
-    border-radius: 5px;
-    border-color: var(--neon-blue);
-}
-
-.btn-contact-submit:hover {
-    background-color: transparent;
-}
-
-
-/* --- FOOTER --- */
 .footer {
     width: 100%;
     text-align: center;
@@ -919,8 +850,6 @@ main {
 .footer p {
     margin: 0;
 }
-
-/* --- ANIMATIONS & RESPONSIVE --- */
 
 @keyframes clip-reveal {
     0% {
@@ -984,10 +913,7 @@ main {
     }
     
     .slider-controls {
-        width: 100%;
-        left: 0;
-        right: 0;
-        padding: 0 10px;
+        display: none;
     }
 }
 
@@ -1029,10 +955,7 @@ main {
     }
     
     .slider-controls {
-        width: 100%;
-        left: 0;
-        right: 0;
-        padding: 0 10px;
+        display: none;
     }
 
     .contact-info-new {
