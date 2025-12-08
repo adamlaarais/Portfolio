@@ -162,31 +162,29 @@ document.addEventListener("DOMContentLoaded", function () {
         initializeProjectSlider(container);
     });
 
+    /* --- Animation au défilement (Scroll Animation) --- */
     const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-    const animatedTitles = document.querySelectorAll('.animated-title');
-    const roleTags = document.querySelectorAll('.role-tag');
-
-    // Retrait de l'IntersectionObserver pour les éléments .animate-on-scroll
-    // Les animations se déclencheront immédiatement au chargement de la page.
-    window.addEventListener('load', () => {
-        elementsToAnimate.forEach(el => {
-            el.classList.add('visible');
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
         });
+    };
 
-        // Déclenchement spécifique pour les rôles (staggered)
-        document.querySelectorAll('.bio-content-fusion').forEach(container => {
-            container.querySelectorAll('.role-tag').forEach((item, itemIndex) => {
-                setTimeout(() => {
-                    item.classList.add('visible');
-                }, itemIndex * 150);
-            });
-        });
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.1
+    };
 
-        // Déclenchement pour les titres
-        animatedTitles.forEach(el => {
-            el.classList.add('visible');
-        });
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    elementsToAnimate.forEach(el => {
+        observer.observe(el);
     });
+    /* --- Fin Animation au défilement --- */
 
     const canvas = document.getElementById('star-background');
 

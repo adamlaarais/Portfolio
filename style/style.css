@@ -287,7 +287,7 @@ main {
     position: absolute;
     bottom: -10px;
     left: 0;
-    width: 80px; 
+    width: 140px; 
     height: 3px;
     background-color: var(--neon-blue);
     transform: scaleX(0);
@@ -299,6 +299,22 @@ main {
     transform: scaleX(1);
 }
 
+@keyframes neon-pulse {
+    0% {
+        box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px rgba(18, 199, 236, 0.5);
+        border-color: var(--neon-blue);
+    }
+    50% {
+        box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px rgba(18, 199, 236, 0.8), 0 0 40px rgba(18, 199, 236, 0.3);
+        border-color: var(--neon-blue);
+    }
+    100% {
+        box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px rgba(18, 199, 236, 0.5);
+        border-color: var(--neon-blue);
+    }
+}
+
+/* Base styles for buttons - No pulse or special hover here */
 .btn-primary, .btn-contact-submit {
     font-family: 'Montserrat', sans-serif;
     padding: 12px 28px;
@@ -313,6 +329,35 @@ main {
     position: relative;
     z-index: 1;
     display: inline-block;
+    animation: none;
+    box-shadow: none;
+}
+
+/* Constant Neon Pulse - Applies only to CV Button (inside .hero-buttons) and Contact Form Button */
+.hero-buttons .btn-primary, 
+.btn-contact-submit {
+    animation: neon-pulse 1.5s infinite alternate;
+}
+
+/* RESTORED HOVER EFFECT FOR PROJECT CTAs (.project-cta) - Fill with color on hover */
+.project-cta:hover {
+    color: var(--text-light);
+    background-color: var(--neon-blue);
+    transform: none;
+    box-shadow: none;
+    border-color: var(--neon-blue);
+    animation: none; /* Disable pulse on hover to allow solid fill */
+}
+
+/* PULSE BUTTON HOVER OVERRIDE - Prevents fill on hover for CV and Contact buttons, keeps the pulse animation */
+.hero-buttons .btn-primary:hover,
+.btn-contact-submit:hover {
+    color: var(--text-light);
+    background-color: transparent; /* Keep background transparent */
+    transform: none;
+    border-color: var(--neon-blue);
+    /* Ensure the pulse effect continues on hover by maintaining the animation and box-shadow */
+    animation: neon-pulse 1.5s infinite alternate;
 }
 
 .btn-contact-submit {
@@ -321,15 +366,6 @@ main {
     display: block;
     width: 100%;
     border-radius: 5px;
-}
-
-.btn-primary:hover, .btn-contact-submit:hover {
-    color: var(--text-light);
-    background-color: var(--neon-blue);
-    transform: none;
-    box-shadow: none;
-    border-color: var(--neon-blue);
-    animation: none;
 }
 
 .bouton-scroll {
@@ -654,7 +690,7 @@ main {
 
 .project-separator {
     border: 0;
-    height: 2px;
+    height: 4px;
     background-color: var(--neon-blue);
     margin: 80px auto;
     width: 80%;
@@ -958,6 +994,17 @@ main {
 }
 
 @media (max-width: 900px) {
+    /* HEADER FIX: Show hamburger and hide desktop navigation */
+    header {
+        padding: 0 20px;
+    }
+    .header-nav, .header-socials {
+        display: none;
+    }
+    .hamburger-menu {
+        display: block; /* Fix: display the hamburger menu */
+    }
+    
     /* APROPOS MEDIA QUERY: Stack columns vertically */
     .bio-roles-split {
         flex-direction: column; 
@@ -970,7 +1017,7 @@ main {
     }
     
     .roles-stack {
-        flex-direction: row; /* Display role boxes side-by-side on tablet/mobile if space allows */
+        flex-direction: row;
         gap: 20px;
     }
     
