@@ -384,62 +384,102 @@ main {
     margin-top: 40px;
 }
 
-.bio-content-fusion {
-    max-width: 900px;
+/* --- A PROPOS DE MOI - NEW LAYOUT STYLES --- */
+
+.apropos-grid-container {
+    max-width: 1200px; 
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     gap: 40px;
     padding: 0;
 }
 
-.bio-main-info {
+.bio-roles-split {
     display: flex;
-    flex-wrap: wrap;
     gap: 40px;
-    align-items: flex-start;
+    align-items: stretch; /* Makes columns stretch to the height of the tallest item */
 }
 
 .bio-text-column {
-    flex: 3;
+    flex: 2; /* Gives more width to the bio text (approx 2/3) */
     min-width: 300px;
     text-align: left;
+}
+
+.bio-box {
+    padding: 30px;
+    border: 2px solid var(--neon-blue);
+    border-radius: 10px;
 }
 
 .bio-text-column p {
     line-height: 1.8;
     color: var(--text-light);
-    margin-bottom: 15px;
+    margin: 0;
 }
 
-.bio-roles {
-    flex: 1;
+.roles-stack {
+    flex: 1; /* Takes the remaining width (approx 1/3) */
     min-width: 150px;
     display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding-top: 10px;
+    flex-direction: column; /* Stacks the two role boxes vertically */
+    gap: 20px;
 }
 
-.role-tag {
-    display: inline-block;
-    padding: 10px 20px;
+.role-box {
+    flex-grow: 1; /* Makes both role boxes share the vertical space equally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
     border: 2px solid var(--neon-blue);
-    border-radius: 5px;
-    color: var(--text-light);
-    font-weight: 600;
-    text-transform: uppercase;
+    border-radius: 10px;
     transition: background-color 0.3s, transform 0.3s;
     cursor: pointer;
-    opacity: 0;
-    transform: translateX(20px);
     text-align: center;
 }
 
-.role-tag.visible {
-    opacity: 1;
-    transform: translateX(0);
+.role-box-dev, .role-box-design {
+    /* Animation base inherited from .animate-on-scroll in HTML */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
+
+.role-box:hover {
+    background-color: rgba(18, 199, 236, 0.1); /* Subtle hover effect */
+    transform: translateY(-2px);
+}
+
+.role-icon {
+    stroke: var(--neon-blue);
+    transition: stroke 0.3s ease;
+    width: 30px; 
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.role-box:hover .role-icon {
+    stroke: var(--text-light);
+}
+
+.role-tag {
+    color: var(--neon-blue);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.role-box:hover .role-tag {
+    color: var(--text-light);
+}
+
+/* END A PROPOS DE MOI NEW STYLES */
+
 
 .skills-container-rework {
     max-width: 900px;
@@ -918,6 +958,27 @@ main {
 }
 
 @media (max-width: 900px) {
+    /* APROPOS MEDIA QUERY: Stack columns vertically */
+    .bio-roles-split {
+        flex-direction: column; 
+        gap: 20px;
+    }
+    
+    .bio-box, .roles-stack {
+        min-width: 0;
+        flex: 1;
+    }
+    
+    .roles-stack {
+        flex-direction: row; /* Display role boxes side-by-side on tablet/mobile if space allows */
+        gap: 20px;
+    }
+    
+    .role-box {
+        flex-grow: 1;
+    }
+    /* END APROPOS MEDIA QUERY */
+    
     .contact-container-twocol {
         flex-direction: column;
         gap: 30px;
@@ -965,6 +1026,19 @@ main {
     .skills-grid {
         justify-content: space-around;
         gap: 20px;
+    }
+    
+    .role-box {
+        padding: 15px 10px;
+    }
+    
+    .role-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .role-tag {
+        font-size: 0.9rem;
     }
     
     .skill-icon {

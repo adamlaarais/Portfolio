@@ -64,24 +64,30 @@
             </div>
         </section>
 
-        <section class="section" id="apropos">
+        <section class="section">
             <div class="animated-title" data-text="À PROPOS DE MOI."></div>
-            <div class="bio-content-fusion animate-on-scroll">
-                <div class="bio-main-info">
-                    <div class="bio-text-column">
+            <div class="apropos-grid-container animate-on-scroll" id="apropos">
+                <div class="bio-roles-split" >
+                    <div class="bio-text-column bio-box">
                         <p>Actuellement étudiant en deuxième année de BUT MMI à l'IUT de Mulhouse, je me
                         passionne pour la création d'expériences web où le développement précis rencontre un
                         design minimaliste et intuitif. Autonome et rigoureux, je cherche activement à mettre mes
                         compétences en application et à contribuer concrètement à des projets stimulants, afin
                         d'acquérir une expérience professionnelle significative.</p>
                     </div>
-                    <div class="bio-roles">
-                        <span class="role-tag animate-on-scroll" style="transition-delay: 0.1s;">développeur web</span>
-                        <span class="role-tag animate-on-scroll" style="transition-delay: 0.2s;">designer UI/UX</span>
+                    <div class="roles-stack">
+                        <div class="role-box role-box-dev animate-on-scroll" style="transition-delay: 0.1s;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-icon"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                            <span class="role-tag">développeur web</span>
+                        </div>
+                        <div class="role-box role-box-design animate-on-scroll" style="transition-delay: 0.2s;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="role-icon"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                            <span class="role-tag">designer UI/UX</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="skills-container-rework animate-on-scroll">
+                <div class="skills-container-rework">
                     <div class="skills-grid">
                         <div class="skill-icon animate-on-scroll">
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 640 640"><path fill="#12c7ec" d="M128 96L162.9 491.8L319.5 544L477.1 491.8L512 96L128 96zM436.2 223.9L252.4 223.9L256.5 273.3L432.1 273.3L418.5 421.7L320.6 448.7L320.6 449L319.5 449L220.8 421.7L214.8 345.9L262.5 345.9L266 384L319.5 398.5L373.2 384L379.2 321.8L212.3 321.8L199.5 176.2L440.6 176.2L436.2 223.9z"/></svg>
@@ -107,19 +113,20 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 700 700"><path fill="#12c7ec" d="M142 159.8C142 106.9 184.9 64 237.8 64L402.2 64C455.1 64 498 106.9 498 159.8C498 193.3 480.8 222.8 454.8 239.9C480.8 257 498 286.5 498 320C498 372.9 455.1 415.8 402.2 415.8L400.1 415.8C375.3 415.8 352.7 406.4 335.7 390.9L335.7 479.2C335.7 532.8 291.7 576 238.3 576C185.5 576 142 533.2 142 480.2C142 446.7 159.2 417.2 185.2 400.1C159.2 383 142 353.5 142 320C142 286.5 159.2 257 185.2 239.9C159.2 222.8 142 193.3 142 159.8zM304.3 255.6L237.8 255.6C202.2 255.6 173.4 284.4 173.4 320C173.4 355.4 202 384.2 237.4 384.4L304.3 384.4L304.3 255.6zM335.7 320C335.7 355.6 364.5 384.4 400.1 384.4L402.2 384.4C437.8 384.4 466.6 355.6 466.6 320C466.6 284.4 437.8 255.6 402.2 255.6L400.1 255.6C364.5 255.6 335.7 284.4 335.7 320zM237.8 415.8L237.4 415.8C202 416 173.4 444.8 173.4 480.2C173.4 515.6 202.6 544.6 238.3 544.6C274.6 544.6 304.3 515.2 304.3 479.1L304.3 415.7L237.8 415.7zM237.8 95.4C202.2 95.4 173.4 124.2 173.4 159.8C173.4 195.4 202.2 224.2 237.8 224.2L304.3 224.2L304.3 95.4L237.8 95.4zM335.7 224.2L402.2 224.2C437.8 224.2 466.6 195.4 466.6 159.8C466.6 124.2 437.8 95.4 402.2 95.4L335.7 95.4L335.7 224.2z"/></svg>               
                             <p class="skill-name-text">Figma</p>
                         </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section" id="projets">
+        <section class="section">
             <div class="animated-title" data-text="PROJETS."></div>
             
-            <div class="project-card animate-on-scroll">
+            <div class="project-card animate-on-scroll" id="projets">
                 <div class="project-details">
                     <h2 class="project-title-slide">VoltAuto - Site de location</h2>
                     <p class="project-tagline">HTML, CSS, JS, PHP/MySQL.</p>
                     <p class="project-description">L'objectif principal était de concevoir et de développer une plateforme complète de location de véhicules électriques. Le défi majeur a été l'intégration d'une base de données MySQL et la mise en place d'un système PHP fonctionnel pour la création de comptes et la gestion des réservations.</p>
-                    <a href="#" class="btn-primary project-cta" target="_blank">Voir GitHub</a>
+                    <a href="https://github.com/adamlaarais/SAE-203.git" class="btn-primary project-cta" target="_blank">Voir GitHub</a>
                 </div>
                 <div class="project-slider-container project-slider-container-1">
                     <div class="project-slider-wrapper" id="slider-1">
@@ -145,17 +152,17 @@
 
             <div class="project-card inverse animate-on-scroll">
                 <div class="project-details">
-                    <h2 class="project-title-slide">Autre Projet - Site de location</h2>
+                    <h2 class="project-title-slide">BeeLink - Site pour apiculteur</h2>
                     <p class="project-tagline">HTML, CSS, JS, PHP/MySQL.</p>
-                    <p class="project-description">Ceci est la duplication du projet précédent avec une structure inversée (carrousel à gauche, texte à droite). Vous pouvez modifier ce texte et les images pour présenter un second projet similaire ou distinct.</p>
-                    <a href="#" class="btn-primary project-cta" target="_blank">Voir GitHub</a>
+                    <p class="project-description">L'objectif principal était de concevoir et de développer en groupe une plateforme complète permettant à des apiculteurs de pouvoir visualiser leur. Le défi majeur a été l'intégration d'une base de données MySQL et la mise en place d'un système PHP fonctionnel pour la création/connexion de comptes, la gestion pour l'administrateur et la visualisation des données de la ruche de l'apiculteur.</p>
+                    <a href="https://github.com/AdamDominguez/SAE301.git" class="btn-primary project-cta" target="_blank">Voir GitHub</a>
                 </div>
                 <div class="project-slider-container project-slider-container-2">
                     <div class="project-slider-wrapper" id="slider-2">
                         <div class="project-slider">
-                            <img src="img/Accueil.png" alt="VoltAuto - Page d'accueil">
-                            <img src="img/En savoir plus.png" alt="VoltAuto - Page En savoir plus">
-                            <img src="img/Véhicules.png" alt="VoltAuto - Page Véhicules">
+                            <img src="img/Home.png" alt="BeeLink - Page d'accueil">
+                            <img src="img/Formulaire de contact.png" alt="BeeLink - Formulaire de contact">
+                            <img src="img/Tableau de bord - Accueil.png" alt="BeeLink - Tableau de bord">
                         </div>
                     </div>
                     <div class="slider-dots-container"></div>
@@ -172,9 +179,9 @@
             
         </section>
         
-        <section class="section" id="contact">
+        <section class="section">
             <div class="animated-title" data-text="CONTACTEZ MOI."></div>
-            <div class="contact-container-twocol animate-on-scroll">
+            <div class="contact-container-twocol animate-on-scroll" id="contact">
                 <div class="contact-info-new">
                     <p class="info-text">Vous avez un projet en tête, une opportunité d'alternance ou vous souhaitez simplement échanger ? N'hésitez pas à me contacter via le formulaire ou directement par e-mail.</p>
                     <a href="mailto:laaraisadam22@gmail.com" class="email-link">
