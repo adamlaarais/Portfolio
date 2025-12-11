@@ -301,15 +301,15 @@ main {
 
 @keyframes neon-pulse {
     0% {
-        box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px rgba(18, 199, 236, 0.5);
+        box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 15px rgba(18, 199, 236, 0.5);
         border-color: var(--neon-blue);
     }
     50% {
-        box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px rgba(18, 199, 236, 0.8), 0 0 40px rgba(18, 199, 236, 0.3);
+        box-shadow: 0 0 10px var(--neon-blue), 0 0 15px var(--neon-blue), 0 0 20px rgba(18, 199, 236, 0.8), 0 0 40px rgba(18, 199, 236, 0.3);
         border-color: var(--neon-blue);
     }
     100% {
-        box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 20px rgba(18, 199, 236, 0.5);
+        box-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 15px rgba(18, 199, 236, 0.5);
         border-color: var(--neon-blue);
     }
 }
@@ -352,7 +352,7 @@ main {
 /* PULSE BUTTON HOVER OVERRIDE - Prevents fill on hover for CV and Contact buttons, keeps the pulse animation */
 .hero-buttons .btn-primary:hover,
 .btn-contact-submit:hover {
-    color: var(--text-light);
+    color: var(--neon-blue);
     background-color: transparent; /* Keep background transparent */
     transform: none;
     border-color: var(--neon-blue);
