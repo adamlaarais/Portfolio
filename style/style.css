@@ -333,12 +333,6 @@ main {
     box-shadow: none;
 }
 
-/* Constant Neon Pulse - Applies only to CV Button (inside .hero-buttons) and Contact Form Button */
-.hero-buttons .btn-primary, 
-.btn-contact-submit {
-    animation: neon-pulse 1.5s infinite alternate;
-}
-
 /* RESTORED HOVER EFFECT FOR PROJECT CTAs (.project-cta) - Fill with color on hover */
 .project-cta:hover {
     color: var(--text-light);
@@ -352,7 +346,6 @@ main {
 /* PULSE BUTTON HOVER OVERRIDE - Prevents fill on hover for CV and Contact buttons, keeps the pulse animation */
 .hero-buttons .btn-primary:hover,
 .btn-contact-submit:hover {
-    color: var(--neon-blue);
     background-color: transparent; /* Keep background transparent */
     transform: none;
     border-color: var(--neon-blue);
