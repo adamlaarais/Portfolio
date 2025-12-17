@@ -13,7 +13,7 @@ html {
 body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--bg-medium);
+    background-color: var(--bg-dark);
     color: var(--text-light);
     cursor: none;
     display: flex;
@@ -39,19 +39,6 @@ body::-webkit-scrollbar {
     z-index: -2;
     pointer-events: none;
     opacity: 0.5;
-}
-
-.background-grid {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-    z-index: -1;
-    background-image: linear-gradient(rgba(40, 80, 140, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(40, 80, 140, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    background-attachment: fixed;
 }
 
 .cursor-dot, .cursor-outline {
@@ -103,14 +90,28 @@ header {
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: var(--bg-dark);
     height: 70px;
-    transition: top 0.4s ease-in-out;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Effet Glassmorphism : arrière-plan semi-transparent avec flou */
+    background-color: var(--bg-dark);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Bordure inférieure lumineuse fine */
+    border-bottom: 3px solid var(--neon-blue);}
+
+/* Effet quand on scroll : le header devient plus compact ou change d'opacité */
+header.scrolled {
+    height: 60px;
+    background-color: rgba(17, 26, 40, 0.9);
+    border-bottom: 1px solid var(--neon-blue);
 }
 
 header.hidden {
-    top: -70px;
+    top: -80px;
 }
+
 
 .header-logo img {
     height: 50px;
