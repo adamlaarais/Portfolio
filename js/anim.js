@@ -6,36 +6,39 @@ document.addEventListener("DOMContentLoaded", function () {
     const mobileNav = document.querySelector('.mobile-nav');
     const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
-    hamburger.addEventListener('click', function() {
-        this.classList.toggle('is-active');
-        mobileNav.classList.toggle('is-active');
-        document.body.classList.toggle('menu-open');
-    });
-
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('is-active');
-            mobileNav.classList.remove('is-active');
-            document.body.classList.remove('menu-open');
+    if (hamburger) {
+        hamburger.addEventListener('click', function () {
+            this.classList.toggle('is-active');
+            mobileNav.classList.toggle('is-active');
+            document.body.classList.toggle('menu-open');
         });
-    });
+    }
+
+    if (mobileNavLinks) {
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('is-active');
+                mobileNav.classList.remove('is-active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+    }
 
     const scrollbarThumb = document.getElementById('scrollbar-thumb');
-    
+
     function updateScrollbar() {
         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
         const scrolled = window.scrollY;
         const scrollPercent = (scrolled / scrollHeight) * 100;
-        
-        const thumbHeight = Math.min(100, Math.max(0, scrollPercent)); 
-        
+        const thumbHeight = Math.min(100, Math.max(0, scrollPercent));
+
         if (scrollbarThumb) {
             scrollbarThumb.style.height = `${thumbHeight}%`;
         }
     }
 
     window.addEventListener('scroll', updateScrollbar);
-    updateScrollbar(); 
+    updateScrollbar();
 
     const header = document.querySelector('header');
     let lastScrollY = window.scrollY;
@@ -46,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
             header.classList.add('hidden');
-        } 
+        }
         else if (window.scrollY < lastScrollY) {
             header.classList.remove('hidden');
         }
@@ -57,12 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const outline = document.querySelector('.cursor-outline');
 
     if (window.matchMedia && window.matchMedia("(pointer: fine)").matches && dot && outline) {
-        
+
         let mouseX = 0;
         let mouseY = 0;
         let outlineX = 0;
         let outlineY = 0;
-        const lerpSpeed = 0.15; 
+        const lerpSpeed = 0.15;
 
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
@@ -103,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const prevButton = containerElement.querySelector('.slider-prev');
         const nextButton = containerElement.querySelector('.slider-next');
         const dotsContainer = containerElement.querySelector('.slider-dots-container');
-        
+
         if (!slider || !slider.firstElementChild || !prevButton || !nextButton) return;
 
         const totalSlides = slider.children.length;
@@ -114,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
             slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
             updateDots();
         }
-        
+
         function createDots() {
             if (!dotsContainer) return;
             dotsContainer.innerHTML = '';
@@ -129,14 +132,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 dotsContainer.appendChild(dot);
             }
         }
-        
+
         function updateDots() {
             if (!dotsContainer) return;
             dotsContainer.querySelectorAll('.dot').forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentIndex);
             });
         }
-        
+
         function goToNextSlide() {
             currentIndex = (currentIndex + 1) % totalSlides;
             updateSlider();
@@ -152,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         nextButton.addEventListener('click', goToNextSlide);
         prevButton.addEventListener('click', goToPrevSlide);
-        
+
         window.addEventListener('resize', updateSlider);
         window.addEventListener('load', updateSlider);
     }
@@ -190,56 +193,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (canvas) {
         const ctx = canvas.getContext('2d');
+        let width, height;
 
+        // Configuration Rain (Clean, No Mouse Interaction)
         let stars = [];
-        let numStars = 250;
+        const numStars = 150;
+        const speedMultiplier = 2;
 
-        function setCanvasSize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            initStars();
         }
 
         function initStars() {
             stars = [];
             for (let i = 0; i < numStars; i++) {
                 stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 2 + 1, 
-                    vx: (Math.random() - 0.5) * 0.1, 
-                    vy: (Math.random() - 0.5) * 0.1, 
-                    color: BLUE_NEON,
-                    depth: Math.random() * 1 + 0.1
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.5 + 0.5,
+                    speed: Math.random() * speedMultiplier + 1,
+                    alpha: Math.random() * 0.5 + 0.3
                 });
             }
         }
 
         function drawStars() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = BLUE_NEON;
-            ctx.beginPath();
-            for (let i = 0; i < stars.length; i++) {
-                let star = stars[i];
-                ctx.globalAlpha = star.depth;
-                ctx.moveTo(star.x, star.y);
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = BLUE_NEON; // #12C7EC
+
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.globalAlpha = star.alpha;
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-            }
-            ctx.fill();
-            ctx.globalAlpha = 1; 
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
         }
 
         function updateStars() {
-            for (let i = 0; i < stars.length; i++) {
-                let star = stars[i];
+            stars.forEach(star => {
+                // Mouvement vertical naturel (Pluie)
+                star.y += star.speed;
 
-                star.x += star.vx * star.depth;
-                star.y += star.vy * star.depth;
-
-                if (star.x < 0) star.x = canvas.width;
-                if (star.x > canvas.width) star.x = 0;
-                if (star.y < 0) star.y = canvas.height;
-                if (star.y > canvas.height) star.y = 0;
-            }
+                // Wrap around (Infinite Loop)
+                if (star.y > height) {
+                    star.y = 0;
+                    star.x = Math.random() * width;
+                }
+            });
         }
 
         function animate() {
@@ -248,14 +251,19 @@ document.addEventListener("DOMContentLoaded", function () {
             requestAnimationFrame(animate);
         }
 
-        setCanvasSize();
-        initStars();
+        function handleScrollFade() {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            let opacity = Math.max(0, 1 - (scrollY / (windowHeight * 0.8)));
+            canvas.style.opacity = opacity;
+        }
+
+        // Event Listeners (No mouse listeners here)
+        window.addEventListener('resize', resize);
+        window.addEventListener('scroll', handleScrollFade);
+
+        resize();
         animate();
-
-        window.addEventListener('resize', () => {
-            setCanvasSize();
-            initStars(); 
-        });
+        handleScrollFade();
     }
-
 });
