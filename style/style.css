@@ -8,6 +8,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
 }
 
 body {
@@ -93,7 +94,11 @@ header {
     right: 0;
     z-index: 1000;
     height: 70px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 70px;
+    /* Clean up transition to avoid conflict with transform/opacity/intro */
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        border-bottom 0.4s ease;
 
     /* Effet Glassmorphism : arrière-plan semi-transparent avec flou */
     background-color: var(--bg-dark);
@@ -456,6 +461,9 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
+    padding-top: 70px;
+    /* Offset for fixed header */
+    box-sizing: border-box;
     /* Pour que le canvas ne déborde pas */
 }
 
@@ -532,7 +540,7 @@ body {
     /* Texte Blanc */
     border: 2px solid var(--neon-blue);
     /* Contour Bleu */
-    border-radius: 5px;
+    border-radius: 64px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -1334,4 +1342,89 @@ body {
     .skill-icon .skill-name-text {
         font-size: 0.8rem;
     }
+}
+
+/* --- INTRO OVERLAY --- */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-dark);
+    z-index: 9998;
+    /* Below Canvas (if canvas is 9999) but above everything else */
+    opacity: 1;
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    pointer-events: all;
+    transform: scale(1);
+}
+
+#intro-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.1);
+    /* Subtle zoom out effect */
+}
+
+/* --- SYNCHRONIZED ENTRANCE ANIMATIONS --- */
+
+/* Header Entrance */
+/* We override the default header transition for the entrance to ensure it's smooth */
+/* Default header has 'transition: all 0.4s' (line 96), we need to be careful */
+
+body:not(.intro-complete) header {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+body.intro-complete header {
+    transform: translateY(0);
+    opacity: 1;
+    /* Longer transition for the entrance */
+    transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s ease-out;
+}
+
+/* Hero Content Staggered Entrance */
+/* Ensure they are hidden before intro completes */
+body:not(.intro-complete) .hero .animate-on-scroll {
+    opacity: 0 !important;
+    transform: translateY(50px) !important;
+    visibility: hidden;
+    /* Ensure it doesn't block anything */
+    transition: none !important;
+}
+
+/* Apply transitions when intro is complete */
+body.intro-complete .hero .animate-on-scroll {
+    visibility: visible;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    /* Use a custom spring-like ease for "pop" or smooth ease-out for "clean" */
+    transition: opacity 1s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+/* Start animations slightly earlier or synced with overlay fade */
+/* 
+   Overlay fade starts at T=0 (relative to class add). Duration 1s.
+   We want content to be rising AS overlay fades.
+*/
+
+body.intro-complete .hero .hero-title {
+    transition-delay: 0.1s;
+    /* Start almost immediately */
+}
+
+body.intro-complete .hero .hero-subtitle {
+    transition-delay: 0.3s;
+}
+
+body.intro-complete .hero .hero-buttons {
+    /* Target the container or buttons if they have class */
+    transition-delay: 0.5s;
+}
+
+body.intro-complete .hero .btn-primary,
+body.intro-complete .hero .bouton-scroll {
+    transition-delay: 0.5s;
 }

@@ -44,16 +44,38 @@ document.addEventListener("DOMContentLoaded", function () {
     let lastScrollY = window.scrollY;
     const headerHeight = header ? header.offsetHeight : 70;
 
+    // Removed scroll hiding logic to keep header fixed
     window.addEventListener('scroll', () => {
-        if (!header) return;
+        // Logic for .scrolled (transparency/height) could go here if needed,
+        // but current implementation only toggled .hidden.
+        // If we want the glassmorphism change on scroll, we need to check if that was part of it.
+        // Looking at previous file content, lines 108 in CSS handle .scrolled.
+        // But wait, the JS I read in Step 9 (lines 47-57) ONLY handles .hidden toggling based on direction used lastScrollY.
+        // Did I miss a piece of JS that toggles .scrolled?
 
-        if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
-            header.classList.add('hidden');
-        }
-        else if (window.scrollY < lastScrollY) {
-            header.classList.remove('hidden');
-        }
-        lastScrollY = window.scrollY;
+        // Let's re-read the JS file content from Step 9 carefully.
+        // Lines 47-57:
+        /*
+        window.addEventListener('scroll', () => {
+            if (!header) return;
+
+            if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
+                header.classList.add('hidden');
+            }
+            else if (window.scrollY < lastScrollY) {
+                header.classList.remove('hidden');
+            }
+            lastScrollY = window.scrollY;
+        });
+        */
+        // It seems there is NO JS for toggling `.scrolled`. 
+        // Let's check if .scrolled is used in CSS.
+        // CSS line 108: `header.scrolled { ... }`.
+        // Is it ever added?
+        // I don't see `classList.add('scrolled')` in the JS provided in Step 9.
+        // Maybe it was missing or I missed it. 
+        // Let's assume for now I just remove the hiding logic. 
+        // I will simply remove the listener.
     });
 
     const dot = document.querySelector('.cursor-dot');
@@ -258,12 +280,41 @@ document.addEventListener("DOMContentLoaded", function () {
             canvas.style.opacity = opacity;
         }
 
+        // Initialize Canvas Style for Intro
+        canvas.style.display = 'block';
+        canvas.style.zIndex = '10001'; // On top of Intro Overlay (9998)
+
+        function handleIntro() {
+            const overlay = document.getElementById('intro-overlay');
+
+            // Wait a bit for the user to see the rain on dark bg
+            setTimeout(() => {
+                document.body.classList.add('intro-complete');
+                if (overlay) {
+                    overlay.classList.add('fade-out');
+                }
+                // Move rain to background as site reveals
+                // We delay the z-index change slightly to match fade or just do it?
+                // If we do it immediately, stars go behind overlay (which is still fading out) -> disappear
+                // So we must keep stars on top until overlay is gone OR
+                // Let overlay fade out, revealing site. Stars are ON TOP.
+                // Then move stars to back?
+                // If stars are on top, they cover text (pointer events none though).
+                // Let's keep stars on top during fade, then move to back.
+                setTimeout(() => {
+                    canvas.style.zIndex = '-2';
+                }, 1000); // EQ to Transition duration
+            }, 1000); // Reduced from 2500ms to 1000ms
+        }
+
         // Event Listeners (No mouse listeners here)
         window.addEventListener('resize', resize);
         window.addEventListener('scroll', handleScrollFade);
 
         resize();
         animate();
-        handleScrollFade();
+        // handleScrollFade(); // Don't fade out initially
+
+        handleIntro();
     }
 });
