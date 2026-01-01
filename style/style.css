@@ -1278,6 +1278,10 @@ body {
         display: block;
     }
 
+    .hero-buttons {
+        flex-direction: column;
+    }
+
     #scrollbar-thumb,
     #scrollbar {
         display: none;
@@ -1341,6 +1345,10 @@ body {
 
     .skill-icon .skill-name-text {
         font-size: 0.8rem;
+        position: static;
+        opacity: 1;
+        transform: none;
+        margin-top: 5px;
     }
 }
 
