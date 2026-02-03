@@ -114,10 +114,12 @@ document.addEventListener("DOMContentLoaded", function () {
             el.addEventListener('mouseenter', () => {
                 outline.style.transform = 'translate(-50%, -50%) scale(1.6)';
                 outline.style.borderColor = '#fff';
+                dot.style.backgroundColor = '#fff';
             });
             el.addEventListener('mouseleave', () => {
                 outline.style.transform = 'translate(-50%, -50%) scale(1)';
                 outline.style.borderColor = BLUE_NEON;
+                dot.style.backgroundColor = BLUE_NEON;
             });
         });
     }
@@ -188,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* --- Animation au défilement (Scroll Animation) --- */
-    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll, .project-separator');
     const observerCallback = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
