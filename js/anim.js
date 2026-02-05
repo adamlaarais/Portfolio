@@ -44,39 +44,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let lastScrollY = window.scrollY;
     const headerHeight = header ? header.offsetHeight : 70;
 
-    // Removed scroll hiding logic to keep header fixed
+    /* Scroll effect disabled
     window.addEventListener('scroll', () => {
-        // Logic for .scrolled (transparency/height) could go here if needed,
-        // but current implementation only toggled .hidden.
-        // If we want the glassmorphism change on scroll, we need to check if that was part of it.
-        // Looking at previous file content, lines 108 in CSS handle .scrolled.
-        // But wait, the JS I read in Step 9 (lines 47-57) ONLY handles .hidden toggling based on direction used lastScrollY.
-        // Did I miss a piece of JS that toggles .scrolled?
-
-        // Let's re-read the JS file content from Step 9 carefully.
-        // Lines 47-57:
-        /*
-        window.addEventListener('scroll', () => {
-            if (!header) return;
-
-            if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
-                header.classList.add('hidden');
+        if (header) {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
-            else if (window.scrollY < lastScrollY) {
-                header.classList.remove('hidden');
-            }
-            lastScrollY = window.scrollY;
-        });
-        */
-        // It seems there is NO JS for toggling `.scrolled`. 
-        // Let's check if .scrolled is used in CSS.
-        // CSS line 108: `header.scrolled { ... }`.
-        // Is it ever added?
-        // I don't see `classList.add('scrolled')` in the JS provided in Step 9.
-        // Maybe it was missing or I missed it. 
-        // Let's assume for now I just remove the hiding logic. 
-        // I will simply remove the listener.
+        }
     });
+    */
 
     const dot = document.querySelector('.cursor-dot');
     const outline = document.querySelector('.cursor-outline');

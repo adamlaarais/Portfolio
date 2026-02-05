@@ -55,7 +55,6 @@ body::-webkit-scrollbar {
     z-index: -2;
     pointer-events: none;
     opacity: 1;
-    /* Changed from 0.5 to 1 for JS control */
 }
 
 .cursor-dot,
@@ -82,19 +81,21 @@ body::-webkit-scrollbar {
 
 #scrollbar {
     position: fixed;
-    top: 0;
-    right: 0;
-    width: 8px;
-    height: 100vh;
-    background-color: rgba(255, 255, 255, 0.1);
+    top: 50%;
+    transform: translateY(-50%);
+    right: 5px;
+    width: 3px;
+    height: 50vh;
+    background-color: transparent;
     z-index: 999;
+    border-radius: 10px;
 }
 
 #scrollbar-thumb {
     width: 100%;
     height: 0;
     background-color: var(--neon-blue);
-    border-radius: 0 0 4px 4px;
+    border-radius: 10px;
     transition: height 0.1s linear;
 }
 
@@ -105,30 +106,34 @@ header {
     padding: 0 40px;
     position: fixed;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 1000;
     height: 70px;
     height: 70px;
-    /* Clean up transition to avoid conflict with transform/opacity/intro */
     transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
         border-bottom 0.4s ease;
 
-    /* Effet Glassmorphism : arrière-plan semi-transparent avec flou */
-    background-color: var(--bg-dark);
+    background-color: rgba(17, 26, 40, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 
-    /* Bordure inférieure lumineuse fine */
-    border-bottom: 3px solid var(--neon-blue);
+    border: 2px solid var(--neon-blue);
+    border-radius: 50px;
+    top: 20px;
+    width: 90%;
+    max-width: 1200px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    box-shadow: none;
+    box-sizing: border-box;
 }
 
-/* Effet quand on scroll : le header devient plus compact ou change d'opacité */
 header.scrolled {
-    height: 60px;
-    background-color: rgba(17, 26, 40, 0.9);
-    border-bottom: 1px solid var(--neon-blue);
+    height: 70px;
+    background-color: rgba(17, 26, 40, 0.8);
+    border: 2px solid var(--neon-blue);
+    box-shadow: none;
 }
 
 header.hidden {
@@ -368,7 +373,6 @@ main {
     box-shadow: none;
     border-color: var(--neon-blue);
     animation: none;
-    /* Disable pulse on hover to allow solid fill */
 }
 
 /* .btn-contact-submit Styling matching .btn-primary */
@@ -379,24 +383,19 @@ main {
     margin-top: 30px;
     background: transparent;
     color: #ffffff;
-    /* White Text */
     border: 2px solid var(--neon-blue);
-    /* Blue Border */
-    border-radius: 5px;
+    border-radius: 64px;
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 1px;
     cursor: none;
     text-decoration: none;
-
-    /* Hover Animation Setup */
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
     z-index: 1;
     box-shadow: none;
-    /* No Neon on base */
 }
 
 .btn-contact-submit::before {
@@ -413,18 +412,15 @@ main {
 
 .btn-contact-submit:hover {
     color: #ffffff;
-    /* Text stays white */
     background-color: transparent;
     border-color: var(--neon-blue);
     box-shadow: none;
-    /* NO Neon effect as requested */
     animation: none;
     transform: none;
 }
 
 .btn-contact-submit:hover::before {
     width: 100%;
-    /* Blue Fill */
 }
 
 .bouton-scroll {
@@ -477,9 +473,7 @@ body {
     position: relative;
     overflow: hidden;
     padding-top: 70px;
-    /* Offset for fixed header */
     box-sizing: border-box;
-    /* Pour que le canvas ne déborde pas */
 }
 
 .hero-content {
@@ -632,7 +626,7 @@ body {
 .bio-box {
     padding: 30px;
     border: 2px solid var(--neon-blue);
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
 .bio-text-column p {
@@ -660,7 +654,7 @@ body {
     justify-content: center;
     padding: 20px;
     border: 2px solid var(--neon-blue);
-    border-radius: 10px;
+    border-radius: 30px;
     transition: background-color 0.3s, transform 0.3s;
     cursor: none;
     text-align: center;
@@ -721,7 +715,7 @@ body {
     gap: 30px 20px;
     align-items: center;
     border: 2px solid var(--neon-blue);
-    border-radius: 15px;
+    border-radius: 30px;
     padding: 30px;
     margin-top: 30px;
 }
@@ -964,7 +958,7 @@ body {
 .project-cta {
     display: block;
     width: fit-content;
-    border-radius: 5px;
+    border-radius: 64px;
 }
 
 .contact-container-twocol {
@@ -1041,7 +1035,6 @@ body {
     position: relative;
     margin-bottom: 30px;
     width: 100%;
-    padding-top: 15px;
 }
 
 .form-row .form-group-floating {
@@ -1052,36 +1045,42 @@ body {
 .form-group-floating textarea {
     width: 100%;
     background-color: transparent;
-    border: none;
-    padding: 10px 0 5px 0;
+    border: 2px solid var(--neon-blue);
+    /* Full border */
+    padding: 15px 20px;
+    /* Horizontal padding for pill shape */
     color: var(--text-light);
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
-    border-radius: 0;
-    border-bottom: 1px solid var(--neon-blue);
-    transition: border-bottom-color 0.3s ease, color 0.3s ease;
+    border-radius: 30px;
+    /* Rounded pill shape */
+    transition: border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     box-sizing: border-box;
     outline: none;
 }
 
 .form-group-floating textarea {
-    border: 1px solid var(--neon-blue);
-    border-radius: 5px;
-    padding: 15px;
+    /* Border and radius already set in shared rule above, just specific tweaks here if needed or empty */
+    /* border: 1px solid var(--neon-blue); Removed to avoid conflict with shared rule */
+    /* border-radius: 5px; Removed */
+    padding: 15px 20px;
     min-height: 150px;
     resize: vertical;
 }
 
 .form-group-floating label {
     position: absolute;
-    top: 15px;
-    left: 0;
+    top: 17px;
+    /* Aligned with input padding */
+    left: 20px;
+    /* Aligned with input padding */
     color: var(--text-muted);
     pointer-events: none;
     transition: all 0.2s ease-out;
     font-size: 1rem;
     padding: 0 5px;
-    background: transparent;
+    background: var(--bg-dark);
+    /* Background to hide border behind label if needed, or transparent */
 }
 
 .form-group-floating.textarea-group-floating {
@@ -1089,27 +1088,25 @@ body {
 }
 
 .form-group-floating.textarea-group-floating label {
-    top: 15px;
-    left: 10px;
-    padding: 0;
+    top: 17px;
+    /* Align with textarea padding-top (15px) */
+    left: 20px;
+    /* Match input left alignment */
+    padding: 0 5px;
 }
 
 .form-group-floating input:focus+label,
-.form-group-floating input:not(:placeholder-shown):valid+label {
-    top: -4px;
-    font-size: 0.75rem;
-    color: var(--neon-blue);
-    padding: 0 5px;
-}
-
+.form-group-floating input:not(:placeholder-shown):valid+label,
 .form-group-floating textarea:focus+label,
 .form-group-floating textarea:not(:placeholder-shown):valid+label {
     top: -10px;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--neon-blue);
-    background-color: var(--bg-dark);
-    left: 10px;
+    left: 20px;
+    /* Keep alignment */
     padding: 0 5px;
+    background-color: var(--bg-dark);
+    /* Ensure it covers the border */
 }
 
 .form-group-floating input::placeholder,
@@ -1362,12 +1359,12 @@ body {
 /* Default header has 'transition: all 0.4s' (line 96), we need to be careful */
 
 body:not(.intro-complete) header {
-    transform: translateY(-100%);
+    transform: translate(-50%, -100%);
     opacity: 0;
 }
 
 body.intro-complete header {
-    transform: translateY(0);
+    transform: translate(-50%, 0);
     opacity: 1;
     /* Longer transition for the entrance */
     transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s ease-out;
