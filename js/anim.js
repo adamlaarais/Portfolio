@@ -197,102 +197,103 @@ document.addEventListener("DOMContentLoaded", function () {
         const ctx = canvas.getContext('2d');
         let width, height;
 
-        // Configuration Vagues Néon Améliorées
-        let time = 0;
-        const waves = [
-            { amplitude: 100, frequency: 0.002, speed: 0.015, opacity: 0.08, yOffset: 0.2, blur: 20 },
-            { amplitude: 80, frequency: 0.0025, speed: 0.02, opacity: 0.12, yOffset: 0.35, blur: 18 },
-            { amplitude: 70, frequency: 0.003, speed: 0.025, opacity: 0.15, yOffset: 0.5, blur: 15 },
-            { amplitude: 60, frequency: 0.0035, speed: 0.03, opacity: 0.18, yOffset: 0.65, blur: 12 },
-            { amplitude: 50, frequency: 0.004, speed: 0.035, opacity: 0.22, yOffset: 0.8, blur: 10 }
-        ];
-
-        // Particules flottantes
-        let particles = [];
-        const numParticles = 30;
+        // Étoiles filantes
+        let shootingStars = [];
 
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            initParticles();
         }
 
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < numParticles; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 2 + 1,
-                    speedX: (Math.random() - 0.5) * 0.5,
-                    speedY: (Math.random() - 0.5) * 0.5,
-                    alpha: Math.random() * 0.3 + 0.2
-                });
+        function createShootingStar() {
+            const x = Math.random() * width;
+            const y = -20; // Part d'en haut de l'écran
+            const length = Math.random() * 120 + 100; // Grandes lignes
+            const speed = Math.random() * 5 + 4;
+            const angle = Math.PI / 2; // Exactement vertical (90°)
+            
+            shootingStars.push({
+                x: x,
+                y: y,
+                length: length,
+                speed: speed,
+                angle: angle,
+                alpha: 1,
+                fadeSpeed: 0.012
+            });
+        }
+
+        function drawShootingStars() {
+            shootingStars.forEach((star, index) => {
+                ctx.save();
+                
+                // Gradient pour la traînée
+                const gradient = ctx.createLinearGradient(
+                    star.x,
+                    star.y,
+                    star.x - Math.cos(star.angle) * star.length,
+                    star.y - Math.sin(star.angle) * star.length
+                );
+                gradient.addColorStop(0, `rgba(255, 255, 255, ${star.alpha})`);
+                gradient.addColorStop(0.5, `rgba(18, 199, 236, ${star.alpha * 0.6})`);
+                gradient.addColorStop(1, 'rgba(18, 199, 236, 0)');
+                
+                ctx.beginPath();
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 2;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = BLUE_NEON;
+                ctx.moveTo(star.x, star.y);
+                ctx.lineTo(
+                    star.x - Math.cos(star.angle) * star.length,
+                    star.y - Math.sin(star.angle) * star.length
+                );
+                ctx.stroke();
+                
+                // Point lumineux à la tête
+                ctx.beginPath();
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = '#fff';
+                ctx.arc(star.x, star.y, 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            });
+        }
+
+        function updateShootingStars() {
+            // Mise à jour des étoiles existantes
+            shootingStars.forEach((star, index) => {
+                star.x += Math.cos(star.angle) * star.speed;
+                star.y += Math.sin(star.angle) * star.speed;
+                star.alpha -= star.fadeSpeed;
+                
+                // Supprimer si hors écran ou invisible
+                if (star.alpha <= 0 || star.x > width || star.y > height) {
+                    shootingStars.splice(index, 1);
+                }
+            });
+            
+            // Créer de nouvelles étoiles aléatoirement
+            if (Math.random() < 0.035) { // 3.5% de chance chaque frame
+                createShootingStar();
             }
         }
 
-        function drawWaves() {
+        function draw() {
             ctx.clearRect(0, 0, width, height);
-
-            waves.forEach((wave, index) => {
-                // Vague principale
-                ctx.beginPath();
-                ctx.strokeStyle = BLUE_NEON;
-                ctx.lineWidth = 2.5;
-                ctx.globalAlpha = wave.opacity;
-                ctx.shadowBlur = wave.blur;
-                ctx.shadowColor = BLUE_NEON;
-
-                for (let x = 0; x <= width; x += 3) {
-                    const y = wave.yOffset * height + 
-                             Math.sin(x * wave.frequency + time * wave.speed) * wave.amplitude +
-                             Math.sin(x * wave.frequency * 2 + time * wave.speed * 1.5) * (wave.amplitude * 0.3);
-                    
-                    if (x === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
-                    }
-                }
-
-                ctx.stroke();
-                ctx.shadowBlur = 0;
-            });
-
-            // Particules
-            ctx.shadowBlur = 8;
-            ctx.shadowColor = BLUE_NEON;
-            particles.forEach(particle => {
-                ctx.beginPath();
-                ctx.globalAlpha = particle.alpha;
-                ctx.fillStyle = BLUE_NEON;
-                ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            ctx.shadowBlur = 0;
-
             ctx.globalAlpha = 1;
+            drawShootingStars();
         }
 
-        function updateWaves() {
-            time += 1;
-            
-            // Mise à jour des particules
-            particles.forEach(particle => {
-                particle.x += particle.speedX;
-                particle.y += particle.speedY;
-
-                // Wrap around
-                if (particle.x < 0) particle.x = width;
-                if (particle.x > width) particle.x = 0;
-                if (particle.y < 0) particle.y = height;
-                if (particle.y > height) particle.y = 0;
-            });
+        function update() {
+            updateShootingStars();
         }
 
         function animate() {
-            drawWaves();
-            updateWaves();
+            draw();
+            update();
             requestAnimationFrame(animate);
         }
 
