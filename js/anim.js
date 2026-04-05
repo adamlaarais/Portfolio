@@ -169,19 +169,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* --- Animation au défilement (Scroll Animation) --- */
     const elementsToAnimate = document.querySelectorAll('.animate-on-scroll, .project-separator');
-    const observerCallback = (entries, observer) => {
+    const observerCallback = (entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
+            entry.target.classList.toggle('visible', entry.isIntersecting);
         });
     };
 
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.1
+        threshold: 0.12
     };
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
