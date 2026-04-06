@@ -1993,3 +1993,58 @@ body.intro-complete .hero .hero-title {
         border-color: var(--neon-blue);
     }
 }
+
+/* --- ADAPTATION POUR GRANDS ÉCRANS --- */
+@media (min-width: 1400px) {
+    main,
+    header,
+    .apropos-grid-container,
+    .project-card {
+        max-width: 1400px;
+    }
+    .skills-container-rework {
+        max-width: 1100px;
+    }
+    .contact-container-twocol {
+        max-width: 1300px;
+    }
+}
+
+@media (min-width: 1800px) {
+    main,
+    header,
+    .apropos-grid-container,
+    .project-card {
+        max-width: 1800px;
+    }
+    .skills-container-rework {
+        max-width: 1500px;
+    }
+    .contact-container-twocol {
+        max-width: 1600px;
+    }
+    html {
+        font-size: 110%;
+    }
+    .project-slider-container {
+        max-width: 60%;
+    }
+}
+
+@media (min-width: 2400px) {
+    main,
+    header,
+    .apropos-grid-container,
+    .project-card {
+        max-width: 2200px;
+    }
+    .skills-container-rework {
+        max-width: 1800px;
+    }
+    .contact-container-twocol {
+        max-width: 2000px;
+    }
+    html {
+        font-size: 130%;
+    }
+}
