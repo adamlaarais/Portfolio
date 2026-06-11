@@ -153,9 +153,8 @@
     fill: none;
     stroke: var(--text);
     stroke-width: 1.5;
-    vector-effect: non-scaling-stroke;
-    stroke-dasharray: 1.05 2;             /* gap is larger than path length to prevent bleed */
-    stroke-dashoffset: 1.05;              /* hidden at rest (no visible border) */
+    stroke-dasharray: 1.2 2;              /* gap is larger than path length to prevent bleed */
+    stroke-dashoffset: 1.2;               /* hidden at rest (no visible border) */
     transition: stroke-dashoffset 0.55s var(--ease-out);
   }
   .btn:hover .btn__outline rect,

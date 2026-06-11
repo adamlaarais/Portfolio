@@ -30,7 +30,7 @@ export const PROJECTS = [
     link: '',
   },
   {
-    title: 'Eze Nettoyage',
+    title: 'Eze',
     image: 'assets/images/projets/Eze_Nettoyage.png',
     description: "Conception et développement du site vitrine d'une entreprise spécialisée dans les prestations de nettoyage extérieur.",
     tags: ['HTML', 'CSS', 'JS'],

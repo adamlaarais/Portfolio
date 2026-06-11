@@ -106,7 +106,6 @@
     letter-spacing: -0.045em;
     text-transform: uppercase;
     color: var(--text);
-    opacity: 0.80;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
