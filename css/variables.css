@@ -1,0 +1,97 @@
+/* ============================================================
+   variables.css — design tokens + thèmes (dark défaut / light)
+   Loaded first: declares the @layer cascade order for the whole site.
+   ============================================================ */
+@layer reset, tokens, base, components, sections, responsive;
+
+@layer tokens {
+  :root {
+    /* ---- Couleurs — DARK (défaut) ---- */
+    --bg              : #0a0a0a;
+    --bg-elev         : #111111;
+    --surface-glass   : rgba(255, 255, 255, 0.07);
+    --surface-glass-2 : rgba(255, 255, 255, 0.12);
+    --border          : rgba(255, 255, 255, 0.13);
+    --border-strong   : rgba(255, 255, 255, 0.26);
+    --glass-highlight : rgba(255, 255, 255, 0.14);
+    --glass-shadow    : rgba(0, 0, 0, 0.22);
+    --text            : #f4f4f4;
+    --text-muted      : #9a9a9a;
+    --text-faint      : #6a6a6a;
+    --ghost-title     : rgba(255, 255, 255, 0.10);
+    --ghost-shadow    : rgba(0, 0, 0, 0.55);
+    --cursor          : #f4f4f4;
+    --logo-invert     : 1;            /* LOGO_NOIR inversé → blanc en dark */
+    --scrim           : rgba(10, 10, 10, 0.55);
+    --bracket-color   : #ffffff;
+
+    /* ---- Typographie ---- */
+    --font            : 'Sora', system-ui, -apple-system, Segoe UI, sans-serif;
+    --fs-ghost        : clamp(4rem, 14vw, 13rem);
+    --fs-hero         : clamp(3rem, 12.5vw, 12rem);
+    --fs-h2           : clamp(1.6rem, 3vw, 2.6rem);
+    --fs-lead         : clamp(1.05rem, 1.6vw, 1.35rem);
+    --fs-body         : clamp(0.95rem, 1.1vw, 1.05rem);
+    --fs-label        : 0.72rem;
+    --lh-tight        : 1.05;
+    --lh-body         : 1.6;
+    --tracking-label  : 0.18em;
+
+    /* ---- Radius ---- */
+    --radius-card     : 22px;
+    --radius-pill     : 999px;
+    --radius-sm       : 12px;
+
+    /* ---- Spacing scale ---- */
+    --space-1         : 4px;
+    --space-2         : 8px;
+    --space-3         : 16px;
+    --space-4         : 24px;
+    --space-5         : 40px;
+    --space-6         : 64px;
+    --space-7         : 96px;
+    --space-8         : 160px;
+    --section-gap     : clamp(8rem, 14vh, 14rem);
+    --gutter          : clamp(1.25rem, 5vw, 5rem);
+    --maxw            : 1320px;
+
+    /* ---- Motion ---- */
+    --ease-out        : cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-inout      : cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-micro       : 0.2s;
+    --dur-ui          : 0.4s;
+    --dur-reveal      : 0.9s;
+    --dur-page        : 1.2s;
+
+    /* ---- Layers (z-index) ---- */
+    --z-cursor        : 9999;
+    --z-loader        : 9000;
+    --z-header        : 900;
+    --z-overlay       : 850;
+
+    color-scheme: dark;
+  }
+
+  /* ---- LIGHT ---- */
+  [data-theme="light"] {
+    --bg              : #f3f3f1;
+    --bg-elev         : #ffffff;
+    --surface-glass   : rgba(255, 255, 255, 0.52);
+    --surface-glass-2 : rgba(255, 255, 255, 0.72);
+    --border          : rgba(0, 0, 0, 0.10);
+    --border-strong   : rgba(0, 0, 0, 0.22);
+    --glass-highlight : rgba(255, 255, 255, 0.80);
+    --glass-shadow    : rgba(0, 0, 0, 0.08);
+    --text            : #0a0a0a;
+    --text-muted      : #5a5a5a;
+    --text-faint      : #8a8a8a;
+    --ghost-title     : rgba(0, 0, 0, 0.05);
+    --ghost-shadow    : rgba(0, 0, 0, 0.12);
+    --cursor          : #0a0a0a;
+    --logo-invert     : 0;            /* LOGO_NOIR tel quel → noir en light */
+    --scrim           : rgba(243, 243, 241, 0.55);
+    --bracket-color   : #0a0a0a;
+
+    color-scheme: light;
+  }
+}
