@@ -61,7 +61,7 @@ export function renderProjects() {
       ? `<ul class="project-card__tags">${p.tags.map((t) => `<li class="project-card__tag">${esc(t)}</li>`).join('')}</ul>`
       : '';
     const link = p.link
-      ? `<a class="project-card__link" href="${esc(p.link)}" target="_blank" rel="noopener" data-cursor>Voir le projet <i class="ico" style="--ico:url(/assets/icons/arrow-up-right.svg)" aria-hidden="true"></i></a>`
+      ? `<a class="project-card__link" href="${esc(p.link)}" target="_blank" rel="noopener" data-cursor>Voir le projet <i class="ico" style="--ico:url(../assets/icons/arrow-up-right.svg)" aria-hidden="true"></i></a>`
       : '';
     return `
       <article class="project-card" data-project data-cursor>
