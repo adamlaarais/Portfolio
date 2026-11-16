@@ -10,6 +10,7 @@ import { initForm } from './form.js';
 import { initNav } from './nav.js';
 import { initCursor, initMagnetic, initDrawOutline } from './cursor.js';
 import { initScrollbar } from './scrollbar.js';
+import { initAnalytics } from '../assets/analytics/analytics.js';
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 window.__pfReduced = prefersReduced;
@@ -22,6 +23,7 @@ initTheme();
 
 /* 2 — Render project cards from editable data */
 renderProjects();
+initAnalytics();
 
 /* 3 — Smooth scroll (no-op under reduced-motion) */
 const lenis = initLenis();

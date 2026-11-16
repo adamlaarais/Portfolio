@@ -2,6 +2,8 @@
    with idle/sending/success/error states, and a graceful mailto fallback when
    the PHP endpoint isn't live (dev) or mail isn't configured yet. */
 
+import { track } from '../assets/analytics/analytics.js';
+
 const EMAIL = 'laaraisadam22@gmail.com';
 const RE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -13,6 +15,12 @@ export function initForm() {
   const submitBtn = form.querySelector('[data-submit]');
   const label = submitBtn?.querySelector('.btn__label');
   const fields = Array.from(form.querySelectorAll('input[required], textarea[required]'));
+  let started = false;
+  const trackStart = () => {
+    // Do not send field values, names, email addresses or message contents.
+    if (!started && track('contact_form_started')) started = true;
+  };
+  fields.forEach((field) => field.addEventListener('input', trackStart));
 
   const setStatus = (state, msg) => {
     if (statusEl) {
@@ -51,25 +59,31 @@ export function initForm() {
 
     // Honeypot: a filled "website" field means a bot — silently ignore.
     if (form.querySelector('input[name="website"]')?.value) return;
+    trackStart();
 
     const valid = fields.map(validate).every(Boolean);
     if (!valid) {
+      track('contact_validation_failed', { invalid_field_count: fields.filter((f) => f.closest('.field')?.classList.contains('is-invalid')).length });
       setStatus('error', 'Merci de vérifier les champs en surbrillance.');
       form.querySelector('.field.is-invalid input, .field.is-invalid textarea')?.focus();
       return;
     }
 
     setStatus('sending', 'Envoi en cours…');
+    track('contact_submit_attempted');
+    let httpStatus = 0;
     try {
       const res = await fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
         headers: { Accept: 'application/json' },
       });
+      httpStatus = res.status;
       let json = null;
       try { json = await res.json(); } catch (_) { /* non-JSON → fallback */ }
 
       if (res.ok && json && json.ok) {
+        track('contact_submit_succeeded');
         setStatus('success', 'Merci ! Votre message a bien été envoyé.');
         form.reset();
         setTimeout(() => setStatus('idle', ''), 4500);
@@ -77,6 +91,8 @@ export function initForm() {
         throw new Error('endpoint-unavailable');
       }
     } catch (_) {
+      track('contact_submit_failed', { http_status: httpStatus, reason: httpStatus ? 'endpoint_unavailable' : 'network_error' });
+      track('contact_mailto_open_requested');
       // Endpoint not live / mail not configured → graceful mailto fallback.
       setStatus('success', 'Ouverture de votre messagerie…');
       mailtoFallback();

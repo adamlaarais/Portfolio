@@ -64,7 +64,7 @@ export function renderProjects() {
       ? `<a class="project-card__link" href="${esc(p.link)}" target="_blank" rel="noopener" data-cursor>Voir le projet <i class="ico" style="--ico:url(../assets/icons/arrow-up-right.svg)" aria-hidden="true"></i></a>`
       : '';
     return `
-      <article class="project-card" data-project data-cursor>
+      <article class="project-card" data-project data-project-name="${esc(p.title)}" data-cursor>
         <div class="project-card__body">
           <span class="project-card__index">${n} / ${total}</span>
           <h3 class="project-card__title">${esc(p.title)}</h3>
