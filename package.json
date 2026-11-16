@@ -1,0 +1,29 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio d’Adam Laarais — intégration PostHog pour GitHub Pages",
+  "private": true,
+  "scripts": {
+    "build:analytics": "node --env-file=.env scripts/build-analytics.mjs",
+    "test": "node --test tests/analytics.test.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamlaarais/Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/adamlaarais/Portfolio/issues"
+  },
+  "homepage": "https://github.com/adamlaarais/Portfolio#readme",
+  "dependencies": {
+    "posthog-js": "^1.450.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "happy-dom": "^21.0.4"
+  }
+}
