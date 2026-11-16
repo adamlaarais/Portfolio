@@ -7,13 +7,13 @@ import { Window } from 'happy-dom';
 
 const result = await build({
   stdin: {
-    contents: "export { initAnalytics, track } from './js/analytics.js'; export { initForm } from './js/form.js';",
+    contents: "export { initAnalytics, track, isDemoActive, reportDemoError } from './js/analytics.js'; export { initForm } from './js/form.js';",
     resolveDir: process.cwd(),
   },
   bundle: true, write: false, format: 'iife', globalName: 'PortfolioTest',
   define: { 'process.env.POSTHOG_PROJECT_TOKEN': '"phc_test"', 'process.env.POSTHOG_HOST': '"https://example.com"' },
   plugins: [{ name: 'isolated-sdk', setup(builder) {
-    builder.onResolve({ filter: /assets\/analytics\/analytics\.js$/ }, () => ({ path: resolve('js/analytics.js') }));
+    builder.onResolve({ filter: /assets\/analytics\/analytics\.js(?:\?.*)?$/ }, () => ({ path: resolve('js/analytics.js') }));
     builder.onResolve({ filter: /^posthog-js$/ }, () => ({ path: 'sdk', namespace: 'mock' }));
     builder.onLoad({ filter: /.*/, namespace: 'mock' }, () => ({ contents: 'export default globalThis.__phMock;' }));
   } }],
@@ -28,6 +28,7 @@ function setup(demo = true) {
   window.document.write(html);
   const calls = [];
   let options;
+  const flags = { 'portfolio-demo-cv-label': 'test', 'portfolio-demo-contact-cta': true };
   const sdk = {
     init(token, config) { calls.push(['init', token]); options = config; config.loaded(sdk); },
     capture(event, props) { calls.push([event, props]); },
@@ -35,6 +36,13 @@ function setup(demo = true) {
     opt_out_capturing() { calls.push(['opt_out']); },
     startSessionRecording() { calls.push(['record']); },
     stopSessionRecording() { calls.push(['stop']); },
+    register(props) { calls.push(['register', props]); },
+    getFeatureFlag(key) { return flags[key]; },
+    isFeatureEnabled(key) { return flags[key]; },
+    onFeatureFlags(callback) { sdk.flagsCallback = callback; callback(); },
+    reloadFeatureFlags() { sdk.flagsCallback(); },
+    get_session_replay_url() { return 'https://eu.posthog.com/project/352470/replay/test-session'; },
+    captureException(error, props) { calls.push(['exception', { name: error.name, message: error.message, ...props }]); },
   };
   window.__phMock = sdk;
   const observers = [];
@@ -46,7 +54,7 @@ function setup(demo = true) {
   window.eval(result.outputFiles[0].text);
   const api = window.PortfolioTest;
   const click = (selector) => window.document.querySelector(selector).click();
-  return { window, calls, api, click, observers, get options() { return options; } };
+  return { window, calls, api, click, observers, flags, get options() { return options; } };
 }
 
 test('Normal visits do not initialize the SDK, including with a legacy accepted choice', async () => {
@@ -59,6 +67,8 @@ test('Normal visits do not initialize the SDK, including with a legacy accepted 
     assert.equal(s.calls.length, 0);
     assert.equal(s.window.document.querySelector('[data-analytics-consent]'), null);
     assert.equal(s.window.document.querySelector('[data-analytics-stop]').hidden, true);
+    assert.equal(s.window.document.querySelector('.demo-controls'), null);
+    assert.equal(s.api.reportDemoError('intentional'), false);
   } finally { await s.window.happyDOM.close(); }
 });
 
@@ -110,7 +120,7 @@ test('Invalid form never sends a request or reports success', async () => {
 });
 
 for (const success of [false, true]) {
-  test(success ? 'Confirmed service response reports success' : 'Failed endpoint reports failure and mailto request, never success', async () => {
+  test(success ? 'Confirmed service response reports success' : 'Failed demo endpoint reports a safe exception without mailto or false success', async () => {
     const s = setup();
     try {
       s.api.initAnalytics(); await tick(); s.api.initForm();
@@ -125,9 +135,49 @@ for (const success of [false, true]) {
       assert.ok(names.includes('contact_submit_attempted'));
       assert.equal(names.includes('contact_submit_succeeded'), success);
       assert.equal(names.includes('contact_submit_failed'), !success);
-      assert.equal(names.includes('contact_mailto_open_requested'), !success);
+      assert.equal(names.includes('contact_mailto_open_requested'), false);
+      assert.equal(names.includes('exception'), !success);
+      if (!success) assert.match(doc.querySelector('[data-form-status]').textContent, /HTTP 405.*Aucun e-mail envoyé/);
       assert.ok(!JSON.stringify(s.calls).includes('demo@example.com'));
       assert.ok(!JSON.stringify(s.calls).includes('Message fictif'));
     } finally { await s.window.happyDOM.close(); }
   });
 }
+
+test('Live flag evaluation changes the CV and contact CTA, without forcing A/B assignment', async () => {
+  const s = setup();
+  try {
+    s.api.initAnalytics(); await tick();
+    const doc = s.window.document;
+    const label = doc.querySelector('a[href$="CV-Adam-Laarais.pdf"] > span');
+    assert.equal(label.textContent, 'Découvrir mon profil');
+    assert.equal(doc.querySelector('[data-demo-cta]').hidden, false);
+    s.flags['portfolio-demo-cv-label'] = 'control';
+    s.flags['portfolio-demo-contact-cta'] = false;
+    s.click('[data-demo-refresh]');
+    assert.equal(label.textContent, 'Mon CV');
+    assert.equal(doc.querySelector('[data-demo-cta]').hidden, true);
+    s.click('[data-demo-error]');
+    const error = s.calls.find(([name]) => name === 'exception')[1];
+    assert.equal(error.name, 'PortfolioDemoError');
+    assert.equal(error.is_intentional, true);
+    assert.equal(s.api.reportDemoError('private form message'), false);
+    s.click('[data-demo-stop]');
+    assert.equal(doc.querySelector('.demo-controls'), null);
+    assert.equal(s.api.reportDemoError('intentional'), false);
+  } finally { await s.window.happyDOM.close(); }
+});
+
+test('Preparing the demo form fills only fictitious fields and sends no request', async () => {
+  const s = setup();
+  try {
+    s.api.initAnalytics(); await tick(); s.api.initForm();
+    let requests = 0;
+    s.window.fetch = async () => { requests++; throw Error('unexpected request'); };
+    s.click('[data-demo-form]');
+    assert.equal(requests, 0);
+    assert.equal(s.window.document.querySelector('[name="email"]').value, 'demo@example.com');
+    assert.ok(!JSON.stringify(s.calls).includes('demo@example.com'));
+    assert.ok(!s.calls.some(([name]) => name === 'contact_submit_attempted'));
+  } finally { await s.window.happyDOM.close(); }
+});
