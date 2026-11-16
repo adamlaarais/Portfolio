@@ -1,8 +1,17 @@
 # PostHog sur le portfolio
 
-Le site reste statique et compatible GitHub Pages. Le SDK est chargé uniquement
-après acceptation de la mesure d’audience et du replay. Le choix peut être
-modifié via « Confidentialité » dans le pied de page et expire après 180 jours.
+Le site reste statique et compatible GitHub Pages. Le bandeau est retiré et le
+SDK reste entièrement désactivé pour les visites ordinaires. Pour enregistrer
+votre propre parcours pendant la présentation, ouvrir :
+
+https://adamlaarais.github.io/Portfolio/?posthog_demo=1
+
+Le mode démo est limité à cet onglet, utilise un stockage en mémoire et ne se
+transmet pas aux visites normales. Le bouton « Arrêter la démo PostHog » du
+pied de page arrête l’enregistrement et retire le paramètre de l’URL.
+Les événements de démonstration portent la propriété `demo_mode: true`.
+Ce lien est prévu pour le présentateur qui choisit d’enregistrer sa propre
+navigation, pas pour activer silencieusement le suivi des autres visiteurs.
 
 ## Configuration et génération
 
@@ -21,9 +30,9 @@ Le dépôt conserve les bundles générés pour son déploiement statique exista
 
 | Événement | Signification |
 | --- | --- |
-| `$pageview` | Visite après acceptation |
+| `$pageview` | Visite en mode démo |
 | `cv_clicked` | Clic sur le CV, sans preuve de lecture |
-| `section_viewed` | Section visible, une fois par chargement avec accord |
+| `section_viewed` | Section visible, une fois par chargement en mode démo |
 | `project_viewed` | Carte d’un projet visible ; propriété `project_name` |
 | `project_link_clicked` | Clic sur un lien de projet, si un lien est renseigné |
 | `contact_link_clicked` | Clic email, LinkedIn ou GitHub ; propriété `channel` |
@@ -45,10 +54,10 @@ sont mesurées, les clics sur des liens ne le seront qu’après ajout de ces li
 
 ## Vérification et démo
 
-`npm test` vérifie le refus, l’acceptation, le retrait du consentement,
+`npm test` vérifie l’absence de suivi en visite normale, l’activation et l’arrêt de la démo,
 le masquage, les données envoyées et les issues du formulaire, avec un SDK isolé.
 
-Sur le site publié, accepter la mesure, cliquer sur « Mon CV », parcourir les
+Sur le lien de démo publié, cliquer sur « Mon CV », parcourir les
 projets et tester le formulaire avec des données fictives. Les actions doivent
 apparaître dans Activity, puis la session dans Session Replay après traitement.
 

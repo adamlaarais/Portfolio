@@ -230,6 +230,7 @@ Breakpoints : `≤480`, `≤768`, `≤1024`, `≥1440`.
 ---
 
 ## 12. Journal
+- **2026-11-16** — Présentation en cours : suppression du bandeau. PostHog est réservé au mode explicite `?posthog_demo=1` du présentateur, sans SDK ni suivi sur les visites ordinaires ; stockage en mémoire, bouton d’arrêt dans le footer et propriété `demo_mode` sur les événements de démonstration.
 - **2026-11-16** — Intégration PostHog : SDK chargé après consentement, événements CV/projets/contact et résultats du formulaire, replay avec champs masqués et sans corps de requêtes. Sources dans `js/analytics.js`, bundles ESM générés dans `assets/analytics/`, configuration issue de `.env` ignoré par Git. Voir `POSTHOG.md` pour le suivi et la démo. L’envoi PHP reste à corriger séparément.
 - **2026-06-11** — Correctif bouton : suppression de `vector-effect: non-scaling-stroke` sur `.btn__outline rect` et augmentation de la longueur du dash à `1.2` (avec gap `2` et offset `1.2`) pour corriger le bug où le contour animé ne se dessinait pas complètement au survol (hover) sur certains navigateurs. Ajout de `pathLength="1"` dans le HTML en guise de fallback.
 - **2026-06-11** — Exploration terminée. Repo Portfolio = slate quasi vierge (index.html vide, 5 captures projets + 2 logos + CV). Structure `assets/`/`css/`/`js/`/`php/` créée, captures déplacées, CV copié. Sora 300–800 woff2 self-host téléchargés. context.md rédigé. → étape 2.
