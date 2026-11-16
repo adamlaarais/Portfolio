@@ -28,9 +28,11 @@
         d.setAttribute('data-theme', t);
       } catch (e) { d.setAttribute('data-theme', 'dark'); }
       d.classList.add('js');
+      var demo = new URL(location.href).searchParams.get('posthog_demo') === '1';
+      if (demo) d.classList.add('posthog-demo');
       // Show the loader on first visit of the session (skip if reduced-motion).
       try {
-        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var reduced = demo || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var seen = false; try { seen = !!sessionStorage.getItem('pf-loaded'); } catch (e) {}
         if (!reduced && !seen) d.classList.add('loading');
       } catch (e) {}
@@ -50,7 +52,7 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/sections.css" />
   <link rel="stylesheet" href="css/responsive.css" />
-  <link rel="stylesheet" href="css/analytics.css" />
+  <link rel="stylesheet" href="css/analytics.css?v=20261116-demo2" />
 </head>
 
 <body>
@@ -355,7 +357,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
   <script defer src="js/background.js"></script>
-  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/main.js?v=20261116-demo2"></script>
 </body>
 
 </html>
