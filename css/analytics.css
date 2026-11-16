@@ -1,48 +1,9 @@
 @layer components {
-  .analytics-demo-stop[hidden] { display: none; }
-  .analytics-demo-stop {
-    background: transparent;
-    color: var(--text-muted);
-    border: 0;
-    font: inherit;
-    font-size: .75rem;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    padding: 12px 0;
-  }
-  .demo-controls {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    width: min(390px, calc(100vw - 40px));
-    z-index: 10020;
-    border: 1px solid var(--border-strong);
-    border-radius: 16px;
-    background: var(--bg-elev);
-    color: var(--text);
-    font-size: 12px;
-    line-height: 1.5;
-  }
-  .demo-controls:not([open]) { width: auto; }
-  .demo-controls summary { padding: 13px 18px; cursor: pointer; font-weight: 600; }
-  .demo-controls[open] summary { border-bottom: 1px solid var(--border); }
-  .demo-controls__body { padding: 18px; max-height: 72vh; overflow-y: auto; overscroll-behavior: contain; }
-  .demo-controls h2 { font-size: 20px; line-height: 1.3; letter-spacing: -.03em; margin: 4px 0 10px; }
-  .demo-controls__eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: 9px; color: var(--text-muted); }
-  .demo-controls__intro, .demo-controls small { color: var(--text-muted); }
-  .demo-controls small { display: block; font-size: 10px; margin-top: 8px; }
-  .demo-controls__status { padding: 10px; margin: 12px 0; background: var(--surface-glass-2); border-radius: 8px; font-size: 11px; }
-  .demo-controls__links, .demo-controls__actions { display: flex; gap: 7px; flex-wrap: wrap; }
-  .demo-controls a, .demo-controls button {
-    color: inherit; font: inherit; cursor: pointer; text-decoration: none;
-    background: transparent; border: 1px solid var(--border-strong); border-radius: 7px; padding: 7px 9px;
-  }
-  .demo-controls a:hover, .demo-controls button:hover { background: var(--surface-glass-2); }
-  .demo-controls a:focus-visible, .demo-controls button:focus-visible, .demo-controls summary:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
-  .demo-controls__step { padding: 14px 0; border-bottom: 1px solid var(--border); }
-  .demo-controls__step b { display: block; font-weight: 600; margin-bottom: 8px; }
-  .demo-controls__step p { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
-  .demo-controls__footer { padding-top: 14px; }
+  /* Keep presentation controls out of the public portfolio, including when
+     an older cached analytics bundle still creates them. */
+  .demo-controls,
+  .analytics-demo-stop { display: none !important; }
+
   .demo-cta { margin-top: 16px; }
   .demo-cta[hidden] { display: none; }
   .posthog-demo .loader { display: none; }
