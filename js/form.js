@@ -2,7 +2,7 @@
    with idle/sending/success/error states, and a graceful mailto fallback when
    the PHP endpoint isn't live (dev) or mail isn't configured yet. */
 
-import { track } from '../assets/analytics/analytics.js';
+import { track, isDemoActive, reportDemoError } from '../assets/analytics/analytics.js?v=20261116-demo2';
 
 const EMAIL = 'laaraisadam22@gmail.com';
 const RE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -92,9 +92,14 @@ export function initForm() {
       }
     } catch (_) {
       track('contact_submit_failed', { http_status: httpStatus, reason: httpStatus ? 'endpoint_unavailable' : 'network_error' });
+      if (isDemoActive()) {
+        reportDemoError('contact_form', httpStatus);
+        setStatus('error', `Échec du service de contact${httpStatus ? ` (HTTP ${httpStatus})` : ''}. GitHub Pages ne peut pas exécuter PHP. Aucun e-mail envoyé.`);
+        return;
+      }
       track('contact_mailto_open_requested');
       // Endpoint not live / mail not configured → graceful mailto fallback.
-      setStatus('success', 'Ouverture de votre messagerie…');
+      setStatus('idle', 'Le service de contact est indisponible. Ouverture de votre messagerie pour envoyer le message vous-même…');
       mailtoFallback();
       setTimeout(() => setStatus('idle', `Si rien ne s'ouvre, écrivez-moi à ${EMAIL}`), 1800);
     }

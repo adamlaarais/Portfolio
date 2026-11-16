@@ -2,6 +2,9 @@
    This source reads build-time environment variables; GitHub Pages serves
    the generated ESM bundle in assets/analytics/. */
 const DEMO_PARAM = 'posthog_demo';
+const CV_FLAG = 'portfolio-demo-cv-label';
+const CTA_FLAG = 'portfolio-demo-contact-cta';
+const PH_APP = 'https://eu.posthog.com/project/352470';
 const EVENT_PROPERTIES = {
   cv_clicked: [],
   section_viewed: ['section'],
@@ -15,6 +18,8 @@ const EVENT_PROPERTIES = {
   contact_submit_failed: ['http_status', 'reason'],
   contact_submit_succeeded: [],
   contact_mailto_open_requested: [],
+  demo_error_requested: [],
+  feature_cta_clicked: [],
 };
 let demoActive = false;
 let sdk = null;
@@ -23,6 +28,111 @@ let queue = [];
 let observer = null;
 let initialized = false;
 const seen = new Set();
+
+export function isDemoActive() { return demoActive; }
+
+// Fixed messages only: never forward form values or arbitrary exception text.
+export function reportDemoError(source, httpStatus = 0) {
+  if (!demoActive || !sdk || !['intentional', 'contact_form'].includes(source)) return false;
+  const error = new Error(source === 'intentional'
+    ? 'PortfolioDemoError: erreur volontaire pour la présentation'
+    : 'PortfolioContactError: service de contact indisponible');
+  error.name = source === 'intentional' ? 'PortfolioDemoError' : 'PortfolioContactError';
+  sdk.captureException(error, { demo_mode: true, source, http_status: Number(httpStatus) || 0,
+    is_intentional: source === 'intentional' });
+  return true;
+}
+
+function setDemoStatus(message) {
+  const el = document.querySelector('[data-demo-status]');
+  if (el) el.textContent = message;
+}
+
+function applyFlags() {
+  if (!demoActive || !sdk) return;
+  const variant = sdk.getFeatureFlag(CV_FLAG);
+  const label = document.querySelector('a[href$="CV-Adam-Laarais.pdf"] > span');
+  if (label) label.textContent = variant === 'test' ? 'Découvrir mon profil' : 'Mon CV';
+  const variantStatus = document.querySelector('[data-demo-variant]');
+  if (variantStatus) variantStatus.textContent = variant === 'control' || variant === 'test'
+    ? `${variant === 'control' ? 'A · Mon CV' : 'B · Découvrir mon profil'} (tirage 50/50)`
+    : 'Variante indisponible · libellé par défaut';
+  const enabled = sdk.isFeatureEnabled(CTA_FLAG) === true;
+  const cta = document.querySelector('[data-demo-cta]');
+  if (cta) cta.hidden = !enabled;
+  const flagStatus = document.querySelector('[data-demo-flag]');
+  if (flagStatus) flagStatus.textContent = enabled ? 'Bouton contact : activé' : 'Bouton contact : désactivé';
+}
+
+function mountDemoControls() {
+  const controls = document.createElement('details');
+  controls.className = 'demo-controls';
+  controls.innerHTML = `
+    <summary>Démo PostHog</summary>
+    <div class="demo-controls__body">
+      <p class="demo-controls__eyebrow">Présentation · 10 minutes</p>
+      <h2>Du parcours à l’analyse</h2>
+      <p class="demo-controls__intro">Navigation enregistrée, champs masqués. Projets sans animations pour un replay plus lisible.</p>
+      <p class="demo-controls__status" role="status" data-demo-status>Connexion à PostHog…</p>
+      <div class="demo-controls__links">
+        <a href="${PH_APP}/dashboard/1120085" target="_blank" rel="noopener">Tableau de bord ↗</a>
+        <a href="${PH_APP}/replay" target="_blank" rel="noopener" data-demo-replay>Replays ↗</a>
+      </div>
+      <div class="demo-controls__step"><b>01 · Parcours et conversion</b>
+        <div class="demo-controls__actions"><a href="#about">Voir le CV</a><a href="#projets">Voir les projets</a>
+        <button type="button" data-demo-form>Préparer le formulaire</button></div>
+        <small>Puis cliquer sur Envoyer : le vrai service PHP échoue sur GitHub Pages. Aucun e-mail n’est envoyé.</small>
+      </div>
+      <div class="demo-controls__step"><b>02 · Test A/B et fonctionnalité</b>
+        <p data-demo-variant>Chargement du test A/B…</p><p data-demo-flag>Chargement du bouton contact…</p>
+        <div class="demo-controls__actions"><a href="${PH_APP}/experiments/113651" target="_blank" rel="noopener">Test A/B ↗</a>
+        <a href="${PH_APP}/feature-flags/364080" target="_blank" rel="noopener">Feature flag ↗</a>
+        <button type="button" data-demo-refresh>Actualiser les variantes</button></div>
+        <small>Activer/désactiver le flag dans PostHog, puis actualiser ici. Le test A/B reste aléatoire.</small>
+      </div>
+      <div class="demo-controls__step"><b>03 · Erreurs et retour utilisateur</b>
+        <div class="demo-controls__actions"><button type="button" data-demo-error>Générer une erreur</button>
+        <button type="button" data-demo-survey>Donner mon avis</button></div>
+        <small>L’erreur est volontaire et ne bloque pas le site. Le sondage collecte uniquement une note.</small>
+      </div>
+      <div class="demo-controls__actions demo-controls__footer">
+        <button type="button" data-demo-new>Nouvelle session</button>
+        <button type="button" data-demo-stop>Arrêter la démo</button>
+      </div>
+    </div>`;
+  document.body.append(controls);
+  const cta = document.createElement('p');
+  cta.className = 'demo-cta';
+  cta.dataset.demoCta = '';
+  cta.hidden = true;
+  cta.innerHTML = '<a class="btn" href="#contact">Un projet en tête ? Parlons-en ↗</a>';
+  document.querySelector('.about__card')?.append(cta);
+  cta.querySelector('a').addEventListener('click', () => track('feature_cta_clicked'));
+  controls.querySelector('[data-demo-error]').addEventListener('click', () => {
+    track('demo_error_requested');
+    setDemoStatus(reportDemoError('intentional') ? 'Erreur volontaire capturée. Ouvrir Error Tracking dans PostHog.' : 'PostHog n’est pas encore prêt. Réessayer après la connexion.');
+  });
+  controls.querySelector('[data-demo-refresh]').addEventListener('click', () => {
+    if (!sdk) return setDemoStatus('PostHog n’est pas encore prêt.');
+    sdk.reloadFeatureFlags();
+    setDemoStatus('Mise à jour demandée à PostHog…');
+  });
+  controls.querySelector('[data-demo-form]').addEventListener('click', () => {
+    const form = document.querySelector('[data-form]');
+    if (!form) return;
+    for (const [name, value] of Object.entries({ nom: 'Demo', prenom: 'Presentation', email: 'demo@example.com', message: 'Message fictif pour la présentation PostHog.' })) {
+      const field = form.elements.namedItem(name);
+      if (!field) continue;
+      field.value = value;
+      field.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    controls.open = false;
+    document.querySelector('#contact')?.scrollIntoView();
+  });
+  controls.querySelector('[data-demo-new]').addEventListener('click', () => window.location.reload());
+  controls.querySelector('[data-demo-stop]').addEventListener('click', stopDemo);
+  document.querySelectorAll('[data-project-name] img').forEach((img) => { img.loading = 'eager'; });
+}
 
 export function track(event, properties = {}) {
   if (!demoActive || !Object.hasOwn(EVENT_PROPERTIES, event)) return false;
@@ -75,9 +185,10 @@ async function start() {
       capture_pageview: false,
       capture_pageleave: false,
       capture_exceptions: false,
-      capture_performance: false,
-      capture_dead_clicks: false,
-      disable_surveys: true,
+      capture_performance: true,
+      capture_dead_clicks: true,
+      enable_heatmaps: true,
+      disable_surveys: false,
       disable_session_recording: true,
       opt_out_capturing_by_default: true,
       person_profiles: 'never',
@@ -106,14 +217,22 @@ async function start() {
         sdk = instance;
         if (!demoActive) { instance.opt_out_capturing(); return; }
         instance.opt_in_capturing();
+        instance.register({ demo_mode: true });
         instance.capture('$pageview', { demo_mode: true });
         instance.startSessionRecording();
+        instance.onFeatureFlags(() => {
+          if (!demoActive) return;
+          applyFlags();
+          setDemoStatus('PostHog connecté · démo prête');
+        });
+        const replayLink = document.querySelector('[data-demo-replay]');
+        if (replayLink) replayLink.href = instance.get_session_replay_url();
         for (const [event, props] of queue) instance.capture(event, props);
         queue = [];
         observeContent();
       },
     });
-  }).catch(() => { queue = []; }).finally(() => { loading = null; });
+  }).catch(() => { queue = []; setDemoStatus('Connexion impossible. Vérifier le réseau ou le bloqueur de suivi.'); }).finally(() => { loading = null; });
   return loading;
 }
 
@@ -129,6 +248,10 @@ function stopDemo() {
   window.history.replaceState(window.history.state, '', url);
   const stopButton = document.querySelector('[data-analytics-stop]');
   if (stopButton) stopButton.hidden = true;
+  document.querySelector('.demo-controls')?.remove();
+  document.querySelector('[data-demo-cta]')?.remove();
+  const label = document.querySelector('a[href$="CV-Adam-Laarais.pdf"] > span');
+  if (label) label.textContent = 'Mon CV';
 }
 
 export function initAnalytics() {
@@ -137,6 +260,7 @@ export function initAnalytics() {
   demoActive = new URL(window.location.href).searchParams.get(DEMO_PARAM) === '1';
   // A remembered choice or another tab cannot activate a normal visit.
   if (!demoActive) return;
+  mountDemoControls();
   const stopButton = document.querySelector('[data-analytics-stop]');
   if (stopButton) {
     stopButton.hidden = false;

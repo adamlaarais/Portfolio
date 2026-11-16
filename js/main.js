@@ -6,13 +6,15 @@ import { renderProjects, initProjects } from './projects.js';
 import { initLenis } from './lenis.js';
 import { initReveals } from './reveals.js';
 import { initLoader } from './loader.js';
-import { initForm } from './form.js';
+import { initForm } from './form.js?v=20261116-demo2';
 import { initNav } from './nav.js';
 import { initCursor, initMagnetic, initDrawOutline } from './cursor.js';
 import { initScrollbar } from './scrollbar.js';
-import { initAnalytics } from '../assets/analytics/analytics.js';
+import { initAnalytics } from '../assets/analytics/analytics.js?v=20261116-demo2';
 
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Static demo view avoids scroll-triggered invisibility in session replays.
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+  document.documentElement.classList.contains('posthog-demo');
 window.__pfReduced = prefersReduced;
 
 const { gsap, ScrollTrigger } = window;
