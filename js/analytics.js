@@ -1,8 +1,7 @@
-/* PostHog: consent first; the SDK is downloaded only after acceptance.
+/* PostHog: classroom demo only; normal portfolio visits never load the SDK.
    This source reads build-time environment variables; GitHub Pages serves
    the generated ESM bundle in assets/analytics/. */
-const CONSENT_KEY = 'pf-analytics-consent-v1';
-const CONSENT_TTL = 180 * 24 * 60 * 60 * 1000;
+const DEMO_PARAM = 'posthog_demo';
 const EVENT_PROPERTIES = {
   cv_clicked: [],
   section_viewed: ['section'],
@@ -17,7 +16,7 @@ const EVENT_PROPERTIES = {
   contact_submit_succeeded: [],
   contact_mailto_open_requested: [],
 };
-let choice = null;
+let demoActive = false;
 let sdk = null;
 let loading = null;
 let queue = [];
@@ -25,18 +24,9 @@ let observer = null;
 let initialized = false;
 const seen = new Set();
 
-function readConsent() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(CONSENT_KEY));
-    if (stored && typeof stored.at === 'number' && stored.at <= Date.now() && Date.now() - stored.at < CONSENT_TTL &&
-      ['accepted', 'declined'].includes(stored.choice)) return stored.choice;
-  } catch (_) { /* storage may be unavailable */ }
-  return null;
-}
-
 export function track(event, properties = {}) {
-  if (choice !== 'accepted' || !Object.hasOwn(EVENT_PROPERTIES, event)) return false;
-  const safe = {};
+  if (!demoActive || !Object.hasOwn(EVENT_PROPERTIES, event)) return false;
+  const safe = { demo_mode: true };
   for (const key of EVENT_PROPERTIES[event]) {
     const value = properties[key];
     if (typeof value === 'number' && Number.isFinite(value)) safe[key] = value;
@@ -52,7 +42,7 @@ function observeContent() {
   if (observer || !('IntersectionObserver' in window)) return;
   observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
-      if (!entry.isIntersecting || choice !== 'accepted') continue;
+      if (!entry.isIntersecting || !demoActive) continue;
       const element = entry.target;
       const project = element.getAttribute('data-project-name');
       const key = project ? `project:${project}` : element.id;
@@ -77,7 +67,7 @@ async function start() {
   }
   if (loading) return loading;
   loading = import('posthog-js').then(({ default: posthog }) => {
-    if (choice !== 'accepted') return;
+    if (!demoActive) return;
     posthog.init(process.env.POSTHOG_PROJECT_TOKEN, {
       api_host: process.env.POSTHOG_HOST,
       defaults: '2026-08-30',
@@ -91,7 +81,7 @@ async function start() {
       disable_session_recording: true,
       opt_out_capturing_by_default: true,
       person_profiles: 'never',
-      persistence: 'localStorage',
+      persistence: 'memory',
       cross_subdomain_cookie: false,
       enable_recording_console_log: false,
       session_recording: {
@@ -102,7 +92,7 @@ async function start() {
         maskCapturedNetworkRequestFn: () => null,
       },
       before_send: (event) => {
-        if (choice !== 'accepted') return null;
+        if (!demoActive) return null;
         for (const key of ['$current_url', '$referrer']) {
           if (!event.properties?.[key]) continue;
           try {
@@ -114,9 +104,9 @@ async function start() {
       },
       loaded: (instance) => {
         sdk = instance;
-        if (choice !== 'accepted') { instance.opt_out_capturing(); return; }
+        if (!demoActive) { instance.opt_out_capturing(); return; }
         instance.opt_in_capturing();
-        instance.capture('$pageview');
+        instance.capture('$pageview', { demo_mode: true });
         instance.startSessionRecording();
         for (const [event, props] of queue) instance.capture(event, props);
         queue = [];
@@ -127,43 +117,31 @@ async function start() {
   return loading;
 }
 
-function setConsent(value, persist = true) {
-  choice = value;
-  if (persist) {
-    try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ choice, at: Date.now() })); } catch (_) {}
-  }
-  document.querySelector('[data-analytics-consent]').hidden = choice !== null;
-  if (choice === 'accepted') void start();
-  else {
-    queue = [];
-    observer?.disconnect();
-    observer = null;
-    sdk?.stopSessionRecording();
-    sdk?.opt_out_capturing();
-  }
+function stopDemo() {
+  demoActive = false;
+  queue = [];
+  observer?.disconnect();
+  observer = null;
+  sdk?.stopSessionRecording();
+  sdk?.opt_out_capturing();
+  const url = new URL(window.location.href);
+  url.searchParams.delete(DEMO_PARAM);
+  window.history.replaceState(window.history.state, '', url);
+  const stopButton = document.querySelector('[data-analytics-stop]');
+  if (stopButton) stopButton.hidden = true;
 }
 
 export function initAnalytics() {
   if (initialized) return;
-  const banner = document.querySelector('[data-analytics-consent]');
-  const settings = document.querySelector('[data-analytics-settings]');
-  if (!banner || !settings) return;
   initialized = true;
-  choice = readConsent();
-  settings.hidden = false;
-  banner.hidden = choice !== null;
-  settings.addEventListener('click', () => {
-    banner.hidden = false;
-    banner.querySelector('button')?.focus();
-  });
-  banner.querySelector('[data-analytics-accept]').addEventListener('click', () => setConsent('accepted'));
-  banner.querySelector('[data-analytics-decline]').addEventListener('click', () => setConsent('declined'));
-  // A decline in another open tab also stops this tab immediately.
-  window.addEventListener('storage', (event) => {
-    if (event.key !== CONSENT_KEY && event.key !== null) return;
-    const next = readConsent();
-    setConsent(next, false);
-  });
+  demoActive = new URL(window.location.href).searchParams.get(DEMO_PARAM) === '1';
+  // A remembered choice or another tab cannot activate a normal visit.
+  if (!demoActive) return;
+  const stopButton = document.querySelector('[data-analytics-stop]');
+  if (stopButton) {
+    stopButton.hidden = false;
+    stopButton.addEventListener('click', stopDemo);
+  }
   document.addEventListener('click', (event) => {
     const link = event.target.closest('a');
     if (!link) return;
@@ -176,5 +154,5 @@ export function initAnalytics() {
     else if (href.includes('linkedin.com/')) track('contact_link_clicked', { channel: 'linkedin' });
     else if (href.includes('github.com/')) track('contact_link_clicked', { channel: 'github' });
   });
-  if (choice === 'accepted') void start();
+  void start();
 }
